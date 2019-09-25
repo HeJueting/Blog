@@ -61,17 +61,24 @@ let colorArr = gradient("rab(255,255,255)", "rgb(0,0,0)", 100);
 > 用rgb表示的两种颜色，我们可以轻松求得其间的渐变色，但是项目中又穿插着 **" #ffffff "** 以16进制格式来表示的颜色，因此在计算渐变色之前，我们还应该将16进制格式的颜色(hex)转换成10进制格式的颜色(rgb)。
 
 </br>
+
 **● 10进制转为16进制：**
+
 </br>
+
 在javascript中，利用 *parseInt* 这个方法，可以轻松实现。只需要在你的 *hexNumber(一个16进制的数值)* 前加上 *”0x“* 即可：
+
 ```javascript
 parseInt("0x" + hexNumber);
 ```
 </br>
 
 **● 16进制转为10进制：**
+
 </br>
+
 利用 *toString* 这个方法，也可以轻松实现转换，number代表一个10进制的数值（值得注意的是数值后面不能直接调用toSring方法，需要先将该数值定义成一个变量）：
+
 ```javascript
 number.toString(16);
 ```
@@ -84,7 +91,10 @@ number.toString(16);
 > 结合以上代码逻辑，这个小需求也算是轻松解决，但是细细斟酌，其实还有许多坑点
 
 </br>
+
 **● hex颜色的格式要求**
+
+</br>
 > 1、只能包含0-9,a-f(A-F)这些字符
 > 
 > 2、(不包含#符号)浏览器不会识别并渲染长度为1，2，5的hex颜色，长度为4的hex颜色会当作长度为3来渲染，长度为6才是标准的hex颜色
@@ -92,6 +102,7 @@ number.toString(16);
 > 欢迎补充......
 
 </br>
+
 ```javascript
 // 处理hex格式的颜色
 function detectHexColor(color){
@@ -116,13 +127,18 @@ function detectHexColor(color){
     return color;
 }
 ```
+
 </br>
 </br>
 
 **● rgb颜色的格式要求**
+
+</br>
+
 > 1、rgb(x,x,x) 其中x是一个0-255的数字
 
 </br>
+
 ```javascript
 // 处理rgb格式的颜色
 function detectRgbColor(color){
@@ -140,10 +156,14 @@ function detectRgbColor(color){
     return color;
 }
 ```
+
 </br>
 </br>
 
 **● 兼容rgba格式的颜色(原理同上)**
+
+</br>
+
 ```javascript
 // 判断rgba的正则表达式
 let reg = /^rgba/
