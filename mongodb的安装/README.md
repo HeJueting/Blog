@@ -25,19 +25,19 @@
 
 - **配置**
 
-```javascript
+```
 mongod.exe --logpath C:\mongodb\mongodb.log --logappend --dbpath C:\mongodb\data --directoryperdb --serviceName mongodb --install
 ```
 
 上述命令就是配置mongodb的日志和数据库的文件目录地址，你需要配置到自己Mongodb的目录，值得注意的是，如果你的目录地址中存在空格，例如:
 
-```javascript
+```
 C:\Program Files\mongodb\mongodb.log
 ```
 
 此时执行上面的命令会报错：*Invalid command:Files\mongodb\mongodb.log*，你该使用如下方式去规定他们目录地址：
 
-```javascript
+```
 mongod.exe --logpath=“C:\Program Files\mongodb\mongodb.log” --logappend --dbpath=“C:\Program Files\mongodb\data” --directoryperdb --serviceName MongoDB --install
 ```
 
@@ -47,7 +47,7 @@ mongod.exe --logpath=“C:\Program Files\mongodb\mongodb.log” --logappend --db
 
 上述命令中，有一个--serviceName的参数，该参数代表你数据库的名称，此处我的数据库名称是“mongodb”：
 
-```javascript
+```
 net start mongodb   //开启服务
 net stop mongodb    //关闭服务
 ```
@@ -58,7 +58,7 @@ net stop mongodb    //关闭服务
 
 ### 数据的导入导出
 
-```javascript
+```
 mongoexport -d <数据库名称> -c <collection名称> -o <json文件名称>
 mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json文件名称>
 ```
@@ -79,7 +79,7 @@ mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json�
 
 - **创建mongodb-org-4.2.repo文件**
 
-```javascript
+```
 //cd到yum.repos.d目录下
 cd etc/yum.repos.d
 
@@ -91,7 +91,7 @@ vim mongodb-org-4.2.repo
 
 - **写入配置信息**
 
-```javascript
+```
 //在该文件中输入并保存以下内容
 [mongodb-org-4.2]
 name=MongoDB Repository
@@ -105,7 +105,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 
 - **使用yum安装**
 
-```javascript
+```
 yum install -y mongodb-org
 ```
 
@@ -113,7 +113,7 @@ yum install -y mongodb-org
 
 - **开启服务**
 
-```javascript
+```
 service mongod start   //开启服务
 service mongod stop    //关闭服务
 service mongod restart //重启服务
@@ -124,7 +124,7 @@ systemctl restart mongod.service  //重启服务
 
 - **验证是否开启成功**
 
-```javascript
+```
 mongo
 ```
 
@@ -150,7 +150,7 @@ mongodb默认的端口号是27017，需要服务器将其开放出来。我使�
 
 - **修改mongod.conf配置文件**
 
-```javascript
+```
 vim /etc/mongod.conf          // 编辑配置文件
 ```
 
@@ -159,7 +159,7 @@ vim /etc/mongod.conf          // 编辑配置文件
 
 wq保存退出后，记得重启mongodb
 
-```javascript
+```
 systemctl restart mongod.service
 ```
 
@@ -177,7 +177,7 @@ systemctl restart mongod.service
 
 **2、** cmd连接
 
-```javascript
+```
 mongo 11.11.11.11 //mongo后面接你的公网IP地址
 ```
 
@@ -189,7 +189,7 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 **1、** 创建超级管理员用户
 
-```javascript
+```
 //连接数据库(你也通过cmd远程连接，这里我在服务器直接使用mongo命令进行的连接)
 mongo
 
@@ -215,7 +215,7 @@ db.auth("root","xxxxxx")
 
 **2、** 修改配置文件
 
-```javascript
+```
 //编辑配置文件
 vim /etc/mongod.conf
 
@@ -230,7 +230,7 @@ security:                       // 去掉security前面#
 
 **3、** 重启mongodb
 
-```javascript
+```
 systemctl restart mongod.service
 ```
 
@@ -244,7 +244,7 @@ systemctl restart mongod.service
 
 	- cmd
 
-```javascript
+```
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 ```
 
@@ -275,7 +275,7 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 - **报错：** Job for mongod.service failed because the control process exited with error code. See “systemctl status mongod.service” and “journalctl -xe” for details.
 
-```javascript
+```
 //修改mongodb-27017.sock文件的所有者权限
 chown mongod:mongod /tmp/mongodb-27017.sock
 ```
