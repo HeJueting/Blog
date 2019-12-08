@@ -238,11 +238,11 @@ systemctl restart mongod.service
 
 **4、** 连接测试
 
-	✦ MongoDB Compass Community
+✦ MongoDB Compass Community
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-7.png)
 
-	✦ cmd
+✦ cmd
 
 ```
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
