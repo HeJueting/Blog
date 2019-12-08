@@ -7,21 +7,21 @@
 </br>
 </br>
 
-------
 
-
-### windows
+> ## windows
 
 </br>
 
-> ### 下载
+### 下载
 
 下载地址：[https://www.mongodb.com/download-center/community](https://www.mongodb.com/download-center/community)
 
 </br>
 </br>
 
-> ### 加入到windows本地服务中
+### 加入到windows本地服务中
+
+</br>
 
 **● 配置**
 
@@ -56,7 +56,7 @@ net stop mongodb    //关闭服务
 </br>
 
 
-> ### 数据的导入导出
+### 数据的导入导出
 
 ```javascript
 mongoexport -d <数据库名称> -c <collection名称> -o <json文件名称>
@@ -71,11 +71,11 @@ mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json�
 </br>
 </br>
 
-### Linux(Centos 7)
+> ## Linux(Centos 7)
 
 </br>
 
-> ### 安装
+### 安装
 
 **● 创建mongodb-org-4.2.repo文件**
 
@@ -131,12 +131,15 @@ mongo
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-1.png)
 
 
-**PS：**最新版本的安装，请参见[https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
+** PS： ** 最新版本的安装，请参见：[https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
 
 </br>
+
+------
+
 </br>
 
-> ### 远程连接
+### 远程连接
 
 **● 服务器开放端口号**
 
@@ -169,7 +172,7 @@ systemctl restart mongod.service
 
 </br>
 
-**1、**可视化工具
+** 1、 ** 可视化工具
 
 我使用的是mongodb官方可视化工具 —— MongoDB Compass Community，输入**公网IP**和**端口号**即可进行连接
 
@@ -177,7 +180,7 @@ systemctl restart mongod.service
 
 </br>
 
-**2、**cmd连接
+** 2、 ** cmd连接
 
 ```javascript
 mongo 11.11.11.11 //mongo后面接你的公网IP地址
@@ -191,7 +194,7 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 如果按照以上步骤操作，意味着任何人都可以连接你的数据库，因此，我们还需要针对不同数据库创建用户信息，避免任何人都可以对你的数据库进行读写。
 
-**1、**创建超级管理员用户
+** 1、 ** 创建超级管理员用户
 
 ```javascript
 //连接数据库(你也通过cmd远程连接，这里我在服务器直接使用mongo命令进行的连接)
@@ -217,7 +220,7 @@ db.auth("root","xxxxxx")
 
 </br>
 
-**2、**修改配置文件
+** 2、 ** 修改配置文件
 
 ```javascript
 //编辑配置文件
@@ -230,13 +233,13 @@ security:                       // 去掉security前面#
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-6.png)
 
-**3、**重启mongodb
+** 3、 ** 重启mongodb
 
 ```javascript
 systemctl restart mongod.service
 ```
 
-**4、**连接测试
+** 4、 ** 连接测试
 
 	- MongoDB Compass Community
 
@@ -248,7 +251,7 @@ systemctl restart mongod.service
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 ```
 
-**5、**常用命令
+** 5、 ** 常用命令
 	- show dbs： 显示数据库列表
 	
 	- show collections： 显示当前数据库中的集合
@@ -265,9 +268,11 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 </br>
 
+------
 
+</br>
 
-> ### 踩坑
+### 踩坑
 
 **● 报错：**Job for mongod.service failed because the control process exited with error code. See “systemctl status mongod.service” and “journalctl -xe” for details.
 
