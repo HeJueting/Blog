@@ -268,6 +268,15 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 </br>
 
+**6、** 角色权限
+
+```
+在moogodb中，每一个数据库都可以创建多个角色，不同的角色有着不同的操作权限。对个人用户而言，也不需要这么角色去管理自己的数据库，如果有需要，可以自行学习：(https://docs.mongodb.com/manual/core/authorization/)[https://docs.mongodb.com/manual/core/authorization/]
+```
+
+
+</br>
+
 ------
 
 </br>
