@@ -8,7 +8,7 @@
 </br>
 
 
-> ## windows
+> # windows
 
 </br>
 
@@ -23,7 +23,7 @@
 
 </br>
 
-**● 配置**
+- **配置**
 
 ```javascript
 mongod.exe --logpath C:\mongodb\mongodb.log --logappend --dbpath C:\mongodb\data --directoryperdb --serviceName mongodb --install
@@ -43,7 +43,7 @@ mongod.exe --logpath=“C:\Program Files\mongodb\mongodb.log” --logappend --db
 
 </br>
 
-**● 开启服务**
+- **开启服务**
 
 上述命令中，有一个--serviceName的参数，该参数代表你数据库的名称，此处我的数据库名称是“mongodb”：
 
@@ -66,18 +66,18 @@ mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json�
 </br>
 </br>
 
-------
+
 
 </br>
 </br>
 
-> ## Linux(Centos 7)
+> # Linux(Centos 7)
 
 </br>
 
 ### 安装
 
-**● 创建mongodb-org-4.2.repo文件**
+- **创建mongodb-org-4.2.repo文件**
 
 ```javascript
 //cd到yum.repos.d目录下
@@ -89,7 +89,7 @@ vim mongodb-org-4.2.repo
 
 </br>
 
-**写入配置信息**
+- **写入配置信息**
 
 ```javascript
 //在该文件中输入并保存以下内容
@@ -103,7 +103,7 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 
 </br>
 
-**使用yum安装**
+- **使用yum安装**
 
 ```javascript
 yum install -y mongodb-org
@@ -111,7 +111,7 @@ yum install -y mongodb-org
 
 </br>
 
-**● 开启服务**
+- **开启服务**
 
 ```javascript
 service mongod start   //开启服务
@@ -122,7 +122,7 @@ systemctl restart mongod.service  //重启服务
 
 </br>
 
-**● 验证是否开启成功**
+- **验证是否开启成功**
 
 ```javascript
 mongo
@@ -131,7 +131,7 @@ mongo
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-1.png)
 
 
-** PS： ** 最新版本的安装，请参见：[https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
+**PS：** 最新版本的安装，请参见：[https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
 
 </br>
 
@@ -141,7 +141,7 @@ mongo
 
 ### 远程连接
 
-**● 服务器开放端口号**
+- **服务器开放端口号**
 
 </br>
 
@@ -150,7 +150,7 @@ mongodb默认的端口号是27017，需要服务器将其开放出来。我使�
 
 </br>
 
-**● 修改mongod.conf配置文件**
+- **修改mongod.conf配置文件**
 
 ```javascript
 vim /etc/mongod.conf          // 编辑配置文件
@@ -168,11 +168,11 @@ systemctl restart mongod.service
 
 </br>
 
-**● 本地连接mongdb**
+- **本地连接mongdb**
 
 </br>
 
-** 1、 ** 可视化工具
+**1、** 可视化工具
 
 我使用的是mongodb官方可视化工具 —— MongoDB Compass Community，输入**公网IP**和**端口号**即可进行连接
 
@@ -180,7 +180,7 @@ systemctl restart mongod.service
 
 </br>
 
-** 2、 ** cmd连接
+**2、** cmd连接
 
 ```javascript
 mongo 11.11.11.11 //mongo后面接你的公网IP地址
@@ -188,13 +188,13 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
-**● 添加用户认证**
+- **添加用户认证**
 
 </br>
 
 如果按照以上步骤操作，意味着任何人都可以连接你的数据库，因此，我们还需要针对不同数据库创建用户信息，避免任何人都可以对你的数据库进行读写。
 
-** 1、 ** 创建超级管理员用户
+**1、** 创建超级管理员用户
 
 ```javascript
 //连接数据库(你也通过cmd远程连接，这里我在服务器直接使用mongo命令进行的连接)
@@ -220,7 +220,7 @@ db.auth("root","xxxxxx")
 
 </br>
 
-** 2、 ** 修改配置文件
+**2、** 修改配置文件
 
 ```javascript
 //编辑配置文件
@@ -233,13 +233,13 @@ security:                       // 去掉security前面#
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-6.png)
 
-** 3、 ** 重启mongodb
+**3、** 重启mongodb
 
 ```javascript
 systemctl restart mongod.service
 ```
 
-** 4、 ** 连接测试
+**4、** 连接测试
 
 	- MongoDB Compass Community
 
@@ -251,7 +251,7 @@ systemctl restart mongod.service
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 ```
 
-** 5、 ** 常用命令
+**5、** 常用命令
 	- show dbs： 显示数据库列表
 	
 	- show collections： 显示当前数据库中的集合
@@ -274,7 +274,7 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 ### 踩坑
 
-**● 报错：**Job for mongod.service failed because the control process exited with error code. See “systemctl status mongod.service” and “journalctl -xe” for details.
+- **报错：** Job for mongod.service failed because the control process exited with error code. See “systemctl status mongod.service” and “journalctl -xe” for details.
 
 ```javascript
 //修改mongodb-27017.sock文件的所有者权限
