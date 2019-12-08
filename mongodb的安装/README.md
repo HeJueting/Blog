@@ -143,8 +143,6 @@ mongo
 
 - **服务器开放端口号**
 
-</br>
-
 mongodb默认的端口号是27017，需要服务器将其开放出来。我使用的阿里云云服务器（[开放地址](https://swas.console.aliyun.com/?spm=5176.12818093.my.dswas.488716d0Il0BVL#/server/9d0419bb1acc4784bc03bb1b12e31d10/cn-beijing/security/firewall)），点击左侧防火墙菜单进行配置
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-2.png)
 
@@ -158,7 +156,6 @@ vim /etc/mongod.conf          // 编辑配置文件
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-3.png)
 
-</br>
 
 wq保存退出后，记得重启mongodb
 
@@ -169,8 +166,6 @@ systemctl restart mongod.service
 </br>
 
 - **本地连接mongdb**
-
-</br>
 
 **1、** 可视化工具
 
@@ -189,8 +184,6 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 </br>
 
 - **添加用户认证**
-
-</br>
 
 如果按照以上步骤操作，意味着任何人都可以连接你的数据库，因此，我们还需要针对不同数据库创建用户信息，避免任何人都可以对你的数据库进行读写。
 
@@ -233,11 +226,15 @@ security:                       // 去掉security前面#
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-6.png)
 
+</br>
+
 **3、** 重启mongodb
 
 ```javascript
 systemctl restart mongod.service
 ```
+
+</br>
 
 **4、** 连接测试
 
@@ -250,6 +247,8 @@ systemctl restart mongod.service
 ```javascript
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 ```
+
+</br>
 
 **5、** 常用命令
 	- show dbs： 显示数据库列表
@@ -280,4 +279,3 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 //修改mongodb-27017.sock文件的所有者权限
 chown mongod:mongod /tmp/mongodb-27017.sock
 ```
-	
