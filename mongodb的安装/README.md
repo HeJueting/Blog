@@ -58,6 +58,8 @@ net stop mongodb    //关闭服务
 
 ### 数据的导入导出
 
+</br>
+
 - **命令行**
 
 cd到mongodb的bin目录下：
@@ -73,24 +75,37 @@ mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json�
 
 - **MongoDB Compass Community**
 
-选中一个数据表，会出现 Collection 选项，在 Collection 的下拉菜单中，就可以选择 import data 和 export collection ，导入和导出数据
+选中一个数据表，会出现 Collection 选项，在 Collection 的下拉菜单中，就可以选择 import data 和 export collection（导入和导出数据）
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-9.png)
 
 
 </br>
 </br>
-
-
-
 </br>
 </br>
+
+
+
+
+
+
+
+
+
+
+
 
 > # Linux(Centos 7)
 
 </br>
 
+
+
+
 ### 安装
+
+</br>
 
 - **创建mongodb-org-4.2.repo文件**
 
@@ -154,7 +169,15 @@ mongo
 
 </br>
 
+
+
+
+
+
+
 ### 远程连接
+
+</br>
 
 - **服务器开放端口号**
 
@@ -179,8 +202,11 @@ systemctl restart mongod.service
 ```
 
 </br>
+</br>
 
 - **本地连接mongdb**
+
+</br>
 
 **1、** 可视化工具
 
@@ -202,9 +228,19 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
+
+
+
+
+
+
 ### 添加用户认证
 
+</br>
+
 如果按照以上步骤操作，意味着任何人都可以连接你的数据库，因此，我们还需要针对不同数据库创建用户信息，避免任何人都可以对你的数据库进行读写。
+
+</br>
 
 - **角色权限**
 
@@ -245,7 +281,7 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 	✦ root：readWriteAnyDatabase、dbAdminAnyDatabase、userAdminAnyDatabase、clusterAdmin、restore、backup权限
 
 
-更多详情，请查看[https://docs.mongodb.com/manual/reference/built-in-roles/#database-user-roles)
+更多角色详情，请查看： [https://docs.mongodb.com/manual/reference/built-in-roles/#database-user-roles](https://docs.mongodb.com/manual/reference/built-in-roles/#database-user-roles)
 
 </br>
 
@@ -305,11 +341,11 @@ systemctl restart mongod.service
 
 - **连接测试** 
 
-✦ MongoDB Compass Community
+**1、** MongoDB Compass Community
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-7.png)
 
-✦ cmd
+**2、** cmd
 
 ```
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
@@ -345,9 +381,15 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 </br>
 
 
+
+
 ### 使用moogose连接数据库
 
+</br>
+
 在我搭建个人博客中，使用到了 **moogose** 这个库对数据库进行连接，由于我开启了 mongodb 用户权限，使用 moogose 进行数据库连接时，也需要添加用户信息，否则 mongodb 会连接失败。
+
+</br>
 
 - **创建拥有读写权限的角色**
 
