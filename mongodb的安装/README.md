@@ -58,10 +58,25 @@ net stop mongodb    //关闭服务
 
 ### 数据的导入导出
 
+- **命令行**
+
+cd到mongodb的bin目录下：
+
+![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-8.png)
+
 ```
 mongoexport -d <数据库名称> -c <collection名称> -o <json文件名称>
 mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json文件名称>
 ```
+
+</br>
+
+- **MongoDB Compass Community**
+
+选中一个数据表，会出现 Collection 选项，在 Collection 的下拉菜单中，就可以选择 import data 和 export collection ，导入和导出数据
+
+![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-9.png)
+
 
 </br>
 </br>
@@ -183,11 +198,59 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
-- **添加用户认证**
+------
+
+</br>
+
+### 添加用户认证
 
 如果按照以上步骤操作，意味着任何人都可以连接你的数据库，因此，我们还需要针对不同数据库创建用户信息，避免任何人都可以对你的数据库进行读写。
 
-**1、** 创建超级管理员用户
+- **角色权限**
+
+在moogodb中，每一个数据库都可以创建多个角色，不同的角色有着不同的操作权限
+
+**1、** Database User Roles（数据库用户角色）
+
+	✦ read：读取指定数据库中任何数据
+	✦ readWrite：读写指定数据库中任何数据
+
+**2、** Database Administration Roles（数据库管理角色）
+
+	✦ dbAdmin：在指定数据库中执行管理函数
+	✦ dbOwner：该数据库的所有者，拥有该库的所有权限，包括readWrite，dbAdmin和userAdmin权限
+	✦ userAdmin：在指定数据库里创建、删除和管理用户
+
+**3、** Cluster Administration Roles（群集管理角色）
+
+	✦ clusterAdmin
+	✦ clusterManager
+	✦ clusterMonitor
+	✦ hostManager
+
+**4、** Backup and Restoration Roles（备份和恢复角色）
+
+	✦ backup
+	✦ restore
+
+**5、** All-Database Roles（所有数据库角色）
+
+	✦ readAnyDatabase：读取所有数据库中任何数据
+	✦ readWriteAnyDatabase：读写所有数据库中任何数据
+	✦ userAdminAnyDatabase：在任何数据库里创建、删除和管理用户
+	✦ dbAdminAnyDatabase：在任何数据库中执行管理函数
+
+**6、** Superuser Roles（超级管理员角色）
+	
+	✦ root：readWriteAnyDatabase、dbAdminAnyDatabase、userAdminAnyDatabase、clusterAdmin、restore、backup权限
+
+
+更多详情，请查看[https://docs.mongodb.com/manual/reference/built-in-roles/#database-user-roles)
+
+</br>
+
+
+- **创建超级管理员用户** 
 
 ```
 //连接数据库(你也通过cmd远程连接，这里我在服务器直接使用mongo命令进行的连接)
@@ -211,9 +274,11 @@ db.auth("root","xxxxxx")
 
 ![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-5.png)
 
+
 </br>
 
-**2、** 修改配置文件
+
+- **修改配置文件** 
 
 ```
 //编辑配置文件
@@ -228,7 +293,8 @@ security:                       // 去掉security前面#
 
 </br>
 
-**3、** 重启mongodb
+
+- **重启mongodb** 
 
 ```
 systemctl restart mongod.service
@@ -236,7 +302,8 @@ systemctl restart mongod.service
 
 </br>
 
-**4、** 连接测试
+
+- **连接测试** 
 
 ✦ MongoDB Compass Community
 
@@ -250,13 +317,18 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 </br>
 
-**5、** 常用命令
+
+- **常用命令** 
 
 	- show dbs： 显示数据库列表
 	
 	- show collections： 显示当前数据库中的集合
 	
 	- use XXX： 切换/创建XXX数据库
+
+	- show users： 展示当前数据库下的用户信息
+	
+	- db.dropUser('xxx')： 删除用户
 	
 	- db.dropDatabase()： 删除当前使用数据库
 
@@ -268,22 +340,50 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 </br>
 
-**6、** 角色权限
-
-在moogodb中，每一个数据库都可以创建多个角色，不同的角色有着不同的操作权限。对个人用户而言，也不需要这么角色去管理自己的数据库，如果有需要，可以自行学习： [https://docs.mongodb.com/manual/core/authorization/](https://docs.mongodb.com/manual/core/authorization/)
-
-
-</br>
-
 ------
 
 </br>
 
-### 踩坑
 
-- **报错：** Job for mongod.service failed because the control process exited with error code. See “systemctl status mongod.service” and “journalctl -xe” for details.
+### 使用moogose连接数据库
 
+在我搭建个人博客中，使用到了 **moogose** 这个库对数据库进行连接，由于我开启了 mongodb 用户权限，使用 moogose 进行数据库连接时，也需要添加用户信息，否则 mongodb 会连接失败。
+
+- **创建拥有读写权限的角色**
+
+虽然我们一开始在 admin 数据库下创建了一个超级管理用户，他拥有所有数据库的读写权限，但是我的个人博客使用的是 blog 数据库，在 blog 数据库下用户认证是不会通过的。
+
+![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-10.png)
+
+</br>
+
+因此，我们还需要在 blog 数据库下新建一个拥有读写权限的用户角色：
+
+```javascript
+//切换到blog数据库
+use blog
+
+//创建拥有读写权限的用户角色
+db.createUser(
+  {
+    user: "blog",          // 账号（自行设置）
+    pwd: "xxxxxx",         // 密码（自行设置）
+    roles: [{
+		role:"readWrite",  // 拥有读写权限即可
+		db:"blog"          // 指定数据库
+	}]
+  }
+)
 ```
-//修改mongodb-27017.sock文件的所有者权限
-chown mongod:mongod /tmp/mongodb-27017.sock
+
+</br>
+
+- **连接数据库**
+
+```javascrit
+mongoose.connect("mongodb://localhost:27017/blog", {
+    user: "blog",          //用户名
+    pass: "xxxxxx",        //密码
+    useNewUrlParser: true
+})
 ```
