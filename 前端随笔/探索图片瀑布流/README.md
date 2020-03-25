@@ -40,7 +40,7 @@
     margin: 2vw;
 }
 ```
-![](https://github.com/HeJueting/Blog/blob/master/image/imageFalls_1.png)
+![image](./img/1.png)
 
 </br>
 </br>
@@ -58,7 +58,7 @@
     margin: 2vw;
 }
 ```
-![](https://github.com/HeJueting/Blog/blob/master/image/imageFalls_2.png)
+![image](./img/2.png)
 
 </br>
 </br>
@@ -79,7 +79,7 @@ for(let i=0; i<wrap.children.length; i++){
 }
 ```
 
-![](https://github.com/HeJueting/Blog/blob/master/image/imageFalls_3.png)
+![image](./img/3.png)
 
 </br>
 </br>
@@ -100,7 +100,7 @@ for(let i=0; i<wrap.children.length; i++){
     flex-grow: 9999;
 }
 ```
-![](https://github.com/HeJueting/Blog/blob/master/image/imageFalls_4.png)
+![image](./img/4.png)
 
 </br>
 </br>
@@ -120,7 +120,7 @@ for(let i=0; i<wrap.children.length; i++){
 花了一下午的时间，分析它的dom结构，分析它的css，然后“意淫”出了一种及其“傻逼”的方式去实现，然后图片的展示总会展示不全（因为固定思维，一来又把高度给固定死），无奈地搜了搜：goole图片瀑布流的实现，看到这个知乎回答，才恍然大悟：
 </br>
 
-![](https://github.com/HeJueting/Blog/blob/master/image/imageFalls_5.png)
+![image](./img/5.png)
 
 </br>
 
@@ -140,7 +140,7 @@ for(let i=0; i<wrap.children.length; i++){
 
 </br>
 
-![](https://github.com/HeJueting/Blog/blob/master/image/imageFalls_6.png)
+![image](./img/6.png)
 
 </br>
 

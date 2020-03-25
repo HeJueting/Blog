@@ -64,7 +64,7 @@ net stop mongodb    //关闭服务
 
 cd到mongodb的bin目录下：
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-8.png)
+![image](./img/8.png)
 
 ```
 mongoexport -d <数据库名称> -c <collection名称> -o <json文件名称>
@@ -77,7 +77,7 @@ mongoimport -d <数据库名称> -c <collection名称> --file <要导入的json�
 
 选中一个数据表，会出现 Collection 选项，在 Collection 的下拉菜单中，就可以选择 import data 和 export collection（导入和导出数据）
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-9.png)
+![image](./img/9.png)
 
 
 </br>
@@ -158,7 +158,7 @@ systemctl restart mongod.service  //重启服务
 mongo
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-1.png)
+![image](./img/1.png)
 
 
 **PS：** 最新版本的安装，请参见：[https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
@@ -182,7 +182,7 @@ mongo
 - **服务器开放端口号**
 
 mongodb默认的端口号是27017，需要服务器将其开放出来。我使用的阿里云云服务器（[开放地址](https://swas.console.aliyun.com/?spm=5176.12818093.my.dswas.488716d0Il0BVL#/server/9d0419bb1acc4784bc03bb1b12e31d10/cn-beijing/security/firewall)），点击左侧防火墙菜单进行配置
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-2.png)
+![image](./img/2.png)
 
 </br>
 
@@ -192,7 +192,7 @@ mongodb默认的端口号是27017，需要服务器将其开放出来。我使�
 vim /etc/mongod.conf          // 编辑配置文件
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-3.png)
+![image](./img/3.png)
 
 
 wq保存退出后，记得重启mongodb
@@ -212,7 +212,7 @@ systemctl restart mongod.service
 
 我使用的是mongodb官方可视化工具 —— MongoDB Compass Community，输入**公网IP**和**端口号**即可进行连接
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-4.png)
+![image](./img/4.png)
 
 </br>
 
@@ -308,7 +308,7 @@ db.createUser(
 db.auth("root","xxxxxx")
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-5.png)
+![image](./img/5.png)
 
 
 </br>
@@ -325,7 +325,7 @@ security:                       // 去掉security前面#
     authorization: enabled      // 添加这句开启认证
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-6.png)
+![image](./img/6.png)
 
 </br>
 
@@ -343,7 +343,7 @@ systemctl restart mongod.service
 
 **1、** MongoDB Compass Community
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-7.png)
+![image](./img/7.png)
 
 **2、** cmd
 
@@ -395,7 +395,7 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 
 虽然我们一开始在 admin 数据库下创建了一个超级管理用户，他拥有所有数据库的读写权限，但是我的个人博客使用的是 blog 数据库，在 blog 数据库下用户认证是不会通过的。
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/mongodb-install-10.png)
+![image](./img/10.png)
 
 </br>
 

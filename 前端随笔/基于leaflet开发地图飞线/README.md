@@ -20,13 +20,13 @@
 
 > 阿里 data-v 的地图飞线层实现如下图所示：
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-1.gif)
+![image](./img/1.gif)
 
 </br>
 
 > 由上图可知，我们首先得利用 cavans 或者 svg 画出这些飞线和气泡。阿里是通过 canvas 实现的，三个 canvas 分别对应了**飞线**、**气泡**、**飞线头部**（每条飞线是有一个线头的，由于图片清晰度原因，不好从图片中直接观察到）。
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-2.png)
+![image](./img/2.png)
 
 </br>
 
@@ -60,7 +60,7 @@
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-3.png)
+![image](./img/3.png)
 
 </br>
 
@@ -97,7 +97,7 @@
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-4.png)
+![image](./img/4.png)
 
 </br>
 
@@ -121,7 +121,7 @@
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-5.gif)
+![image](./img/5.gif)
 
 </br>
 
@@ -129,12 +129,12 @@
 
 ```html
 <circle cx="550" cy="150" fill="url(#radialGradient-2)" >
-	<animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;1;0" />
+    <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;1;0" />
     <animate attributeName="r" dur="2s" repeatCount="indefinite" values="0;50"/>
 </circle>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-6.gif)
+![image](./img/6.gif)
 
 </br>
 </br>
@@ -170,7 +170,7 @@
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-7.png)
+![image](./img/7.png)
 
 </br>
 
@@ -183,15 +183,15 @@
 
 **1、二阶贝塞尔曲线**：1个起点（P₀）、1个终点（P₂）、1个控制点（P₁）
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-8.gif)
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-9.png)
+![image](./img/8.gif)
+![image](./img/9.png)
 
 如上图所示，动图很直观地展示了二阶贝塞尔曲线的形成过程，曲线上的点也会满足一个规律：**P₀M/P₀P₁ = P₁N/P₁P₂**
 
 **2、三阶贝塞尔曲线**：1个起点（P₀）、1个终点（P₃）、2个控制点（P₁、P₂）
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-10.gif)
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-11.jpg)
+![image](./img/10.gif)
+![image](./img/11.jpg)
 
 三阶贝塞尔曲线的形成规律与二阶的也类似，**P₀Q₀/P₀P₁ = P₁Q₁/P₁P₂ = P₂Q₂/P₂P₃**
 
@@ -224,7 +224,7 @@
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-12.png)
+![image](./img/12.png)
 
 </br>
 
@@ -233,7 +233,7 @@
 
 > 仔细观察 data-v 的飞线，类似于一条二阶贝塞尔曲线，且它的控制点在**起点和终点连线的垂直平分线上**，如下图所示，A 和 B 分别代表起点和终点，C 点是 AB 连线上的中点，如果**已知 A B 两点坐标，再已知 QC 连线的距离**，即可轻松求出 Q 点坐标。
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-13.png)
+![image](./img/13.png)
 
 ```javascript
 /**
@@ -304,7 +304,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-14.png)
+![image](./img/14.png)
 
 </br>
 
@@ -342,7 +342,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-15.png)
+![image](./img/15.png)
 
 </br>
 
@@ -369,7 +369,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-16.gif)
+![image](./img/16.gif)
 
 </br>
 
@@ -404,7 +404,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-17.gif)
+![image](./img/17.gif)
 
 </br>
 
@@ -441,7 +441,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-18.gif)
+![image](./img/18.gif)
 
 </br>
 
@@ -468,7 +468,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-19.gif)
+![image](./img/19.gif)
 
 </br>
 
@@ -478,7 +478,7 @@ function getCurve (A, B, QC) {
 <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;1;1;1;0" />
 ```
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-20.gif)
+![image](./img/20.gif)
 
 </br>
 
@@ -640,13 +640,13 @@ export default CustomLayer;
 
 > 继承于 Layer 对象的图层都会加入到 **overlay-pane** 这个盒子中，getPane 方法便是获得这个 dom 对象
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-21.png)
+![image](./img/21.png)
 
 </br>
 
 > 最终效果展示
 
-![image](https://github.com/HeJueting/Blog/blob/master/image/leaflet-flyLine-22.gif)
+![image](./img/22.gif)
 
 </br>
 </br>
@@ -674,4 +674,5 @@ export default CustomLayer;
 
 </br>
 </br>
-总结： 以上内容基于 leaflet 1.5.1版本，初次接触 SVG 和 leaflet，使用姿势有误的地方，欢迎点评 ~
+
+**总结： 以上内容基于 leaflet 1.5.1版本，初次接触 SVG 和 leaflet，使用姿势有误的地方，欢迎点评 ~**

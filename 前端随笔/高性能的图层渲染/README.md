@@ -8,7 +8,7 @@
 
 在上一篇文章 **[《基于leaflet开发地图飞线》](http://www.shmily-hjt.cn/blog/#/articleDetails/%E5%9F%BA%E4%BA%8Eleaflet%E5%BC%80%E5%8F%91%E5%9C%B0%E5%9B%BE%E9%A3%9E%E7%BA%BF)** 中，我简要介绍并实践了leaflet的自定义图层开发，也提到过 svg 和 canvas 自己都没有接触过，就盲选的 svg 进行实践。其实也不算盲选，我查看过 leaflet 内置图层的元素，也是基于 svg 实现的，如下图所示：
 
-![](https://github.com/HeJueting/Blog/blob/master/image/coverageRender-1.png)
+![image](./img/1.png)
 
 </br>
 
@@ -43,12 +43,12 @@
 > 邓小平爷爷常说：**实践是检验真理的唯一标准**。不手动测试对比一下，怎么能妄下定论？
 
 - **svg实现的描点：**
-![](https://github.com/HeJueting/Blog/blob/master/image/coverageRender-2.gif)
+![image](./img/2.gif)
 
 </br>
 
 - **canvas实现的描点：**
-![](https://github.com/HeJueting/Blog/blob/master/image/coverageRender-3.gif)
+![image](./img/3.gif)
 
 </br>
 
