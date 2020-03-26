@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG飞线</title>
+    <style>
+        body {
+            background: #00192e;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        /**
+         * 实现思路：
+         * 1、已知 from 和 to 两个坐标点，通过 calculateQPoint(from, to) 函数计算出二次贝塞尔曲线的 Q 点
+         * 2、得到 from、to、Q 点后，利用 path 路径画出这条曲线
+         * 3、曲线路径的动画是通过给 Path 路径添加一个遮罩层，然后让遮罩层进行曲线移动实现
+         * 4、这个遮罩层是一个渐变的圆圈，起点应该从圆心处开始，因此还需要利用 cut-off 去对这个圆圈进行剪切
+         * 5、由于飞线的路线都不相同（左-右，上-下），剪切时需要利用 judgeCutRotate(from ,to) 判断剪切方块的旋转方向
+         */
+    </script>
+    <svg width="1000" height="600">
+        <defs>
+            <!-- 气泡 -->
+            <radialGradient id="gradient-bubble" cx="50%" cy="50%" r="40%">
+                <stop offset="0%" stop-color="#41B2EA" stop-opacity="0" />
+                <stop offset="40%" stop-color="#41B2EA" stop-opacity="0" />
+                <stop offset="100%" stop-color="#41B2EA" stop-opacity="1" />
+            </radialGradient>
+            <circle id="bubble" cx="0" cy="0" r="10" fill="url(#gradient-bubble)">
+                <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+                <animate attributeName="r" dur="2s" repeatCount="indefinite" values="0;15" />
+            </circle>
+
+            <!-- 飞线头部 -->
+            <radialGradient id="gradient-lineHead" cx="50%" cy="50%" r="40%">
+                <stop offset="0%" stop-color="#FBF320" stop-opacity='1' />
+                <stop offset="100%" stop-color="#FBF320" stop-opacity='0' />
+            </radialGradient>
+
+
+            <!-- 飞线 -->
+            <radialGradient id="gradient-line" cx="50%" cy="50%" r="40%">
+                <stop offset="0%" stop-color="#fff" stop-opacity='1' />
+                <stop offset="100%" stop-color="#fff" stop-opacity='0' />
+            </radialGradient>
+            <clipPath id="cutOff-line">
+                <rect x="0" y="0" width="200" height="200" transform="rotate(90)" />
+            </clipPath>
+            <mask id="line-mask">
+                <circle cx="0" cy="0" r="200" fill="url(#gradient-line)" clip-path="url(#cutOff-line)">
+                    <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;1;1;1;1;0" />
+                    <animateMotion calcMode="linear" dur="2s" path="M100,200 Q250,100 400,200" rotate="auto"
+                        repeatCount="indefinite" />
+                </circle>
+            </mask>
+        </defs>
+
+
+        <g class="flyLine">
+            <!-- 气泡 -->
+            <use x="400" y="200" xlink:href="#bubble" />
+
+            <!-- 飞线头部 -->
+            <circle cx="0" cy="0" r="6" fill="url(#gradient-lineHead)">
+                <animateMotion calcMode="linear" dur="2s" path="M100,200 Q250,100 400,200" rotate="auto"
+                    repeatCount="indefinite" />
+            </circle>
+
+            <!-- 飞线 -->
+            <path d="M100,200 Q250,100 400,200" stroke="#05D380" stroke-width="2" fill="none" mask="url(#line-mask)" />
+        </g>
+    </svg>
+
+
+    <script>
+        // 计算二阶贝塞尔曲线点
+        function calculateQPoint(from, to) {
+
+            // 计算两点间的中间点
+            let centerPoint = [
+                Math.abs((to[0] + from[0]) / 2),
+                Math.abs((to[1] + from[1]) / 2)
+            ];
+
+            // 计算这两点之间的长度
+            let length = getLength(from, to);
+            let heightRatio = 0.5;
+
+            let QPointX, QPointY;
+            // 这条线平行于x轴
+            if (from[0] == to[0]) {
+                QPointX = (centerPoint[0] + length * heightRatio).toFixed(3);
+                QPointY = centerPoint[1];
+            }
+            // 这条线平行于y轴
+            else if (from[1] == to[1]) {
+                QPointX = centerPoint[0];
+                QPointY = (centerPoint[1] + length * heightRatio).toFixed(3);
+            }
+            // 任意的一条线
+            else {
+                /* 
+                    利用斜率去求得这个二阶贝塞尔曲线Q点
+                    k1 = (to[0] - from[0]) / (to[1] - from[1]);
+                    k2 = (QPointX - centerPoint[0]) / (QPointY - centerPoint[1]);
+                    k1 * k2 = -1;
+                */
+
+                //计算这两点之间的斜率
+                let k = (to[0] - from[0]) / (to[1] - from[1]);
+
+                QPointX = Math.sqrt(
+                    (Math.pow(length * heightRatio, 2) / (1 + Math.pow(k, 2)))
+                ) + centerPoint[0];
+                QPointY = centerPoint[1] - k * (QPointX - centerPoint[0]);
+            }
+
+            // 计算两点之间的长度
+            function getLength(point1, point2) {
+                return Math.floor(Math.sqrt(
+                    Math.pow((point2[1] - point1[1]), 2) + Math.pow((point2[0] - point1[0]), 2)
+                ))
+            }
+
+            return `M${from} Q${QPointX},${QPointY} ${to}`;
+        }
+
+        // 判断剪切方块的旋转角度
+        function judgeCutRotate(from, to) {
+            var k, rotate = 90;
+            // 判断飞线方向（从左到右，从右到左）
+            if (to.x > from.x) {
+                try {
+                    // 防止斜率不存在
+                    k = (from.x - to.x) / (from.y - to.y);
+                    rotate = k > 0 ? 90 : 180;
+                } catch (e) {}
+            } else {
+                try {
+                    // 防止斜率不存在
+                    k = (from.x - to.x) / (from.y - to.y);
+                    rotate = k > 0 ? 180 : 90;
+                } catch (e) {}
+            }
+            return rotate;
+        }
+    </script>
+</body>
+
+</html>

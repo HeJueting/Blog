@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>气泡</title>
+    <style>
+        body{
+            background: #06192f;
+        }
+    </style>
+</head>
+<body>
+<svg width="1000" height="600">
+     <defs>
+        <!-- 气泡2 -->
+        <radialGradient id="gradient-bubble-2" cx="50%" cy="50%" r="40%">
+            <stop offset="0%" stop-color="#fbf320" stop-opacity='1'/>
+            <stop offset="10%" stop-color="#fbf320" stop-opacity='1'/>
+            <stop offset="20%" stop-color="#fbf320" stop-opacity='0.8'/>
+            <stop offset="30%" stop-color="#fbf320" stop-opacity='0.8'/>
+            <stop offset="40%" stop-color="#fbf320" stop-opacity='0.6'/>
+            <stop offset="50%" stop-color="#fbf320" stop-opacity='0.6'/>
+            <stop offset="60%" stop-color="#fbf320" stop-opacity='0.4'/>
+            <stop offset="70%" stop-color="#fbf320" stop-opacity='0.4'/>
+            <stop offset="80%" stop-color="#fbf320" stop-opacity='0.2'/>
+            <stop offset="90%" stop-color="#fbf320" stop-opacity='0.2'/>
+            <stop offset="100%" stop-color="#fbf320" stop-opacity='0'/>
+        </radialGradient>
+
+        <!-- 气泡3 -->
+        <radialGradient id="gradient-bubble-3" cx="50%" cy="50%" r="40%">
+            <stop offset="0%" stop-color="#fbf320" stop-opacity='1'/>
+            <stop offset="70%" stop-color="#fbf320" stop-opacity='1'/>
+            <stop offset="100%" stop-color="#fbf320" stop-opacity='0'/>
+        </radialGradient>
+
+        <!-- 气泡4 -->
+        <radialGradient id="gradient-bubble-4" cx="50%" cy="50%" r="40%">
+            <stop offset="0%" stop-color="#fbf320" stop-opacity='0'/>
+            <stop offset="40%" stop-color="#fbf320" stop-opacity='0'/>
+            <stop offset="90%" stop-color="#fbf320" stop-opacity='0.3'/>
+            <stop offset="100%" stop-color="#fbf320" stop-opacity='0'/>
+        </radialGradient>
+
+        <!-- 气泡5 -->
+        <radialGradient id="gradient-bubble-5" cx="50%" cy="50%" r="40%">
+            <stop offset="0%" stop-color="#fbf320" stop-opacity='0'/>
+            <stop offset="40%" stop-color="#fbf320" stop-opacity='0'/>
+            <stop offset="90%" stop-color="#fbf320" stop-opacity='0.8'/>
+            <stop offset="100%" stop-color="#fbf320" stop-opacity='0'/>
+        </radialGradient>
+
+        <mask id="mask">
+            <rect x="0" y="0" width="10000" height="10000" fill="white" opacity="0.8"/>
+        </mask>
+     </defs>
+
+
+     <g>
+        <!-- 气泡1 -->
+        <circle cx="100" cy="50" r="5" fill="#fbf320" stroke-width="10" stroke="#fbf320" stroke-opacity="0.2">
+            <animate attributeName="r" dur="2s" repeatCount="indefinite" values="5;10;5" />
+            <animate attributeName="stroke-width" dur="2s" repeatCount="indefinite" values="10;20;10" />
+        </circle>
+
+        <!-- 气泡2 -->
+        <circle cx="200" cy="50" fill="url(#gradient-bubble-2)">
+            <animate attributeName="r" dur="2s" repeatCount="indefinite" values="10;20;10"/>
+        </circle>
+
+        <!-- 气泡3 -->
+        <circle cx="300" cy="50" fill="url(#gradient-bubble-3)">
+            <animate attributeName="r" dur="2s" repeatCount="indefinite" values="10;20;10"/>
+        </circle>
+
+        <!-- 气泡4 -->
+        <circle cx="400" cy="50" fill="#fbf320">
+            <animate  attributeName="r" dur="2s" repeatCount="indefinite" values="5;10;5"/>
+        </circle>
+        <circle cx="400" cy="50" fill="url(#gradient-bubble-4)">
+            <animate  attributeName="r" dur="2s" repeatCount="indefinite" values="15;30;15"/>
+        </circle>
+
+        <!-- 气泡5 -->
+        <circle cx="500" cy="50" fill="url(#gradient-bubble-5)">
+            <animate  attributeName="r" dur="2s" repeatCount="indefinite" values="15;20;15" />
+        </circle>
+     </g>
+
+     <g fill-opacity="0.1">
+        <!-- 气泡1 -->
+        <circle cx="100" cy="150" r="5" fill="#fbf320" stroke-width="10" stroke="#fbf320" stroke-opacity="0.2">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+        </circle>
+
+        <!-- 气泡2 -->
+        <circle cx="200" r="10" cy="150" fill="url(#gradient-bubble-2)">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+        </circle>
+
+        <!-- 气泡3 -->
+        <circle cx="300" fill-opacity="0.1" cy="150" r="10" fill="url(#gradient-bubble-3)">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+        </circle>
+
+        <!-- 气泡4 -->
+        <circle cx="400" cy="150" r="5" fill="#fbf320">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+        </circle>
+        <circle cx="400" cy="150" r="15" fill="url(#gradient-bubble-4)">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+        </circle>
+
+        <!-- 气泡5 -->
+        <circle cx="500" cy="150" r="15" fill="url(#gradient-bubble-5)">
+            <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="0;1;0" />
+        </circle>
+     </g>
+</svg>
+
+</body>
+</html>
