@@ -1,4 +1,4 @@
-# 继承（二）
+# 多态（三）
 
 </br>
 </br>
@@ -12,55 +12,58 @@
 
 ### 前言
 
-在JavaScript中， [原型链](https://github.com/HeJueting/Blog/tree/master/JavaScript-%E5%9F%BA%E7%A1%80/%E5%8E%9F%E5%9E%8B%E9%93%BE) 是实现继承的关键
+> 《大话设计模式》开篇用简单的计算机案例介绍了面向对象编程，开启设计模式学习之旅的前奏，便是先学会用面向对象思维编程
 
 </br>
 </br>
 
 
 
+### 传统的面向对象
+
+#### 三大特性
+
+- 封装： 将不同职责的代码进行拆分，降低代码耦合度
+
+- 继承： 不同实例拥有相同的属性和方法都挂载在这个类上（抽离公共的代码）
+
+- 多态： 不同实例的相同方法在不同情形有不同表现形式
 
 
+#### 两个概念
+
+- 类： 创建对象的模板
+
+- 实例： 使用类创建出来的对象
 
 
+</br>
 
 
+### JavaScript中的面向对象
 
-### ES5
+> 虽然JavaScript在ES5语法中，是没有类的概念，但是其“构造函数”却与类的作用相似。但在ES6语法中，引入了“类”的概念，让我们更好地以面向对象的思维去编写代码
 
-创建一个Animal类
+#### ES5
 
 ```javascript
-function Animal(type){
-    this.type = type;
-}
-Animal.prototype.live = "earth";
+function A(){}
+var a = new A();
 ```
 
-创建一个Dog子类
+- 构造函数：通过new function这种形式去实例对象时，这个function就变成了构造函数
 
-```javascript
-function Dog(type){
-    this.type = type;
-}
-Animal.prototype.live = "earth";
-```
+- 实例：通过new关键字去创建一个“对象”时，这个“对象”便叫作实例
 
 
-</br>
-</br>
-
-
-
-### ES6
+#### ES6
 
 ```javascript
 class A {}
 var a = new A();
 ```
 
-
-
+- 类：ES6语法中，通过class关键字，可以定义类
 
 
 #### 区别

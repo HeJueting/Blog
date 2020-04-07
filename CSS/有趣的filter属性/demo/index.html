@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+</head>
+<style>
+.wrap{
+    color: red;
+    display: flex;
+    margin-bottom: 40px;
+}
+.wrap div{
+    margin: 0 60px;
+}
+
+
+/* 模糊滤镜 */
+.blur{
+    filter: blur(5px);
+}
+
+
+/* 光亮色泽滤镜 */
+.brightness_0{
+    filter: brightness(0%);
+}
+.brightness_50{
+    filter: brightness(50%);
+}
+.brightness_100{
+    filter: brightness(100%);
+}
+.brightness_200{
+    filter: brightness(200%);
+}
+
+
+/* 对比度滤镜 */
+.contrast_0{
+    filter: contrast(0%);
+}
+.contrast_50{
+    filter: contrast(50%);
+}
+.contrast_100{
+    filter: contrast(100%);
+}
+.contrast_200{
+    filter: contrast(200%);
+}
+
+
+/* 阴影偏移滤镜 */
+.shadow_1{
+    filter: drop-shadow(10px 10px 10px black)
+}
+.shadow_2{
+    filter: drop-shadow(20px 20px 10px black)
+}
+.shadow_3{
+    filter: drop-shadow(20px 20px 20px black)
+}
+.shadow_4{
+    filter: drop-shadow(20px 20px 20px green)
+}
+
+
+/* 灰暗滤镜 */
+.grayscale_0{
+    filter: grayscale(0%)
+}
+.grayscale_50{
+    filter: grayscale(50%)
+}
+.grayscale_100{
+    filter: grayscale(100%)
+}
+
+
+/* 色环滤镜 */
+.rotate_0{
+    filter: hue-rotate(0deg)
+}
+.rotate_45{
+    filter: hue-rotate(45deg)
+}
+.rotate_90{
+    filter: hue-rotate(90deg)
+}
+.rotate_180{
+    filter: hue-rotate(180deg)
+}
+.rotate_270{
+    filter: hue-rotate(270deg)
+}
+
+
+/* 饱和度滤镜 */
+.saturate_0{
+    filter: saturate(0%)
+}
+.saturate_30{
+    filter: saturate(30%)
+}
+.saturate_60{
+    filter: saturate(60%)
+}
+.saturate_100{
+    filter: saturate(100%)
+}
+
+
+/* 深褐色滤镜 */
+.sepia_0{
+    filter: sepia(0%)
+}
+.sepia_30{
+    filter: sepia(30%)
+}
+.sepia_60{
+    filter: sepia(60%)
+}
+.sepia_100{
+    filter: sepia(100%)
+}
+
+
+/* 反转输入图像滤镜 */
+.invert_0{
+    filter: invert(0%)
+}
+.invert_30{
+    filter: invert(30%)
+}
+.invert_60{
+    filter: invert(60%)
+}
+.invert_100{
+    filter: invert(100%)
+}
+</style>
+<body>
+    <div class="wrap">
+        <div>
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="blur">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+
+
+    <div class="wrap">    
+        <div class="brightness_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="brightness_50">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="brightness_100">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>    
+    
+        <div class="brightness_200">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div> 
+    </div>
+
+
+    <div class="wrap">    
+        <div class="contrast_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="contrast_50">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="contrast_100">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>    
+    
+        <div class="contrast_200">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div> 
+    </div>    
+
+
+    <div class="wrap">
+        <div>
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+        
+        <div class="shadow_1">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="shadow_2">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="shadow_3">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>   
+    
+        <div class="shadow_4">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="grayscale_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="grayscale_50">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+        
+        <div class="grayscale_100">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+
+
+    <div class="wrap">
+        <div class="rotate_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="rotate_45">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="rotate_90">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="rotate_180">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="rotate_270">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+
+
+    <div class="wrap">
+        <div class="invert_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="invert_30">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+
+        <div class="invert_60">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="invert_100">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+
+
+    <div class="wrap">
+        <div class="saturate_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="saturate_30">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="saturate_60">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="saturate_100">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+
+
+    <div class="wrap">
+        <div class="sepia_0">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="sepia_30">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="sepia_60">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    
+        <div class="sepia_100">
+            <h1>Hello QQ</h1>
+            <img src="./qq.png"/>
+        </div>
+    </div>
+</body>
+</html>
