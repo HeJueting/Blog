@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe子页面</title>
+</head>
+
+<style>
+h1 {
+    text-align: center;
+}
+.btn {
+    display: block;
+    margin: 0 auto;
+}
+</style>
+
+<body>
+    <h1>iframe子页面</h1>
+    <button class="btn" id="btn">点击显示内容</button>
+
+    <div class="wrap" id="wrap"></div>
+
+<script type="text/javascript">
+    const btn = document.getElementById("btn");
+    const wrap = document.getElementById("wrap");
+
+    btn.addEventListener("click", ()=>{
+        const dom = document.createElement("p");
+        dom.innerText = "这是一条数据";
+        wrap.appendChild(dom);
+    })
+</script>
+</body>
+</html>

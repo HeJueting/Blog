@@ -99,7 +99,6 @@ yum update
 </br>
 
 
-### 部署egg项目
 
 
 
@@ -115,7 +114,9 @@ yum update
 </br>
 </br>
 </br>
+
 ```javascript
+
 //从docker镜像仓库获取镜像，options是选项，name是镜像名称
 docker image pull [options] [name]
 例如：docker image pull hello-world
@@ -131,6 +132,47 @@ docker build [options] xxxx .
 //删除docker镜像
 docker image rm [OPTIONS] [IMAGE ID]
 例如：docker image rm -f 87abf0239f1a
+
+
+//删除所有镜像
+docker rmi $(docker images -q)
+
+
+
+
+
+
+
+//查看正在运行的所有容器
+docker container ls
+
+
+// 列出本机所有容器，包括终止运行的容器
+docker container ls --all
+
+
+//终止容器运行
+docker docker container kill
+
+
+//终止运行的容器文件，依然会占据硬盘空间，可以使用docker container rm命令删除
+docker container rm [containerID]
+
+//删除所有容器
+docker rm $(docker ps -a -q)
+
+
+//从 image 文件生成容器。
+docker container run -p 8000:3000 koa-demo
+
+✦ -p参数：容器的 3000 端口映射到本机的 8000 端口。
+✦ -it参数：容器的 Shell 映射到当前的 Shell，然后你在本机窗口输入的命令，就会传入容器。
+✦ koa-demo：image 文件的名字
+✦ /bin/bash：容器启动以后，内部第一个执行的命令。这里是启动 Bash，保证用户可以使用 Shell。
+
+
+//进入容器
+docker container exec -it [containerID] /bin/bash
 ```
 
 

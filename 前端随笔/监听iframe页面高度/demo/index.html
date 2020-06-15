@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>父页面</title>
+</head>
+
+<style>
+html body {
+    margin: 0;
+    padding: 0;
+}
+.menu {
+    width: 100%;
+    height: 80px;
+    background: red;
+}
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.navigation {
+    width: 120px;
+    background: black;
+    min-height: 600px;
+}
+.content .iframe {
+    width: 100%;
+    min-height: 600px;
+}
+</style>
+
+<body>
+    <div class="menu"></div>
+
+    <div class="content">
+        <div class="navigation"></div>
+        <iframe id="iframe" class="iframe" src="./iframe.html"></iframe>
+    </div>
+
+<script type="text/javascript">
+    // 获取iframe子页面的dom节点
+    const iframeDom = document.getElementById("iframe");
+    
+    // 监听
+    window.addEventListener("message", (e)=>{
+        if(e.data.iframeHeight) {
+            iframeDom.style.height = e.data.iframeHeight + 'px';
+        }
+    }, false);
+</script>
+</body>
+</html>

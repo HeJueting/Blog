@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iframe子页面</title>
+</head>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    overflow: hidden;
+}
+h1 {
+    text-align: center;
+}
+.btn {
+    display: block;
+    margin: 0 auto;
+}
+</style>
+
+<body>
+    <h1>iframe子页面</h1>
+    <button class="btn" id="btn">点击显示内容</button>
+
+    <div class="wrap" id="wrap"></div>
+
+<script type="text/javascript">
+    const btn = document.getElementById("btn");
+    const wrap = document.getElementById("wrap");
+
+    btn.addEventListener("click", ()=>{
+        const dom = document.createElement("p");
+        dom.innerText = "这是一条数据";
+        wrap.appendChild(dom);
+    })
+
+
+
+
+    // 选择需要观察变动的节点
+    const observeDom = document.body;
+    // 记录当前body的clientHeight值
+    let clientHeight = observeDom.clientHeight;
+    // 初始化默认高度
+    window.parent.postMessage({ iframeHeight: observeDom.clientHeight }, '*');
+
+    // 观察器的配置
+    // 注意：clientHeight并不是attributes属性值，所以可以监听他的子孙的变化
+    var config = {
+        childList: true,
+        subtree: true,
+    };
+    // 当观察到变动时执行的回调函数
+    var callback = mutations => {
+        for (var mutation of mutations) {
+            // 如果body的高度发生了改变
+            if (observeDom.clientHeight != clientHeight) {
+                clientHeight = observeDom.clientHeight;
+                window.parent.postMessage({ iframeHeight: observeDom.clientHeight }, '*');
+            }
+        }
+    };
+    // 创建一个观察器实例并传入回调函数
+    this.observer = new MutationObserver(callback);
+    // 以上述配置开始观察目标节点
+    this.observer.observe(observeDom, config);
+
+
+</script>
+</body>
+</html>
