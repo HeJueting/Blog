@@ -173,7 +173,7 @@ console.log(Object({0:value1,1:value2}));    // 解析错误
 </br>
 
 
-完整的代码已经上传到GitHub，请移步查看[demo]()
+完整的代码已经上传到GitHub，请移步查看[demo](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/webpack%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/demo)
 
 ```json
 1、下载 demo 文件夹内容
