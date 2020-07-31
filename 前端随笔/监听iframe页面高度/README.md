@@ -73,7 +73,7 @@
 
 ### MutationObserver
 
-JS并没有直接提供resize的方法去监听一个dom元素的属性，而是通过MutationObserver接口去监视dom元素的变化。
+JS并没有直接提供resize的方法去监听一个dom元素的属性，而是通过MutationObserver接口去监视dom元素的变化。在之前的[《监听iframe页面高度》](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E7%9B%91%E5%90%ACiframe%E9%A1%B5%E9%9D%A2%E9%AB%98%E5%BA%A6)文章中便提到了MutationObserver去监听dom元素的改变。此情此景，我们也可以使用MutationObserver去监听水印的“消失”
 
 </br>
 

@@ -675,4 +675,12 @@ export default CustomLayer;
 </br>
 </br>
 
-**总结： 以上内容基于 leaflet 1.5.1版本，初次接触 SVG 和 leaflet，使用姿势有误的地方，欢迎点评 ~**
+**总结： 以上内容基于 leaflet 1.5.1版本，初次接触 SVG 和 leaflet，使用姿势有误的地方，欢迎点评 ~ 具体代码我已经放置仓库的 [demo](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E5%9F%BA%E4%BA%8Eleaflet%E5%BC%80%E5%8F%91%E5%9C%B0%E5%9B%BE%E9%A3%9E%E7%BA%BF/demo) 文件夹中，欢迎大家clone下来参考**
+
+
+
+</br>
+</br>
+
+### 博客原文：[hejueting.cn](www.hejueting.cn)
+
