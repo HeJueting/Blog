@@ -593,3 +593,21 @@ filter: blur(5px) brightness(30%) contrast(40%) ....
 通过 [can i use](https://caniuse.com/#search=filter) 的查询，各大浏览器的最新版，几乎完全覆盖，可放心使用
 
 ![image](./img/compatibility.png)
+
+
+
+</br>
+</br>
+
+
+代码已经放在github上：[有趣的filter属性demo](https://github.com/HeJueting/Blog/tree/master/CSS/%E6%9C%89%E8%B6%A3%E7%9A%84filter%E5%B1%9E%E6%80%A7)
+
+
+
+</br>
+</br>
+
+### 博客原文：[hejueting.cn](www.hejueting.cn)
+
+
+</br>

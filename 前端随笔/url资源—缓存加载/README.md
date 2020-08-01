@@ -104,3 +104,11 @@ const apiCache = new ApiCache();
 // 请求资源
 let result = await apiCache.getCorrectRes(“http://localhost/test.js”);
 ```
+
+
+</br>
+</br>
+
+### 博客原文：[hejueting.cn](www.hejueting.cn)
+
+</br>
