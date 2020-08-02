@@ -68,7 +68,7 @@ body{
 </body>
 ```
 
-![image](./img/blur.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/blur.png)
 
 </br>
 </br>
@@ -126,7 +126,7 @@ body{
 </body>
 ```
 
-![image](./img/brightness.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/brightness.png)
 
 </br>
 </br>
@@ -182,7 +182,7 @@ body{
 </body>
 ```
 
-![image](./img/contrast.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/contrast.png)
 
 </br>
 </br>
@@ -251,7 +251,7 @@ body{
 </body>
 ```
 
-![image](./img/shadow.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/shadow.png)
 
 </br>
 </br>
@@ -303,7 +303,7 @@ body{
 </body>
 ```
 
-![image](./img/grayscale.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/grayscale.png)
 
 </br>
 </br>
@@ -370,7 +370,7 @@ body{
 </body>
 ```
 
-![image](./img/rotate.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/rotate.png)
 
 </br>
 </br>
@@ -445,7 +445,7 @@ body{
 </body>
 ```
 
-![image](./img/saturate.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/saturate.png)
 
 </br>
 </br>
@@ -504,7 +504,7 @@ body{
 ```
 
 
-![image](./img/sepia.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/sepia.png)
 
 </br>
 </br>
@@ -562,7 +562,7 @@ body{
 </body>
 ```
 
-![image](./img/invert.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/invert.png)
 
 </br>
 </br>
@@ -592,7 +592,7 @@ filter: blur(5px) brightness(30%) contrast(40%) ....
 
 通过 [can i use](https://caniuse.com/#search=filter) 的查询，各大浏览器的最新版，几乎完全覆盖，可放心使用
 
-![image](./img/compatibility.png)
+![image](http://qiniu.hejueting.cn/github/css/filter/compatibility.png)
 
 
 
