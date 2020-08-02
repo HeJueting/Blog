@@ -117,7 +117,7 @@ sym.__proto__.__proto__ === Object.prototype;  //true
 Object.prototype.__proto__ === null;   //true
 ```
 
-![image](./img/1.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/prototypeTop.png)
 
 虽然Object.prototype的__proto__属性确实指向了null，但是MDN上也给出了明确的提示，Object.prototype将不再拥有这个属性。因此，Object.prototype是原型链的顶端。
 
@@ -132,11 +132,11 @@ Object.prototype.__proto__ === null;   //true
 
 ### 原型链的结构
 
-![image](./img/2.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/structure.png)
 
 乍一看，有点复杂，其实仔细梳理一下，也就四条原型链
 
-![image](./img/3.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/chain.png)
 
 Object作为一个函数，它的__proto__属性会指向Function的prototype属性；而Function作为函数的鼻祖，它的__proto__也只能指向自己的prototype属性
 
@@ -173,12 +173,12 @@ console.log(tiger.skill);  //捕猎
 console.log(tiger.from);   //森林
 ```
 
-![image](./img/4.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/example_1.png)
 
 **Animal：** 顺着Animal原型链往上查询的过程中，并没有找到say()方法和skill属性，因此访问say()方法时会报错，访问skill属性时结果是undefined；而整条原型链上，在Object.prototype处找到了from属性，因此访问from属性时会打印“地球”
 
 
-![image](./img/5.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/example_2.png)
 
 **tiger：** 同理可得tiger.speak()和tiger.skill的结果。顺着tiger原型链往上查询from属性的过程中，在tiger处就已经找到了from属性，不会再继续查询下去，因此tiger.from得到的结果是"森林"
 
