@@ -1,7 +1,10 @@
+# to do list ...
+
 # 继承（二）
 
 </br>
 </br>
+
 
 
 
@@ -179,7 +182,7 @@ sym.__proto__.__proto__ === Object.prototype;  //true
 Object.prototype.__proto__ === null;   //true
 ```
 
-![image](./img/1.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/prototypeTop.png)
 
 虽然Object.prototype的__proto__属性确实指向了null，但是MDN上也给出了明确的提示，Object.prototype将不再拥有这个属性。因此，Object.prototype是原型链的顶端。
 
@@ -187,11 +190,11 @@ Object.prototype.__proto__ === null;   //true
 
 回到最初的案例，我们再来分析一下：原型链的结构
 
-![image](./img/2.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/structure.png)
 
 乍一看，有点复杂，其实仔细梳理一下，也就三条原型链
 
-![image](./img/3.png)
+![image](http://qiniu.hejueting.cn/github/javascript/prototype/chain.png)
 
 为什么原型链是的结构是这样绕来绕去的？
 
