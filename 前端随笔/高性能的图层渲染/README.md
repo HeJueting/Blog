@@ -6,9 +6,9 @@
 ### 前言
 > 上一周临时接了一个舟山大屏的项目，其中有一个需求是：在地图中展示舟山所有接入OneNET平台的设备点。鉴于之前对开源地图 **[leaflet](https://leafletjs.com/index.html)** 小有研究，此次的需求我就直接基于leaflet进行开发
 
-在上一篇文章 **[《基于leaflet开发地图飞线》](http://www.shmily-hjt.cn/blog/#/articleDetails/%E5%9F%BA%E4%BA%8Eleaflet%E5%BC%80%E5%8F%91%E5%9C%B0%E5%9B%BE%E9%A3%9E%E7%BA%BF)** 中，我简要介绍并实践了leaflet的自定义图层开发，也提到过 svg 和 canvas 自己都没有接触过，就盲选的 svg 进行实践。其实也不算盲选，我查看过 leaflet 内置图层的元素，也是基于 svg 实现的，如下图所示：
+在上一篇文章 **[《基于leaflet开发地图飞线》](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E5%9F%BA%E4%BA%8Eleaflet%E5%BC%80%E5%8F%91%E5%9C%B0%E5%9B%BE%E9%A3%9E%E7%BA%BF)** 中，我简要介绍并实践了leaflet的自定义图层开发，也提到过 svg 和 canvas 自己都没有接触过，就盲选的 svg 进行实践。其实也不算盲选，我查看过 leaflet 内置图层的元素，也是基于 svg 实现的，如下图所示：
 
-![image](./img/1.png)
+![image](./img/leaflet.png)
 
 </br>
 
@@ -43,12 +43,12 @@
 > 邓小平爷爷常说：**实践是检验真理的唯一标准**。不手动测试对比一下，怎么能妄下定论？
 
 - **svg实现的描点：**
-![image](./img/2.gif)
+![image](./img/svg.gif)
 
 </br>
 
 - **canvas实现的描点：**
-![image](./img/3.gif)
+![image](./img/canvas.gif)
 
 </br>
 
