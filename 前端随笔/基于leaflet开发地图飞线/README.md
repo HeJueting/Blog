@@ -20,13 +20,13 @@
 
 > 阿里 data-v 的地图飞线层实现如下图所示：
 
-![image](./img/1.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/dataV-1.gif)
 
 </br>
 
 > 由上图可知，我们首先得利用 cavans 或者 svg 画出这些飞线和气泡。阿里是通过 canvas 实现的，三个 canvas 分别对应了**飞线**、**气泡**、**飞线头部**（每条飞线是有一个线头的，由于图片清晰度原因，不好从图片中直接观察到）。
 
-![image](./img/2.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/dataV-2.png)
 
 </br>
 
@@ -60,7 +60,7 @@
 </svg>
 ```
 
-![image](./img/3.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/circle.png)
 
 </br>
 
@@ -97,7 +97,7 @@
 </svg>
 ```
 
-![image](./img/4.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/gradients.png)
 
 </br>
 
@@ -121,7 +121,7 @@
 </svg>
 ```
 
-![image](./img/5.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/animation-enlarge-1.gif)
 
 </br>
 
@@ -134,7 +134,7 @@
 </circle>
 ```
 
-![image](./img/6.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/animation-enlarge-2.gif)
 
 </br>
 </br>
@@ -170,7 +170,7 @@
 </svg>
 ```
 
-![image](./img/7.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/straight-line.png)
 
 </br>
 
@@ -183,15 +183,15 @@
 
 **1、二阶贝塞尔曲线**：1个起点（P₀）、1个终点（P₂）、1个控制点（P₁）
 
-![image](./img/8.gif)
-![image](./img/9.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/belser-second.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/belser-second.png)
 
 如上图所示，动图很直观地展示了二阶贝塞尔曲线的形成过程，曲线上的点也会满足一个规律：**P₀M/P₀P₁ = P₁N/P₁P₂**
 
 **2、三阶贝塞尔曲线**：1个起点（P₀）、1个终点（P₃）、2个控制点（P₁、P₂）
 
-![image](./img/10.gif)
-![image](./img/11.jpg)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/belser-third.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/belser-third.jpg)
 
 三阶贝塞尔曲线的形成规律与二阶的也类似，**P₀Q₀/P₀P₁ = P₁Q₁/P₁P₂ = P₂Q₂/P₂P₃**
 
@@ -224,7 +224,7 @@
 </svg>
 ```
 
-![image](./img/12.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/curve.png)
 
 </br>
 
@@ -233,7 +233,7 @@
 
 > 仔细观察 data-v 的飞线，类似于一条二阶贝塞尔曲线，且它的控制点在**起点和终点连线的垂直平分线上**，如下图所示，A 和 B 分别代表起点和终点，C 点是 AB 连线上的中点，如果**已知 A B 两点坐标，再已知 QC 连线的距离**，即可轻松求出 Q 点坐标。
 
-![image](./img/13.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/design.png)
 
 ```javascript
 /**
@@ -304,7 +304,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](./img/14.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-1.png)
 
 </br>
 
@@ -342,7 +342,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](./img/15.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-2.png)
 
 </br>
 
@@ -369,7 +369,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](./img/16.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-3.gif)
 
 </br>
 
@@ -404,7 +404,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](./img/17.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-4.gif)
 
 </br>
 
@@ -441,7 +441,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](./img/18.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-5.gif)
 
 </br>
 
@@ -468,7 +468,7 @@ function getCurve (A, B, QC) {
 </svg>
 ```
 
-![image](./img/19.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-6.gif)
 
 </br>
 
@@ -478,7 +478,7 @@ function getCurve (A, B, QC) {
 <animate attributeName="opacity" dur="2s" repeatCount="indefinite" values="1;1;1;1;0" />
 ```
 
-![image](./img/20.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/draw-7.gif)
 
 </br>
 
@@ -640,13 +640,13 @@ export default CustomLayer;
 
 > 继承于 Layer 对象的图层都会加入到 **overlay-pane** 这个盒子中，getPane 方法便是获得这个 dom 对象
 
-![image](./img/21.png)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/result-1.png)
 
 </br>
 
 > 最终效果展示
 
-![image](./img/22.gif)
+![image](http://qiniu.hejueting.cn/github/notes/leaflet-flyLine/result-2.gif)
 
 </br>
 </br>
