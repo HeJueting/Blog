@@ -18,11 +18,11 @@
 
 ```html
 <div class="wrap">
-    <img src="./img/1.jpg"/>
-    <img src="./img/2.jpg"/>
+    <img src="http://qiniu.hejueting.cn/github/notes/pictureWaterfall/1.jpg"/>
+    <img src="http://qiniu.hejueting.cn/github/notes/pictureWaterfall/2.jpg"/>
 	<!--...省略部分代码...-->
-    <img src="./img/12.jpg"/>
-    <img src="./img/13.jpg"/>
+    <img src="http://qiniu.hejueting.cn/github/notes/pictureWaterfall/12.jpg"/>
+    <img src="http://qiniu.hejueting.cn/github/notes/pictureWaterfall/13.jpg"/>
 </div>
 ```
 ```css
@@ -40,7 +40,7 @@
     margin: 2vw;
 }
 ```
-![image](./img/1.png)
+![image](http://qiniu.hejueting.cn/github/notes/pictureWaterfall/fixed-width.png)
 
 </br>
 </br>
@@ -58,7 +58,7 @@
     margin: 2vw;
 }
 ```
-![image](./img/2.png)
+![image](http://qiniu.hejueting.cn/github/notes/pictureWaterfall/fixed-height.png)
 
 </br>
 </br>
@@ -79,7 +79,7 @@ for(let i=0; i<wrap.children.length; i++){
 }
 ```
 
-![image](./img/3.png)
+![image](http://qiniu.hejueting.cn/github/notes/pictureWaterfall/flex-grow.png)
 
 </br>
 </br>
@@ -100,7 +100,7 @@ for(let i=0; i<wrap.children.length; i++){
     flex-grow: 9999;
 }
 ```
-![image](./img/4.png)
+![image](http://qiniu.hejueting.cn/github/notes/pictureWaterfall/tail.png)
 
 </br>
 </br>
@@ -120,7 +120,7 @@ for(let i=0; i<wrap.children.length; i++){
 花了一下午的时间，分析它的dom结构，分析它的css，然后“意淫”出了一种及其“傻逼”的方式去实现，然后图片的展示总会展示不全（因为固定思维，一来又把高度给固定死），无奈地搜了搜：goole图片瀑布流的实现，看到这个知乎回答，才恍然大悟：
 </br>
 
-![image](./img/5.png)
+![image](http://qiniu.hejueting.cn/github/notes/pictureWaterfall/goole.png)
 
 </br>
 
@@ -140,7 +140,7 @@ for(let i=0; i<wrap.children.length; i++){
 
 </br>
 
-![image](./img/6.png)
+![image](http://qiniu.hejueting.cn/github/notes/pictureWaterfall/result.png)
 
 </br>
 
