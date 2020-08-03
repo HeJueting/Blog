@@ -15,7 +15,7 @@
 
 今天碰到这样一个需求：子页面以iframe的形式嵌入到父页面中，但是iframe子页面内容的高度的改变，iframe子页面的滚动条不会出现，而父页面的滚动条会发生变化
 
-![image](./img/1.png)
+![image](./img/compare.png)
 
 </br>
 </br>
