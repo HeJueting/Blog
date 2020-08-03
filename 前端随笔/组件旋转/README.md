@@ -14,7 +14,7 @@
 
 近期，在view编辑器中，需要实现组件旋转的功能。在此，记录一下实现过程
 
-![image](./img/1.gif)
+![image](http://qiniu.hejueting.cn/github/notes/componentRotate/rotate.gif)
 
 
 </br>
@@ -84,7 +84,7 @@ function setBoxRotate(){
 
 ### 计算旋转的角度
 
-![image](./img/2.png)
+![image](http://qiniu.hejueting.cn/github/notes/componentRotate/angle.png)
 
 **条件：**
 
@@ -272,7 +272,7 @@ function setBoxRotate(){
 </html>
 ```
 
-![image](./img/3.gif)
+![image](http://qiniu.hejueting.cn/github/notes/componentRotate/result.gif)
 
 
 </br>
