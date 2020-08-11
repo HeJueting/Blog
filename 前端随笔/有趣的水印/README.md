@@ -16,9 +16,9 @@
 
 
 
+### 给网页添加水印
 
-
-### 实现方式
+#### 实现方式
 
 - 网页的最顶层新增一个遮罩层用来展示“水印”
 
@@ -33,7 +33,7 @@
 
 
 
-### canvas绘制
+#### canvas绘制
 
 - 如果UI大佬没有直接提供设计图，我们也可以使用canvans来设计水印
 
@@ -42,9 +42,7 @@
 - 将这个图片以background的形式插入页面中
 
 
-
 </br>
-
 
 
 **index.html文件**
@@ -131,7 +129,7 @@ img.onload = function(){
 
 
 
-### 水印防修改
+#### 水印防修改
 
 
 水印的实现方式简单，破解方式也更简单，稍微懂行的人就能打开控制台去掉水印，因此我们还需要加强对水印的保护。在[《监听iframe页面高度》](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E7%9B%91%E5%90%ACiframe%E9%A1%B5%E9%9D%A2%E9%AB%98%E5%BA%A6)文章中，有提到[MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)的使用，此情此景，我们也可以使用该API去监控水印的变化。
@@ -239,85 +237,35 @@ initWatermark();
 
 
 
-### DefinePlugin
 
-- 通过 cross-env 设置的环境变量，虽然在 webpack 配置文件中可以访问，但在项目编译过程中是无法访问的
+### 给图片添加水印
 
-- DefinePlugin 插件允许你在代码编译期间，为整个项目配置全局变量，在webpack打包的时候会对这些变量做替换
+- 将图片转为canvas
 
-```javascript
-// webpack配置
-const path = require('path');
-const webpack = require('webpack');
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'bundle.js',
-        path: path.join(__dirname, 'dist')
-    },
-    plugins: [
-        new webpack.DefinePlugin({
-            MODE: "test"
-	    })
-    ]
-};
+- 使用canvas制作水印
+
+- 将canvas转为base64图片
+
+- 最后将base64转化为file文件
 
 
-// 被打包的index.js文件
-console.log(MODE);    // 报错：test is not defined
-```
-
-</br>
-
-打包编译后的结果如下：
-
-```javascript
-console.log(test)
-```
-
-MODE 在代码中直接被替换为了 test ，但我们本想赋值 test 字符串给 MODE，却赋值成为了 test 变量。这是因为在配置这些全局变量的时候，**如果传入的值为字符串，会被webpack解析为一个变量**，如果想要赋值一个真正的字符串我们可以这样做：
-
-```javascript
-// 方法一
-MODE: "'test'"
-
-// 方法二
-MODE: JSON.stringify('test')
-```
-
-</br>
-
-这里建议使用方法二，因为它不仅可以处理字符串，还可以处理对象：
-
-```javascript
-// webpack中变量定义
-plugins: [
-    new webpack.DefinePlugin({
-        OBJ_1: JSON.stringify({
-            MODE: "test"
-        }),
-        OBJ_2: {
-            MODE: "test"
-        },
-        ARR_1: JSON.stringify(["value1", "value2"]),
-        ARR_2: ["value1", "value2"]
-    })
-]
 
 
-// 被打包的index.js文件
-console.log(OBJ_1);
-console.log(OBJ_2);
-console.log(ARR_1);
-console.log(ARR_2);
+1、url 转 base64（利用canvas.toDataURL的API转化成base64）
+
+2、base64 转 blob
 
 
-// 打包后的编译结果
-console.log({MODE:"test"});                  // 解析正确
-console.log(Object({MODE:test}));            // 解析错误，test被替换成为了变量
-console.log(["value1","value2"]);            // 解析正确
-console.log(Object({0:value1,1:value2}));    // 解析错误
-```
+
+
+MDN-File
+https://developer.mozilla.org/zh-CN/docs/Web/API/File/File
+
+MDN-Blob
+https://developer.mozilla.org/zh-CN/docs/Web/API/Blob
+
+Base64的编码与解码
+https://developer.mozilla.org/zh-CN/docs/Web/API/WindowBase64/Base64_encoding_and_decoding
 
 </br>
 </br>
@@ -357,3 +305,5 @@ https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Basic_usage
 
 图片隐秘术：
 https://www.cnblogs.com/edgeQAQ/p/12503919.html
+
+http://chenjingjiu.cn/index.php/2019/04/18/steganography

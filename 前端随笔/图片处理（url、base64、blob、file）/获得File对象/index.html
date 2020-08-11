@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>如何获得File对象</title>
+</head>
+<style>
+#fileBox {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+}
+</style>
+<body>
+
+    <p>通过file类型的input标签获取file对象</p>
+    <input id="inputFile" type="file" onchange="fileLoad()"/>
+
+    <p>将文件拖至该处，获取file对象</p>
+    <div id="fileBox"></div>
+    
+    <script src="./index.js"></script>
+</body>
+</html>
