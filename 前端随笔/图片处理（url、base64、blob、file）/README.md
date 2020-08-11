@@ -68,7 +68,7 @@
 通过 atob() 方法对经过 base-64 编码的字符串进行解码。相反地，通过 btoa() 函数能够将某个数据转为base-64编码的ASCII字符串
 
 
-![image](./img/base64.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/base64.png)
 
 
 例如该图片就是以 base64 形式进行展示，但严格来说，src 中的数据格式应该叫做 Data URL
@@ -197,7 +197,7 @@ new Blob([
 })
 ```
 
-![image](./img/blob-new.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/blob-new.png)
 
 
 Blob() 构造函数会返回一个新的 Blob 对象，该构造函数接受两个参数: 
@@ -227,7 +227,7 @@ fetch('http://localhost/img/diamonds.png').then(
 
 利用JS提供的Fetch API，也可以得到Blob对象
 
-![image](./img/blob-fetch.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/blob-fetch.png)
 
 </br>
 
@@ -255,7 +255,7 @@ diamonds.onload = function(){
 
 除了toDataURL方法外，canvas还有toBlob方法将canvas画布内容转为一个Blob对象
 
-![image](./img/blob-canvas.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/blob-canvas.png)
 
 </br>
 
@@ -301,7 +301,7 @@ const file = new File(["Hello World"], "hello.txt", {
 });
 ```
 
-![image](./img/file-new.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/file-new.png)
 
 
 File构造函数接受三个参数: 
@@ -337,7 +337,7 @@ const blobToFile = new File([blob], "hello.txt", {
 });
 ```
 
-![image](./img/file-blob.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/file-blob.png)
 
 
 </br>
@@ -372,7 +372,7 @@ fileBox.addEventListener('drop', e => {
 })
 ```
 
-![image](./img/file-drag.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/file-drag.png)
 
 
 </br>
@@ -398,7 +398,7 @@ fileBox.addEventListener('drop', e => {
 
 经过以上分析，我们可以简单梳理出DataURL、Blob、File三者之间的关系:
 
-![image](./img/relationship.png)
+![image](http://qiniu.hejueting.cn/github/notes/dealImage/relationship.png)
 
 </br>
 </br>
@@ -408,8 +408,7 @@ fileBox.addEventListener('drop', e => {
 
 
 
-完整的代码已经上传到GitHub，请移步查看[demo](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/webpack%E8%87%AA%E5%AE%9A%E4%B9%89%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/demo)
-
+完整的代码已经上传到GitHub，请点击[这里](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86%EF%BC%88url%E3%80%81base64%E3%80%81blob%E3%80%81file%EF%BC%89)查看
 
 
 </br>
