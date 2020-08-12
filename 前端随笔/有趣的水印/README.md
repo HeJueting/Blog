@@ -361,7 +361,7 @@ btn.addEventListener('click', e => {
 
 简单来说，就是将一些隐秘信息写入了图片中，由于我们试别图片的能力有限，对于改动信息后的图片，我们毫无察觉
 
-![image]((http://qiniu.hejueting.cn/github/notes/waterMark/colorCompare.png)
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/colorCompare.png)
 
 例如上方的图片，左边的颜色为“#FF6666”，右边的颜色为“FE6666”，但对于肉眼而言，几乎看不出两者的区别。
 
@@ -373,11 +373,11 @@ btn.addEventListener('click', e => {
 
 对于图片中图像像素一般由RGB（红绿蓝）三原色组成，每一种颜色取值范围为0x00 ~ 0xFF，即256种颜色，一共包含了256*256*256 = 16777216种颜色，而人类眼睛可以区分约1000万种不同的颜色，这也就意味着人类的眼睛无法区分余下的6777216种颜色。
 
-![image]((http://qiniu.hejueting.cn/github/notes/waterMark/transformation.png)
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/transformation.png)
 
 LSB隐写就是修改RGB颜色分量种最低二进制位，也就是最低有效位（LSB），而人类的眼睫不会注意到这细小的变化。
 
-![image]((http://qiniu.hejueting.cn/github/notes/waterMark/change.png)
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/change.png)
 
 由上图可知，在R通道，十进制250表示红色，我们修改了它二进制中的最低位，分别+1和-1，但颜色看起来依旧没有变化。利用这一特点，我们就可以修改最低位中的信息，实现信息的隐写。这种修改最低位信息的算法就叫做LSB加密算法，提取最低位有效信息的算法叫做LSB解密算法。
 
@@ -411,7 +411,7 @@ image.onload = function() {
 }
 ```
 
-![image]((http://qiniu.hejueting.cn/github/notes/waterMark/imageData.png)
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/imageData.png)
 
 
 
@@ -424,7 +424,7 @@ image.onload = function() {
 
 假设我们有 *showData* 和 *hideData* 两个图片信息（这两个图片需要大小一致，以保证每一个像素形成一一对应关系）
 
-![image]((http://qiniu.hejueting.cn/github/notes/waterMark/example.png)
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/example.png)
 
 showData 从原图到转换二之后的图，经过上述分析，我们肉眼是无法察觉变化的，但是我们却悄悄将隐藏信息 hideData 写入其中。当要展示 hideData 隐藏的信息，我们可以通过 R 通道的奇偶值去进行处理。
 
@@ -516,7 +516,7 @@ function getMarkData(width, height) {
 }
 ```
 
-![image]((http://qiniu.hejueting.cn/github/notes/waterMark/result.png)
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/result.png)
 
 </br>
 
