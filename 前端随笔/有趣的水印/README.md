@@ -100,6 +100,8 @@ img.onload = function(){
 }
 ```
 
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/webMark.png)
+
 
 </br>
 
@@ -330,6 +332,9 @@ btn.addEventListener('click', e => {
     });
 })
 ```
+
+
+![image](http://qiniu.hejueting.cn/github/notes/waterMark/imageMark.png)
 
 </br>
 </br>
