@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas隐写术</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .wrap{
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    div{
+        width: 400px;
+    }
+    p {
+        margin-bottom: 30px;
+    }
+    img, canvas{
+        width: 100%;
+    }
+</style>
+<body>
+    <div class="wrap">
+        <div>
+            <p>原图：</p>
+            <img src="./img/bac.jpg"/>
+        </div>
+    
+        <div id="encryption">
+            <p>写入隐秘信息后：</p>
+        </div>
+    
+        <div id="decrypt">
+            <p>解密后的图片：</p>
+        </div>
+    </div>
+    <script type="text/javascript" src="./index.js"></script>
+</body>
+</html>
