@@ -23,29 +23,31 @@
 
 </br>
 
+- **创建mongodb.log**
+
+首先，你需要进入mongodb文件夹下，手动创建一个mongodb.log的文件日志
+
 - **配置**
 
+打开管理员命令窗口（Windows PowerShell），进入到你的mongdob下面的bin目录，执行以下命令：
+
 ```
-mongod.exe --logpath C:\mongodb\mongodb.log --logappend --dbpath C:\mongodb\data --directoryperdb --serviceName mongodb --install
+./mongod.exe --logpath "C:\mongodb\mongodb.log" --logappend --dbpath "C:\mongodb\data" --directoryperdb --serviceName "mongodb" --install
 ```
 
-上述命令就是配置mongodb的日志和数据库的文件目录地址，你需要配置到自己Mongodb的目录，值得注意的是，如果你的目录地址中存在空格，例如:
+上述命令就是配置mongodb的日志和数据库的文件目录地址，你需要配置到自己mongodb的目录，值得注意的是，所有的路径和名称都需要加上引号。如果你的目录地址中存在空格，且不加引号，例如:
 
 ```
 C:\Program Files\mongodb\mongodb.log
 ```
 
-此时执行上面的命令会报错：*Invalid command:Files\mongodb\mongodb.log*，你该使用如下方式去规定他们目录地址：
-
-```
-mongod.exe --logpath=“C:\Program Files\mongodb\mongodb.log” --logappend --dbpath=“C:\Program Files\mongodb\data” --directoryperdb --serviceName MongoDB --install
-```
+此时执行上面的命令会报错：*Invalid command:Files\mongodb\mongodb.log*，因此在配置名称和路径时，最好加上引号
 
 </br>
 
 - **开启服务**
 
-上述命令中，有一个--serviceName的参数，该参数代表你数据库的名称，此处我的数据库名称是“mongodb”：
+上述命令中，有一个--serviceName的参数，该参数代表你数据库的名称，此处我的数据库名称是“mongodb”，同样在管理员命令窗口（Windows PowerShell）执行以下命令：
 
 ```
 net start mongodb   //开启服务
