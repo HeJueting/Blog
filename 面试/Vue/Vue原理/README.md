@@ -13,7 +13,7 @@
 
 
 
-### 监听data变化的核心API是什么？
+### 监听data变化的核心API是什么？响应式原理？
 
 **基本使用**
 
@@ -128,20 +128,62 @@ data.arr.push(4);           // 视图更新
 
 - 无法监听数组，需要特殊处理
 
-
-
-
-
-### 响应式原理
-
 <br></br>
 <br></br>
 <br></br>
+
+
 
 
 
 
 ### v-dom和diff算法
+
+**用JS模拟dom结构**
+
+- JS计算速度是很快的，但是dom的计算速度很耗时，因此vue、react等主流框架便使用虚拟dom（JS模拟的dom结构）来计算并渲染dom
+```html
+<div id="divId">
+    <h1 class="title">hello world</h1>
+</div>
+```
+```javascript
+var jsDom = {
+    tag: 'div',
+    props: {
+        id: 'divId',
+    },
+    children: [
+        {
+            tag: 'h1',  
+            props: {
+                className: 'title',
+            },
+            children: 'hello world'
+        }
+    ]
+}
+```
+
+**diff算法**
+
+- diff算法，即一种对比算法。例如git版本管理工具，也使用了diff算法，将不同分支进行比较
+
+
+
+**dom diff算法**
+
+- dom diff算法就是将js模拟的两个dom树进行比较，但树的diff算法，时间复杂度是O(n^3)，tree1遍历一次，tree2遍历一次，相互比较再遍历一次，但如果有1000个节点，就要遍历1亿次
+
+- dom diff算法优化后，将时间复杂度变成了O(n)
+
+    - 只比较一层级，不跨级比较
+    
+    - tag不相同，直接删掉重建，不再深度比较
+    
+    - tag和key，两者都相同，则认为是相同节点，不再深度比较
+
+的时间复杂度只有O(n)。如果应用在前端框架中，1000个节点就要遍历1亿次，显然不科学
 
 <br></br>
 <br></br>
