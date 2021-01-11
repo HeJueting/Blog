@@ -2,7 +2,7 @@
 
 <br></br>
 
-### 反转一个单链表
+### 题目
 
 请编写一个函数，使其可以删除某个链表中给定的（非末尾）节点。传入函数的唯一参数为 要被删除的节点
 
@@ -71,31 +71,20 @@
  * @return {ListNode}
  */
 var reverseList = function(head) {
-    // 用指针p来记录当前遍历到哪个节点
+    // l表示反转后的链表
+    let l = new ListNode();
+    // p表示原始链表的指针
     let p = head;
-    // 用l表示反转后的链表
-    const l = new ListNode();
-
     while(p) {
         // 缓存p的下一个节点
         const temp = p.next;
-        // 如果l的下一个节点为空，说明不需要反转
-        if (!l.next) {
-            // 将第一个节点插入l链表中，注意，l链表的末尾为null，所以需要把p指针的next指向null
-            p.next = null;
-            l.next = p;
-        }
-        // 需要反转
-        else {
-            // 将p节点插入到l.next之前
-            p.next = l.next;
-            l.next = p;
-        }
-        // p节点向后移动
+        // 将最新的值插入到l.next
+        p.next = l.next;
+        l.next = p;
+        // p指针向后移动
         p = temp;
     }
 
-    // 返回l链表
     return l.next;
 };
 ```

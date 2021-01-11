@@ -142,6 +142,7 @@ data.arr.push(4);           // 视图更新
 **用JS模拟dom结构**
 
 - JS计算速度是很快的，但是dom的计算速度很耗时，因此vue、react等主流框架便使用虚拟dom（JS模拟的dom结构）来计算并渲染dom
+
 ```html
 <div id="divId">
     <h1 class="title">hello world</h1>
@@ -183,8 +184,6 @@ var jsDom = {
     
     - tag和key，两者都相同，则认为是相同节点，不再深度比较
 
-的时间复杂度只有O(n)。如果应用在前端框架中，1000个节点就要遍历1亿次，显然不科学
-
 <br></br>
 <br></br>
 <br></br>
@@ -193,6 +192,52 @@ var jsDom = {
 
 
 ### 模板编译
+
+> 模板不是html，有指令、插值、JS表达式、能实现判断、循环。但html只是标签语言，只有JS才能实现判断、循环，因此模板一定是转化为某种JS代码，即编译模板
+
+
+**vue template complier**
+
+通过vue-cli创建项目，package.json中有一个 vue-template-compiler 的包，vue就是通过这个包实现的模板编译
+
+```javascript
+const compiler = require('vue-template-compiler');
+const tempalte = `<h1>fuck</h1>`;
+const res = compiler.compile(tempalte);
+
+console.log(res);
+// {
+//   ast: { type: 1, tag: 'h1', .... },
+//   render: `with(this){return _c('h1',[_v("fuck")])}`,
+//   ......
+// }
+```
+
+**JS的with语法**
+
+res.render是一个with语法的JS语句
+
+```javascript
+const obj = {
+    a: 'a',
+    b: 'b',
+}
+console.log(obj.a);  // a
+console.log(obj.b);  // b
+console.log(obj.c);  // undefined
+
+// 改变{}内自由变量的查找规则，当作obj属性来查找
+// 如果找不到匹配的obj属性，就会报错
+with (obj) {
+    console.log(a);  // a
+    console.log(b);  // b
+    console.log(c);  // 报错
+}
+```
+
+**执行render函数生成vnode**
+
+this表示vue实例，_c代表creatElement，也就是说render最后会返回一个vnode
 
 <br></br>
 <br></br>
