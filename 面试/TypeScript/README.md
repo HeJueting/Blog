@@ -113,7 +113,6 @@ interface Person {
     name: string;
     age?: number;         // 可选属性
     readonly id: number;  // 只能读的属性
-
 }
 const user: Person = {
     name: 'hejueting',
@@ -298,10 +297,56 @@ const arr2: Array<number> = [1, 2, ,3];     // 利用泛型定义一个number类
 
 
 
+### 类型别名和类型断言
+
+```typescript
+// 类型别名：基本使用
+type PlusType = (x: number, y: number) => number;
+function sum(x: number, y: number): number {
+    return x+y;
+}
+const sum2: PlusType = sum;
+// 类型别名：联合类型
+type StrResolver = () => string;
+type StrOrResolver = string | strResolver;
+function getStr(n: StrOrResolver): string {
+    if(typeof n === 'string') {
+        return n;
+    } else {
+        return n();
+    }
+}
+
+// 类型断言（编译阶段不确定的变量类型时，告诉ts它的类型，不用报错）
+function getLength(input: string | number): number {
+    // 断言：把input当作一个string
+    const str  = input as string;
+    if(str.length) {
+        console.log(str.length);
+    } else {
+        // 断言：把num当作一个number
+        const num = input as number;
+        console.log(num);
+    }
+    // 断言：简写
+    if((<string>input).length) {
+        console.log(str.length);
+    } else {
+        console.log((<number>input).toFixed());
+    }
+}
+```
+
+<br></br>
+<br></br>
 
 
 
 
+
+### 声明文件
+
+> 声明第三方库，可使之调用第三方库的API；配合DefinitelyTyped使用
 
 
 
