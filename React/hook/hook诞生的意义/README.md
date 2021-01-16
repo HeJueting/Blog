@@ -1,177 +1,217 @@
 # hook诞生的意义
 
-> 例如实现这样一个需求：监听鼠标在某个区域移动的位置
+<br></br>
 
-![image](./img/reference.png)
 
+### 代码更精简，更容易理解
+
+> 例如：实现监听鼠标在网页中移动的位置
+
+- **使用class语法实现**
+
+```javascript
+class Mouse extends React.Component {
+    constructor() {
+        super();
+        this.mouseMove = this.mouseMove.bind(this);
+        this.state = { x: 0, y: 0 }
+    }
+    componentDidMount() {
+        document.addEventListener('mousemove', this.mouseMove);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousemove', this.mouseMove);
+    }
+    mouseMove(e) {
+        this.setState({
+            x: e.clientX,
+            y: e.clientY,
+        })
+    }
+    render() {
+        const { x, y } = this.state;
+        return (
+           <p>鼠标位置x: {x}, y: {y}</p>
+        )
+    }
+}
+```
+
+- **使用hook实现**
+
+```javascript
+function Mouse() {
+    const [location, setLocation] = useState({x: 0, y: 0});
+    const mouseMove = (e) => {
+        setLocation({
+            x: e.clientX,
+            y: e.clientY,
+        });
+    };
+    useEffect(() => {
+        document.addEventListener('mousemove', mouseMove);
+        return () => {
+            document.removeEventListener('mousemove', mouseMove);
+        }
+    }, []);
+    return (
+        <p>鼠标位置x: {location.x}, y: {location.y}</p>
+    )
+}
+```
+
+实现同样的需求，在class语法中:
+- 需要把mouseMove方法需要绑定this对象上调用
+- 需要在不同的生命周期中对鼠标移动事件进行监听、卸载
+- 编码量较多
+
+但是hook语法中:
+- 不需要this对象，直接以函数形式调用mouseMove方法
+- 仅在useEffect中就可以实现对鼠标移动事件进行监听、卸载
+- 编码量较少
+
+<br></br>
 <br></br>
 
 
 
 
+### 更好的复用状态逻辑
 
-### 一、使用class语法的render props实现
+> 如果需要把监听鼠标移动这个逻辑抽离出来，class语法常用的两种方式: [render props](https://zh-hans.reactjs.org/docs/render-props.html)、[HOC高阶组件](https://zh-hans.reactjs.org/docs/higher-order-components.html)
+
+- **class语法，使用render props来抽离**
 
 ```javascript
 // Mouse组件
 class Mouse extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { x: 0, y: 0 };
+    constructor() {
+        super();
+        this.mouseMove = this.mouseMove.bind(this);
+        this.state = { x: 0, y: 0 }
     }
-    mouseMove = (e) => {
+    componentDidMount() {
+        document.addEventListener('mousemove', this.mouseMove);
+    }
+    componentWillUnmount() {
+        document.removeEventListener('mousemove', this.mouseMove);
+    }
+    mouseMove(e) {
         this.setState({
             x: e.clientX,
-            y: e.clientY
+            y: e.clientY,
         })
     }
     render() {
         return (
-            <div onMouseMove={this.mouseMove}>
-                {this.props.render(this.state)}
-            </div>
+            <>{ this.props.render(this.state) }</>
         )
     }
 }
 
-// ComponentA组件
-class ComponentA extends React.Component {
+// Component组件
+class Component extends React.Component{
     render() {
         const { location } = this.props;
         return (
-            <div style={{width: '100%', height: '20vh', lineHeight: '20vh', background: 'red'}}>
-                <h1>我是A组件，鼠标当前位置: x({location.x})、y({location.y})</h1>
-            </div>
-
-        )
-    }
-}
-
-// ComponentB组件
-class ComponentB extends React.Component {
-    render() {
-        const { location } = this.props;
-        return (
-            <div style={{width: '100%', height: '20vh', lineHeight: '20vh', background: 'yellow'}}>
-                <h1>我是B组件，鼠标当前位置: x({location.x})、y({location.y})</h1>
-            </div>
-
+            <p>我是组件，我想知道鼠标的位置: x({location.x})、y({location.y})</p>
         )
     }
 }
 
 // App组件
-class App extends React.Component {
+class App extends React.Component{
     render() {
         return (
-            <>
-                <Mouse render={state => <ComponentA location={state} />}></Mouse>
-                <Mouse render={state => <ComponentB location={state} />}></Mouse>
-            </>
+            <Mouse render={(state) => <Component location={state}/>} />
         )
     }
 }
 ```
 
-<br></br>
-
-
-
-
-
-
-### 二、使用class语法的HOC(高阶组件)实现
+- **class语法，使用HOC高阶组件来抽离**
 
 ```javascript
-// WithMouse方法
-function WithMouse(Component) {
+// MouseWithHOC方法
+function MouseWithHOC(Components) {
     return class extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = { x: 0, y: 0 };
+        constructor() {
+            super();
+            this.mouseMove = this.mouseMove.bind(this);
+            this.state = { x: 0, y: 0 }
         }
-        mouseMove = (e) => {
+        componentDidMount() {
+            document.addEventListener('mousemove', this.mouseMove);
+        }
+        componentWillUnmount() {
+            document.removeEventListener('mousemove', this.mouseMove);
+        }
+        mouseMove(e) {
             this.setState({
                 x: e.clientX,
-                y: e.clientY
+                y: e.clientY,
             })
         }
         render() {
             return (
-                <div onMouseMove={this.mouseMove}>
-                    <Component location={this.state} {...this.props} />
-                </div>
+                <Components {...this.props} location={this.state} />
             )
         }
     }
 }
 
-// ComponentA、ComponentB组件与render props编码一致
-// .......
+// Component组件
+class Component extends React.Component{
+    render() {
+        const { location } = this.props;
+        return (
+            <p>我是组件，我想知道鼠标的位置: x({location.x})、y({location.y})</p>
+        )
+    }
+}
 
 // App组件
-class App extends React.Component {
+class App extends React.Component{
     render() {
-        const WithMouseComponentA = WithMouse(ComponentA);
-        const WithMouseComponentB = WithMouse(ComponentB);
+        const MouseWithComponent = MouseWithHOC(Component);
         return (
-            <>
-                <WithMouseComponentA />
-                <WithMouseComponentB />
-            </>
+            <MouseWithComponent />
         )
     }
 }
 ```
 
-<br></br>
-
-
-
-
-
-
-### 三、使用Hook
+- **hook语法来抽离**
 
 ```javascript
-// 实现Notice高阶组件
-function WithNotice(Component) {
-    console.log(Component);
-    return class extends React.Component {
-        constructor(props) {
-            super(props);
-            this.state = {
-                msg: '今天不上学，放假一天',
-            };
+// 自定义useHook
+function useMouse() {
+    const [location, setLocation] = useState({x: 0, y: 0});
+    const mouseMove = (e) => {
+        setLocation({
+            x: e.clientX,
+            y: e.clientY,
+        });
+    };
+    useEffect(() => {
+        document.addEventListener('mousemove', mouseMove);
+        return () => {
+            document.removeEventListener('mousemove', mouseMove);
         }
-        render() {
-            return (
-                <Component {...this.props} info={this.state} />
-            )
-        }
-    }
+    }, []);
+    return location;
 }
 
-// 此处省略小明、小红组件的代码，与render props一致
-// ......
-
-// 小明小红共享消息通知
-function App() {
-    const NoticeWithXiaoMing = WithNotice(XiaoMing);
-    const NoticeWithXiaoHong = WithNotice(XiaoHong);
+// Component组件直接复用useMouse的逻辑
+function Component() {
+    const location = useMouse();
     return (
-        <div className="App">
-            <NoticeWithXiaoMing />
-            <NoticeWithXiaoHong />
-        </div>
-    );
+        <p>我是组件，我想知道鼠标的位置: x({location.x})、y({location.y})</p>
+    )
 }
 ```
 
+抽离同样的逻辑，使用class的render props和HOC方式，明显代码更加臃肿且不易理解
 
 <br></br>
-
-
-### 一、更好的复用状态逻辑
-
-
+<br></br>
