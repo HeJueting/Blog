@@ -44,3 +44,21 @@ useEffect(() => {
     // to do something...
 }, [name, age])
 ```
+
+<br></br>
+<br></br>
+<br></br>
+
+
+# useLayoutEffect
+
+- useLayoutEffect的使用方式与useEffect相同
+
+- 但是useLayoutEffect是**在浏览器渲染之前触发**，useLayoutEffect 内部的更新计划将被**同步刷新**
+
+- 尽可能使用标准的 useEffect **以避免阻塞视觉更新**。
+ 
+<br></br>
+<br></br>
+
+**注意：** 以上内容基于React 17.0.1版本学习记录

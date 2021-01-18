@@ -98,3 +98,8 @@ const childHandleClick = useCallback(func, []);
 - 子组件的不必要渲染(配合React.memo使用)
 
 - 需要大量计算的函数，例如for循环10000次
+
+<br></br>
+<br></br>
+
+**注意：** 以上内容基于React 17.0.1版本学习记录

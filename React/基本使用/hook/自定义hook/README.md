@@ -20,3 +20,8 @@ function useCoustomHook(friendID) {
   return state;
 }
 ```
+
+<br></br>
+<br></br>
+
+**注意：** 以上内容基于React 17.0.1版本学习记录
