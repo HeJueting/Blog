@@ -148,3 +148,17 @@ netstat -nap | grep 端口号
 ```
 kill -9 进程号
 ```
+
+</br>
+</br>
+
+### 报错：ERROR Unable to initialize the server: Unable to initialize sub-systems: Credentials missing
+
+1、先把服务停掉
+
+2、修改密码账号
+
+```
+export MINIO_ACCESS_KEY=hejueting
+export MINIO_SECRET_KEY=*******
+```
