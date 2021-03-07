@@ -94,7 +94,7 @@ cd ur/local
 4、如果这样启动的话，命令窗口不能关闭，可以设置后台启动方式
 
 ```
-./minio server --address=:5757 /usr/share/minio/data &
+nohup ./minio server --address=:5757 /usr/share/minio/data/ > /usr/share/minio/minio.log 2>&1 &
 ```
 
 </br>
