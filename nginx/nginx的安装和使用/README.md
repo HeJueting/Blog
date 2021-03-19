@@ -1,4 +1,9 @@
-# Linux
+# nginx 的安装和使用
+
+</br>
+</br>
+
+## Linux
 
 > 我使用的是阿里云的服务器， 系统安装的是 centos 7
 
@@ -39,7 +44,9 @@ systemctl restart nginx
 </br>
 </br>
 
-# windows
+## windows
+
+</br>
 
 ### 安装
 
@@ -49,8 +56,18 @@ systemctl restart nginx
 
 ### 操作
 
-**启动 nginx**
+**1、启动 nginx**
 
 - 打开 nginx 文件夹，双击 nginx.exe 启动
 
-- 打开 cmd 命令，cd 到 nginx 解压目录下，输入 start nginx
+- 打开 cmd 命令，cd 到 nginx 解压目录下，输入命令： start nginx
+
+**2、关闭 nginx**
+
+- 打开任务管理器，直接关掉 nginx 的两个进程
+
+- 打开 cmd 命令，cd 到 nginx 解压目录下，输入命令：nginx.exe -s stop
+
+**3、重启 nginx**
+
+- 打开 cmd 命令，cd 到 nginx 解压目录下，输入命令：nginx.exe -s reload
