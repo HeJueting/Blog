@@ -22,6 +22,8 @@
 
 首先，你需要进入 mongodb 文件夹下，手动创建一个 mongodb.log 的文件日志
 
+</br>
+
 - **配置**
 
 打开管理员命令窗口（Windows PowerShell），进入到你的 mongdob 下面的 bin 目录，执行以下命令：

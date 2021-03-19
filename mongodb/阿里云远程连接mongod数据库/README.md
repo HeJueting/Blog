@@ -38,7 +38,9 @@ service mongod restart
 
 ### 远程连接 mongdb
 
-- **1、 cmd 连接**
+</br>
+
+- **cmd 连接**
 
 如果你使用的是 windows，需要进入到 mongodb/bin 目录下执行以下命令：
 
@@ -48,7 +50,7 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
-- **2、 可视化工具**
+- **可视化工具**
 
 我使用的是 mongodb 官方可视化工具 —— MongoDB Compass Community，输入**公网 IP**和**端口号**即可进行连接
 
@@ -70,50 +72,17 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 在 moogodb 中，每一个数据库都可以创建多个角色，不同的角色有着不同的操作权限
 
-**1、** Database User Roles（数据库用户角色）
+**1、** Superuser Roles（超级管理员角色）
+
+```
+    ✦ root：readWriteAnyDatabase、dbAdminAnyDatabase、userAdminAnyDatabase、clusterAdmin、restore、backup 权限
+```
+
+**2、** Database User Roles（数据库用户角色）
 
 ```
     ✦ read：读取指定数据库中任何数据
     ✦ readWrite：读写指定数据库中任何数据
-```
-
-**2、** Database Administration Roles（数据库管理角色）
-
-```
-✦ dbAdmin：在指定数据库中执行管理函数
-✦ dbOwner：该数据库的所有者，拥有该库的所有权限，包括readWrite，dbAdmin和userAdmin权限
-✦ userAdmin：在指定数据库里创建、删除和管理用户
-```
-
-**3、** Cluster Administration Roles（群集管理角色）
-
-```
-    ✦ clusterAdmin
-    ✦ clusterManager
-    ✦ clusterMonitor
-    ✦ hostManager
-```
-
-**4、** Backup and Restoration Roles（备份和恢复角色）
-
-```
-    ✦ backup
-    ✦ restore
-```
-
-**5、** All-Database Roles（所有数据库角色）
-
-```
-    ✦ readAnyDatabase：读取所有数据库中任何数据
-    ✦ readWriteAnyDatabase：读写所有数据库中任何数据
-    ✦ userAdminAnyDatabase：在任何数据库里创建、删除和管理用户
-    ✦ dbAdminAnyDatabase：在任何数据库中执行管理函数
-```
-
-**6、** Superuser Roles（超级管理员角色）
-
-```
-    ✦ root：readWriteAnyDatabase、dbAdminAnyDatabase、userAdminAnyDatabase、clusterAdmin、restore、backup 权限
 ```
 
 更多角色详情，请查看： [https://docs.mongodb.com/manual/reference/built-in-roles/#database-user-roles](https://docs.mongodb.com/manual/reference/built-in-roles/#database-user-roles)
@@ -171,13 +140,13 @@ service mongod restart
 
 - **再次连接 mongodb**
 
-**1、** cmd
+**1、** cmd 方式
 
 ```
 mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 ```
 
-**2、** MongoDB Compass Community
+**2、** MongoDB Compass Community 工具
 
 ![image](./img/connect-auth.png)
 
@@ -215,16 +184,16 @@ db.createUser(
     user: "blog",          // 账号（自行设置）
     pwd: "xxxxxx",         // 密码（自行设置）
     roles: [{
-		role:"readWrite",  // 拥有读写权限即可
-		db:"blog"          // 指定数据库
-	}]
+      role:"readWrite",  // 拥有读写权限即可
+      db:"blog"          // 指定数据库
+    }]
   }
 )
 ```
 
 </br>
 
-- **连接数据库**
+- **修改代码**
 
 ```javascrit
 mongoose.connect("mongodb://localhost:27017/blog", {
