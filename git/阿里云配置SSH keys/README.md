@@ -30,6 +30,8 @@ eval "ssh-agent -s"
 
 ssh-add ~/.ssh/id_rsa
 
+// 查看生成的公钥（id_rsa是私钥，id_rsa.pub是公钥）
+vim /root/.ssh/id_rsa.pub
 ```
 
 ssh 是什么：https://www.jianshu.com/p/1246cfdbe460
