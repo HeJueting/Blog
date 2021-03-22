@@ -1,4 +1,4 @@
-> # linux 下安装 minio
+# centos 下安装 minio
 
 </br>
 
