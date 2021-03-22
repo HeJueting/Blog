@@ -39,7 +39,7 @@ gitHub 就是上述中的 “服务器” ，它是一个通过 git 进行版本
 
 ### 如何生成 SSH Key？
 
-- 输入以下命令，一路回车键确认即可：
+- 打开 cmd 终端，输入以下命令，一路回车键确认即可：
 
 ```
 ssh-keygen -t rsa -C "email@qq.com"
@@ -59,3 +59,6 @@ ssh git@gitub.com
 // Hi HeJueting! You've successfully authenticated, but GitHub does not provide shell access.
 Connection to github.com closed.
 ```
+
+</br>
+</br>
