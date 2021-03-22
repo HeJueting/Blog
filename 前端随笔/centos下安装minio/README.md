@@ -28,26 +28,18 @@ wget http://dl.minio.org.cn/server/minio/release/linux-amd64/minio
 
 </br>
 
-4、为下载的 minion 添加执行权限：
+4、配置 minio 全局命令：
 
 ```
-chmod +x minio
-```
-
-</br>
-
-5、为了方便管理，你可以将 minio 复制到指定目录：
-
-```
-mv minio /usr/local/
+ln -s /minio /usr/local/bin/minio
 ```
 
 </br>
 
-6、创建 Minio 的文件存在目录：
+5、创建 Minio 的文件存在目录：
 
 ```
-mkdir - p usr/share/minio/data/
+mkdir -p /usr/minio/data/
 ```
 
 </br>
@@ -67,10 +59,10 @@ export MINIO_SECRET_KEY=*******
 
 ### 启动 minio
 
-1、进入 usr/local/目录（我上面移动了 minio 位置的）
+1、为下载的 minion 添加执行权限：
 
 ```
-cd ur/local
+chmod +x minio
 ```
 
 </br>
@@ -78,7 +70,7 @@ cd ur/local
 2、启动 minio（我上面也创建了这个文件夹）
 
 ```
-./minio server /usr/share/minio/data/
+minio server /usr/minio/data/
 ```
 
 </br>
@@ -86,7 +78,7 @@ cd ur/local
 3、minio 的默认端口号是 9000，如果想修改端口号可以使用以下命令：
 
 ```
-./minio server --address=:5757 /usr/share/minio/data/
+minio server --address=:5757 /usr/minio/data/
 ```
 
 </br>
@@ -94,7 +86,7 @@ cd ur/local
 4、如果这样启动的话，命令窗口不能关闭，可以设置后台启动方式
 
 ```
-nohup ./minio server --address=:5757 /usr/share/minio/data/ > /usr/share/minio/minio.log 2>&1 &
+nohup minio server --address=:5757 /usr/minio/data/ > /usr/minio/minio.log 2>&1 &
 ```
 
 </br>
