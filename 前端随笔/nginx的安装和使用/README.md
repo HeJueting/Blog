@@ -3,9 +3,7 @@
 </br>
 </br>
 
-## Linux
-
-> 我使用的是阿里云的服务器， 系统安装的是 centos 7
+## Centos
 
 </br>
 
