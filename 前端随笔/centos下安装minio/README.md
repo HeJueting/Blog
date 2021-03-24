@@ -1,5 +1,7 @@
 # centos 下安装 minio
 
+> 系统版本：centos 8.2
+
 </br>
 
 ### 使用 wget 下载

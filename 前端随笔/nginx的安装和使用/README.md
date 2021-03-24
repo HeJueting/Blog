@@ -3,7 +3,7 @@
 </br>
 </br>
 
-## Centos
+## Centos 8.2
 
 </br>
 

@@ -1,5 +1,7 @@
 # centos 下安装 node、npm、cnpm
 
+> 系统版本：centos 8.2
+
 </br>
 
 ### 下载 ndoe 和 npm

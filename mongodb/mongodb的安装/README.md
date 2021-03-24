@@ -54,7 +54,7 @@ net stop mongodb    //关闭服务
 </br>
 </br>
 
-## Linux(Centos 7)
+## Linux(Centos 8.2)
 
 </br>
 
