@@ -116,7 +116,7 @@ Object.prototype.from = "地球";
 
 function Animal() {}
 Animal.prototype.speak = function () {
-  console.log("我是一种动物");
+	console.log("我是一种动物");
 };
 
 var tiger = new Animal();
@@ -144,7 +144,7 @@ console.log(tiger.from); //森林
 
 ### 总结
 
-原型链是由**proto**属性和 prototype 属性构造而成，因为原型链的存在，JavaScript 能轻松实现面象对象编程
+原型链是由 **proto** 属性和 **prototype** 属性构造而成，因为原型链的存在，JavaScript 能轻松实现面象对象编程
 
 </br>
 </br>
