@@ -1,21 +1,18 @@
-# JavaScript模拟链表
+# JavaScript 模拟链表
 
-- 多个元素组成的列表
+-   多个元素组成的列表
 
-- 他们存储不连续，用next指针连在一起
+-   他们存储不连续，用 next 指针连在一起
 
 <br></br>
-
-
-
 
 ### 模拟链表
 
 ```javascript
-const a = { val: 'a' };
-const b = { val: 'b' };
-const c = { val: 'c' };
-const d = { val: 'd' };
+const a = { val: "a" };
+const b = { val: "b" };
+const c = { val: "c" };
+const d = { val: "d" };
 a.next = b;
 b.next = c;
 c.next = d;
@@ -23,9 +20,6 @@ c.next = d;
 
 <br></br>
 <br></br>
-
-
-
 
 ### 遍历链表
 
@@ -43,13 +37,10 @@ while (p) {
 <br></br>
 <br></br>
 
-
-
-
 ### 插入节点
 
 ```javascript
-const d = { val: 'd' };
+const d = { val: "d" };
 // 在a,b间插入d节点
 a.next = d;
 d.next = b;
