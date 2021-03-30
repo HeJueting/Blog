@@ -5,13 +5,22 @@
 
 ### 前言
 
-不知不觉，踩坑前端也两年多了。这一路的学习经历，也慢慢发现虽然技术会不断更新，但很多优秀的思想却会被一代一代传承。JavaScript 的设计之初，也只是一门运行在浏览器端的脚本语言，但随着技术的发展，JavaScript 所开发出来的项目也越来越庞大，代码的**可维护性、可复用性、可拓展性、灵活性、可理解性**也变得越来越重要。因此，我决定再一次深入面象对象的编程思想。
+不知不觉，踩坑前端也两年多了。这一路的学习经历，也慢慢发现虽然技术会不断更新，但很多优秀的思想却会被一代一代传承。JavaScript 的设计之初，也只是一门运行在浏览器端的脚本语言，但随着技术的发展，JavaScript 所开发出来的项目也越来越庞大，代码的 **可维护性、可复用性、可拓展性、灵活性、可理解性** 也变得越来越重要。因此，我决定再一次深入面向对象的编程思想。
 
 </br>
 </br>
+
+#### 面向对象的三大特性
+
+-   封装： 将不同职责的代码进行拆分，降低代码耦合度
+
+-   继承： 不同实例拥有相同的属性和方法都挂载在这个类上（抽离公共的代码）
+
+-   多态： 不同实例的相同方法在不同情形有不同表现形式
 
 对于我们撸代码而言，封装的思想尤为重要。我理解的封装，应由两部分组成：**提取**、**拆分**
 
+</br>
 </br>
 
 ### 提取
@@ -46,10 +55,10 @@ var B = { x: 24, y: 98 };
 var C = { x: 18, y: 48 };
 //已知两点，计算边长
 function getLength(m, n) {
-	var dx = Math.abs(m.x - n.x);
-	var dy = Math.abs(m.y - n.y);
-	var length = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-	return length;
+    var dx = Math.abs(m.x - n.x);
+    var dy = Math.abs(m.y - n.y);
+    var length = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    return length;
 }
 //求a,b,c三边长度
 var a = getLength(B, C);
@@ -71,10 +80,10 @@ var c = getLength(A, B);
 ```javascript
 //监听页面中鼠标移动事件
 document.onmousemove = function (e) {
-	var x = e.clientX;
-	var y = e.clientY;
-	$div.style.left = `${x}px`;
-	$div.style.top = `${y}px`;
+    var x = e.clientX;
+    var y = e.clientY;
+    $div.style.left = `${x}px`;
+    $div.style.top = `${y}px`;
 };
 ```
 
@@ -83,14 +92,14 @@ document.onmousemove = function (e) {
 ```javascript
 //监听页面中鼠标移动事件
 document.onmousemove = function (e) {
-	var x = e.clientX;
-	var y = e.clientY;
-	setDivPosition(x, y);
+    var x = e.clientX;
+    var y = e.clientY;
+    setDivPosition(x, y);
 };
 //设置div元素的位置
 function setDivPosition(x, y) {
-	$div.style.left = `${x}px`;
-	$div.style.top = `${y}px`;
+    $div.style.left = `${x}px`;
+    $div.style.top = `${y}px`;
 }
 ```
 

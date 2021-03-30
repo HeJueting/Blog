@@ -11,9 +11,9 @@
 
 ### 构造函数 & 实例
 
-- **构造函数：** 通过 new function 这种形式去实例对象时，这个 function 就变成了构造函数
+-   **构造函数：** 通过 new function 这种形式去实例对象时，这个 function 就变成了构造函数
 
-- **实例：** 通过 new 关键字去创建一个“对象”时，这个“对象”便叫作实例
+-   **实例：** 通过 new 关键字去创建一个“对象”时，这个“对象”便叫作实例
 
 ```javascript
 function A() {}
@@ -26,11 +26,11 @@ var a = new A();
 
 ### prototype & **proto**
 
-- 任何对象都拥有**proto**属性
+-   任何对象都拥有**proto**属性
 
-- 函数拥有**proto**属性和 prototype 属性，prototype 属性也被称为**原型**
+-   函数拥有**proto**属性和 prototype 属性，prototype 属性也被称为**原型**
 
-- 任何对象的**proto**属性都会指向它构造函数的 prototype 属性
+-   任何对象的**proto**属性都会指向它构造函数的 prototype 属性
 
 ```javascript
 a.__proto__ === A.prototype; //true
@@ -116,7 +116,7 @@ Object.prototype.from = "地球";
 
 function Animal() {}
 Animal.prototype.speak = function () {
-	console.log("我是一种动物");
+    console.log("我是一种动物");
 };
 
 var tiger = new Animal();
@@ -144,7 +144,7 @@ console.log(tiger.from); //森林
 
 ### 总结
 
-原型链是由 **proto** 属性和 **prototype** 属性构造而成，因为原型链的存在，JavaScript 能轻松实现面象对象编程
+原型链是由 **proto** 属性和 **prototype** 属性构造而成，因为原型链的存在，JavaScript 也能轻松实现面象对象编程
 
 </br>
 </br>
