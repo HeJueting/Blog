@@ -1,6 +1,6 @@
 # 回文链表
 
-<br></br>
+</br>
 
 ### 题目
 
@@ -20,49 +20,26 @@
 输出: false
 ```
 
-<br></br>
-<br></br>
-
-
-
+</br>
+</br>
 
 ### 注意
 
-- 在JavaScript中，我们可以利用Object属性的指向来模拟链表操作
+-   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
-- 在leetcode中，题目其实已经帮你实现了这样的链表，切记不要把[2,3,4,5]这样的链表数据当作普通数组，而要当作
-```
-{
-    val: 1,
-    next: {
-        val: 2,
-        next: {
-            val: 3,
-            next: ......
-        }
-    }
-}
-```
+-   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
-
-<br></br>
-<br></br>
-
-
-
+</br>
+</br>
 
 ### 思路
 
-- 遍历链表，并链表转为数组
+-   遍历链表，并将链表转为数组
 
-- 数组从前后往中间进行遍历判断
+-   数组从前后往中间进行遍历判断
 
-<br></br>
-<br></br>
-
-
-
-
+</br>
+</br>
 
 ### 求解
 
@@ -78,17 +55,17 @@
  * @param {ListNode} head
  * @return {boolean}
  */
-var isPalindrome = function(head) {
+var isPalindrome = function (head) {
     // 将链表转为数组
     let p = head;
     const arr = [];
-    while(p) {
+    while (p) {
         arr.push(p.val);
         p = p.next;
     }
     // 前后向中间遍历数组
-    for(let i=0, j=arr.length-1; i<j; i++, j--) {
-        if(arr[i] !== arr[j]) {
+    for (let i = 0, j = arr.length - 1; i < j; i++, j--) {
+        if (arr[i] !== arr[j]) {
             return false;
         }
     }
@@ -97,6 +74,6 @@ var isPalindrome = function(head) {
 };
 ```
 
-<br></br>
+</br>
 
 **题目来自：[LeetCode-回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)**
