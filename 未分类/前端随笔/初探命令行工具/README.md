@@ -236,3 +236,45 @@ fetch("https://hjt/xxx.zip").then((res) => {
 
 </br>
 </br>
+
+```js
+inquirer
+	.prompt([
+		{
+			type: "input",
+			message: "您的名字:",
+			name: "name",
+			default: "",
+		},
+	])
+	.then((answers) => {
+		fetch("http://qiniu.hejueting.cn/npm/cmd-hello/hello.zip").then(function (res) {
+			// 将压缩包资源下载到本地磁盘
+			const dest = fs.createWriteStream("./hello.zip");
+			res.body.pipe(dest);
+			// 下载成功后
+			dest.on("close", () => {
+				// 从本地磁盘读取该压缩包资源，并解压
+				fs.createReadStream("./hello.zip")
+					.pipe(unzipper.Parse())
+					.on("entry", function (entry) {
+						const fileName = entry.path;
+						// entry.type: 'Directory' or 'File'
+						// entry.vars.uncompressedSize: size
+						if (fileName === "hello.html") {
+							entry.on("data", (content) => {
+								// 将文件的内容转成utf-8格式
+								content = content.toString("utf-8");
+								// 替换变量
+								content = content.replace(/\[_name_\]/g, answers.name);
+								// 写入组件文件
+								fs.writeFileSync(`./${fileName}`, content, "utf8");
+							});
+						} else {
+							entry.autodrain();
+						}
+					});
+			});
+		});
+	});
+```
