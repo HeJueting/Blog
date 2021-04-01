@@ -1,6 +1,6 @@
 # 反转链表
 
-<br></br>
+</br>
 
 ### 题目
 
@@ -12,8 +12,8 @@
 输出: 5->4->3->2->1->NULL
 ```
 
-<br></br>
-<br></br>
+</br>
+</br>
 
 ### 注意
 
@@ -21,8 +21,8 @@
 
 -   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
-<br></br>
-<br></br>
+</br>
+</br>
 
 ### 思路
 
@@ -30,8 +30,8 @@
 
 -   遍历链表，将每一个节点 **插入到新链表的第一个位置**，其实就是链表插入节点的操作
 
-<br></br>
-<br></br>
+</br>
+</br>
 
 ### 求解
 
@@ -50,7 +50,7 @@
 var reverseList = function (head) {
     // l表示反转后的链表（初始值为null）
     let l = null;
-    // p表示需要反转的这个链表
+    // p表示需要反转的这个链表的指针
     let p = head;
     // 遍历这个p链表
     while (p) {
@@ -62,9 +62,10 @@ var reverseList = function (head) {
         // p继续指向下一个节点
         p = temp;
     }
+    return l;
 };
 ```
 
-<br></br>
+</br>
 
 **题目来自：[LeetCode-反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)**
