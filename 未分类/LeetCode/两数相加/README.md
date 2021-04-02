@@ -1,6 +1,6 @@
 # 两数相加
 
-<br></br>
+</br>
 
 ### 题目
 
@@ -25,17 +25,15 @@
 输出：[0]
 ```
 
-<br></br>
-<br></br>
-
-
-
+</br>
+</br>
 
 ### 注意
 
-- 在JavaScript中，我们可以利用Object属性的指向来模拟链表操作
+-   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
-- 在leetcode中，题目其实已经帮你实现了这样的链表，切记不要把[2,3,4,5]这样的链表数据当作普通数组，而要当作
+-   在 leetcode 中，题目其实已经帮你实现了这样的链表，切记不要把[2,3,4,5]这样的链表数据当作普通数组，而要当作
+
 ```
 {
     val: 1,
@@ -49,12 +47,8 @@
 }
 ```
 
-
-<br></br>
-<br></br>
-
-
-
+</br>
+</br>
 
 ### 求解
 
@@ -71,7 +65,7 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
+var addTwoNumbers = function (l1, l2) {
     // 声明一个l3代表求和结果的链表
     var l3 = new ListNode();
     // 指针p1,p2,p3  分别指向l1,l2,l3的头部
@@ -80,7 +74,7 @@ var addTwoNumbers = function(l1, l2) {
     var p3 = l3;
     // 下一位是否进一
     var carry = 0;
-    while(p1 || p2) {
+    while (p1 || p2) {
         var val1 = p1 ? p1.val : 0;
         var val2 = p2 ? p2.val : 0;
         // p3的next指向新的节点
@@ -94,8 +88,8 @@ var addTwoNumbers = function(l1, l2) {
             carry = 0;
         }
         // p1,p2向后移动
-        if(p1) p1 = p1.next;
-        if(p2) p2 = p2.next;
+        if (p1) p1 = p1.next;
+        if (p2) p2 = p2.next;
     }
 
     // 如果carry还为1，还需要在末尾加一个1
@@ -108,6 +102,6 @@ var addTwoNumbers = function(l1, l2) {
 };
 ```
 
-<br></br>
+</br>
 
 **题目来自：[LeetCode-两数相加](https://leetcode-cn.com/problems/add-two-numbers/)**

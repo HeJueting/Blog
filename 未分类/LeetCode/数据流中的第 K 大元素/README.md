@@ -1,6 +1,6 @@
-# 数组中的第K个最大元素
+# 数组中的第 K 个最大元素
 
-<br></br>
+</br>
 
 ### 题目
 
@@ -16,22 +16,21 @@
 输出: 4
 ```
 
-<br></br>
-<br></br>
-
+</br>
+</br>
 
 ### 求解
 
 ```javascript
 function findKthLargest(nums, k) {
     // 先将nums进行排序
-    nums.sort((a, b) => b-a);
-    return nums[k-1];
-};
+    nums.sort((a, b) => b - a);
+    return nums[k - 1];
+}
 ```
 
-由于JS的Array对象自带sort方法，变将这个问题直接简化
+由于 JS 的 Array 对象自带 sort 方法，变将这个问题直接简化
 
-<br></br>
+</br>
 
-**题目来自：[LeetCode-数组中的第K个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)**
+**题目来自：[LeetCode-数组中的第 K 个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)**

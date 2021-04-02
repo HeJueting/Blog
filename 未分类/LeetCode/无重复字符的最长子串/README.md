@@ -1,6 +1,6 @@
 # 无重复字符的最长子串
 
-<br></br>
+</br>
 
 ### 题目
 
@@ -9,7 +9,7 @@
 ```
 // 示例1
 输入: s = "abcabcbb"
-输出: 3 
+输出: 3
 解释: 因为无重复字符的最长子串是 "abc"，所以其长度为 3
 
 // 示例2
@@ -27,30 +27,27 @@
 输出: 0
 ```
 
-<br></br>
-<br></br>
-
-
-
+</br>
+</br>
 
 ### 求解
 
-- 用双指针维护一个滑动窗口，用来剪切子串
+-   用双指针维护一个滑动窗口，用来剪切子串
 
-- 不断移动右指针，遇到重复字符，就把做指针移动到重复字符的下一位
+-   不断移动右指针，遇到重复字符，就把做指针移动到重复字符的下一位
 
-- 过程中记录所有窗口的长度，并返回最大值
+-   过程中记录所有窗口的长度，并返回最大值
 
 ```javascript
-var lengthOfLongestSubstring = function(s) {
+var lengthOfLongestSubstring = function (s) {
     // 最大的字串长度
     let maxLength = 0;
     // 当前子串这个数组（类似于一个滑动窗口）
     let arr = [];
 
-    for(let i=0; i<s.length; i++) {
+    for (let i = 0; i < s.length; i++) {
         // 如果当前子串已经重复
-        if(arr.indexOf(s[i]) !== -1) {
+        if (arr.indexOf(s[i]) !== -1) {
             // 更新最大字串长度
             maxLength = arr.length > maxLength ? arr.length : maxLength;
             // 删除重复的字串
@@ -66,8 +63,7 @@ var lengthOfLongestSubstring = function(s) {
 };
 ```
 
-<br></br>
-<br></br>
-
+</br>
+</br>
 
 **题目来自：[LeetCode-无重复字符的最长子串](https://leetcode-cn.com/problems/longest-substring-without-repeating-characters/)**

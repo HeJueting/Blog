@@ -1,6 +1,6 @@
 # 斐波那契数
 
-<br></br>
+</br>
 
 ### 题目
 
@@ -30,8 +30,8 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 解释：F(4) = F(3) + F(2) = 2 + 1 = 3
 ```
 
-<br></br>
-<br></br>
+</br>
+</br>
 
 ### 递归求解
 
@@ -42,34 +42,34 @@ function getRes(n) {
 }
 
 function fib(n) {
-    if(n < 2) {
+    if (n < 2) {
         return n;
     }
-    var pre = fib(n-2);
-    var next = fib(n-1);
+    var pre = fib(n - 2);
+    var next = fib(n - 1);
     return pre + next;
 }
 ```
 
-<br></br>
+</br>
 
 #### 循环求解
 
 ```javascript
 function fib(n) {
-    if(n<2) {
+    if (n < 2) {
         return n;
     }
     var pre = 0;
     var next = 1;
     var res = 1;
-    for(var i=2; i<n; i++) {
+    for (var i = 2; i < n; i++) {
         pre = next;
         next = res;
         res = pre + next;
     }
     return res;
-};
+}
 ```
 
 **题目来自：[LeetCode-斐波那契数](https://leetcode-cn.com/problems/fibonacci-number/)**

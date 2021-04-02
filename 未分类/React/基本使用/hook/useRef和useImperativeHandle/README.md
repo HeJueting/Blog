@@ -1,13 +1,12 @@
 # useRef
 
-> 用来访问React的dom元素
+> 用来访问 React 的 dom 元素
 
-<br></br>
-
+</br>
 
 ### 知识点
 
-- 如何获取dom元素
+-   如何获取 dom 元素
 
 ```javascript
 function InputWithRef() {
@@ -18,14 +17,14 @@ function InputWithRef() {
     };
     return (
         <>
-          <input ref={inputEl} type="text" />
-          <button onClick={onButtonClick}>Focus the input</button>
+            <input ref={inputEl} type="text" />
+            <button onClick={onButtonClick}>Focus the input</button>
         </>
     );
 }
 ```
 
-- 如何在ref挂载dom之后，根据dom元素的内容进行初始化逻辑
+-   如何在 ref 挂载 dom 之后，根据 dom 元素的内容进行初始化逻辑
 
 ```javascript
 function App() {
@@ -44,27 +43,25 @@ function App() {
 }
 ```
 
-
-<br></br>
-<br></br>
-<br></br>
-
-
+</br>
+</br>
+</br>
 
 # useImperativeHandle
 
-- 可以让你在使用 ref 时自定义暴露给父组件的实例值，应该与React.forwardRef一起使用
+-   可以让你在使用 ref 时自定义暴露给父组件的实例值，应该与 React.forwardRef 一起使用
 
-- React.forwardRef 会创建一个React组件，这个组件能够将其接受的 ref 属性转发到另一个组件中
+-   React.forwardRef 会创建一个 React 组件，这个组件能够将其接受的 ref 属性转发到另一个组件中
 
-<br></br>
+</br>
 
-
-### 父组件访问子组件的整个dom元素
+### 父组件访问子组件的整个 dom 元素
 
 ```javascript
 const FancyButton = React.forwardRef((props, ref) => (
-    <button ref={ref} className="FancyButton">{props.children}</button>
+    <button ref={ref} className="FancyButton">
+        {props.children}
+    </button>
 ));
 
 // 使用FancyButton组件，并访问它的dom节点（可以访问到dom节点上的所有属性）
@@ -77,9 +74,9 @@ function App() {
 }
 ```
 
-<br></br>
+</br>
 
-### 父组件访问子组件dom元素上自定义属性
+### 父组件访问子组件 dom 元素上自定义属性
 
 ```javascript
 const FancyButton = React.forwardRef((props, ref) => {
@@ -87,10 +84,14 @@ const FancyButton = React.forwardRef((props, ref) => {
     // 自定义暴露给父组件的实例值
     useImperativeHandle(ref, () => ({
         focus: () => {
-          inputRef.current.focus();
-        }
-    }))
-    return <button ref={ref} className="FancyButton">{props.children}</button>
+            inputRef.current.focus();
+        },
+    }));
+    return (
+        <button ref={ref} className="FancyButton">
+            {props.children}
+        </button>
+    );
 });
 
 // 使用FancyButton组件，并访问它的dom节点（dom节点上只有一个foucs方法）
@@ -103,7 +104,7 @@ function App() {
 }
 ```
 
-<br></br>
-<br></br>
+</br>
+</br>
 
-**注意：** 以上内容基于React 17.0.1版本学习记录
+**注意：** 以上内容基于 React 17.0.1 版本学习记录

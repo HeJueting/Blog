@@ -1,12 +1,12 @@
 # useContext
 
-<br></br>
+</br>
 
 ### 知识点
 
-- 接收一个 context 对象（React.createContext 的返回值）并返回该 context 的当前值
+-   接收一个 context 对象（React.createContext 的返回值）并返回该 context 的当前值
 
-- 当组件上层最近的 <MyContext.Provider> 更新时，该 Hook 会触发重渲染
+-   当组件上层最近的 <MyContext.Provider> 更新时，该 Hook 会触发重渲染
 
 ```javascript
 // 创建一个Context
@@ -17,8 +17,20 @@ function App() {
     const [count, setCount] = useState(0);
     return (
         <Context.Provider value={count}>
-            <button onClick={() => { setCount(count + 1) }}>add</button>
-            <button onClick={() => { setCount(count - 1) }}>reduce</button>
+            <button
+                onClick={() => {
+                    setCount(count + 1);
+                }}
+            >
+                add
+            </button>
+            <button
+                onClick={() => {
+                    setCount(count - 1);
+                }}
+            >
+                reduce
+            </button>
             <Child />
         </Context.Provider>
     );
@@ -27,15 +39,11 @@ function App() {
 // 在Child组件中访问Context
 function Child() {
     const count = useContext(Context);
-    return (
-        <p>子组件利用useContext获取父组件的: {count}</p>
-    );
+    return <p>子组件利用useContext获取父组件的: {count}</p>;
 }
 ```
 
-<br></br>
-<br></br>
+</br>
+</br>
 
-**注意：** 以上内容基于React 17.0.1版本学习记录
-
-
+**注意：** 以上内容基于 React 17.0.1 版本学习记录

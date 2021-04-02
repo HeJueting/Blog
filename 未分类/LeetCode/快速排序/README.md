@@ -1,24 +1,23 @@
 # 快速排序
 
-<br></br>
+</br>
 
 ### 前言
 
-> 由于JavaScript中Array自带了sort方法，，因此为了应对面试，有必要记录一下各种排序算法
+> 由于 JavaScript 中 Array 自带了 sort 方法，，因此为了应对面试，有必要记录一下各种排序算法
 
-<br></br>
-<br></br>
-
+</br>
+</br>
 
 ### 思路
 
 "快速排序"的思想很简单，整个排序过程只需要三步：
 
-- （1）在数据集之中，选择一个元素作为"基准"
+-   （1）在数据集之中，选择一个元素作为"基准"
 
-- （2）所有小于"基准"的元素，都移到"基准"的左边；所有大于"基准"的元素，都移到"基准"的右边
+-   （2）所有小于"基准"的元素，都移到"基准"的左边；所有大于"基准"的元素，都移到"基准"的右边
 
-- （3）对"基准"左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止
+-   （3）对"基准"左边和右边的两个子集，不断重复第一步和第二步，直到所有子集只剩下一个元素为止
 
 ```javascript
 function fastSort(arr) {
@@ -33,8 +32,8 @@ function fastSort(arr) {
     // 用left、right数组用于存放左右两边的值
     var left = [];
     var right = [];
-    for(var i=0; i<arr.length; i++) {
-        if(arr[i] < pivot) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] < pivot) {
             left.push(arr[i]);
         } else {
             right.push(arr[i]);
@@ -42,5 +41,5 @@ function fastSort(arr) {
     }
     // 对left、right继续排序，最后将left、right的结果组合在pivot左右侧
     return fastSort(left).concat([pivot], fastSort(right));
-};
+}
 ```
