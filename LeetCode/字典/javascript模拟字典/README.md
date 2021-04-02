@@ -18,7 +18,7 @@ map.delete("a"); // {"b" => 2}
 // 改
 map.set("b", "b"); // {"b" => "b"}
 // 查
-map.get("b"); // undefined
+map.get("a"); // undefined
 map.get("b"); // b
 ```
 

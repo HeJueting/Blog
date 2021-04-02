@@ -63,27 +63,17 @@ function isValid(s) {
     if (s.length % 2 === 1) {
         return false;
     }
-    // 利用数组模拟栈
-    var stack = [];
-    var arr = s.split("");
-    for (var i = 0; i < arr.length; i++) {
-        var str = arr[i];
-        // 插入的是左括号
-        if (map.has(str)) {
-            stack.push(str);
-        }
-        // 插入的是右括号
-        else {
-            // 如果stack不存在 or 与上一个符号没有形成闭合
-            if (!stack.length || map.get(stack[stack.length - 1]) !== str) {
-                return false;
-            }
-            // 成功与上一个符号形成闭合，删除上一个符号
-            stack.pop();
+    const arr = [];
+    for (let i = 0; i < s.length; i++) {
+        // arr最后一项是否与s[i]形成匹配
+        const lastOne = arr[arr.length - 1];
+        if (lastOne && map.get(lastOne) === s[i]) {
+            arr.pop();
+        } else {
+            arr.push(s[i]);
         }
     }
-    // 如果最后stack长度为空，说明已完全匹配
-    return !stack.length;
+    return !arr.length;
 }
 ```
 
