@@ -236,7 +236,7 @@ inquirer
 </br>
 </br>
 
-## 四、资源处理
+## 资源处理
 
 1. 使用 node-fetch 模块去请求云端资源,参考[node-fetch](https://www.npmjs.com/package/node-fetch)
 
