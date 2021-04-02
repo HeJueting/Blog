@@ -1,12 +1,12 @@
-# JavaScript 字典
+# JavaScript 模拟字典
 
--   与集合类似，字典也是一种存储**唯一值**的数据结构，但它是以**键值对**的形式来存储
+与集合类似，字典也是一种存储 **唯一值** 的数据结构，但它是以 **键值对** 的形式来存储
 
 </br>
 
 ### 模拟字典
 
--   javascript 用 Map 构造函数来模拟字典，自带去重功能
+javascript 用 Map 构造函数来模拟字典，自带去重功能
 
 ```javascript
 let map = new Map();
@@ -25,7 +25,7 @@ map.get("b"); // b
 </br>
 </br>
 
-### 遍历集合
+### 遍历字典
 
 ```javascript
 const map = new Map([

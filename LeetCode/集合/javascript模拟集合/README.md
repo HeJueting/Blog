@@ -1,12 +1,12 @@
 # JavaScript 模拟集合
 
--   一种**无序且唯一**的数据结构
+集合是一种**无序且唯一**的数据结构
 
 </br>
 
 ### 模拟集合
 
--   javascript 用 Set 构造函数来模拟集合，自带数组去重功能
+javascript 用 Set 构造函数来模拟集合，自带数组去重功能
 
 ```javascript
 let set = new Set();
