@@ -30,32 +30,23 @@
 
 ### 思路
 
--   利用 map 数据结构，以[key, value]形式存储这些数据，key 代表它的位置，value 代表他的值
-
--   遍历数组，将被遍历的值与 map 中的每一个数据相加求和，如果等于 target 直接返回结果，否则将这个数据又加入 map 中
+-   两次 for 循环
 
 </br>
 </br>
 
 ### 求解
 
--   利用栈这种后进先出数据结构
-
 ```javascript
-var twoSum = function (nums, target) {
-    // 初始化一个map数据
-    const map = new Map();
-    // 遍历数组
+function twoSum(nums, target) {
     for (let i = 0; i < nums.length; i++) {
-        // 将nums[i]与每一个map中的值相加求和
-        for ([key, value] of map) {
-            if (nums[i] + value === target) {
-                return [key, i];
+        for (let j = i + 1; j < nums.length; j++) {
+            if (nums[i] + nums[j] === target) {
+                return [i, j];
             }
         }
-        map.set(i, nums[i]);
     }
-};
+}
 ```
 
 </br>
