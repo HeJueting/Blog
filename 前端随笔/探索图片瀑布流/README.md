@@ -253,7 +253,7 @@ function calculateHeight(images) {
 
 </br>
 
-所有的 demo 代码已经放在 github 上：[瀑布流实现 demo](https://github.com/HeJueting/Blog)
+所有的 demo 代码已经放在 github 上：[瀑布流实现 demo](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E6%8E%A2%E7%B4%A2%E5%9B%BE%E7%89%87%E7%80%91%E5%B8%83%E6%B5%81)
 
 </br>
 </br>
