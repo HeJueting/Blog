@@ -43,42 +43,52 @@
 </br>
 </br>
 
+### 思路
+
+-   用 res 表示最后的结果，用 str 记录匹配的字符，用 start 记录匹配字符的起始点
+
+-   遍历这个 s 字符串，如果发现 s\[i\]不等于 str，说明匹配到了新的字符，这时候再根据 start 和 i 判断是否需要加入 res 中，最后更新 start 和 str，继续遍历
+
+</br>
+</br>
+
 ### 求解
 
 ```javascript
-function largeGroupPositions(s) {
+var largeGroupPositions = function (s) {
     // 如果s的长度小于3，直接返回[]
     if (s.length < 3) {
         return [];
     }
-    // 遍历这个字符串
-    var start = 0; // 开始位置
-    var end = 0; // 结束位置
-    var repeatStr = ""; // 重复的字符
-    var res = [];
-    for (var i = 0; i < s.length; i++) {
-        // 如果被重复的字符不等于s[i]
-        if (s[i] !== repeatStr) {
-            // 重复的次数大于等于3，则符合要求
-            if (end - start > 1) {
-                res.push([start, end]);
+
+    // 用start表示起始点位置
+    let start = 0;
+    // res表示最后的结果
+    let res = [];
+    // str表示当前匹配的字符
+    let str = "";
+
+    for (let i = 0; i < s.length; i++) {
+        // 如果s[i]不等于当前所匹配的字符
+        if (str !== s[i]) {
+            // 如果匹配了三个及以上这样的字符，记录他的位置
+            if (i - start > 2) {
+                res.push([start, i - 1]);
             }
-            // 重置start、end、repeatStr
+            // 更新起始点位置
             start = i;
-            end = i;
-            repeatStr = s[i];
-        } else {
-            end++;
+            // 更新当前匹配的字符
+            str = s[i];
         }
     }
 
-    // 如果以符合要求的字符结尾
-    if (end - start > 1) {
-        res.push([start, end]);
+    // 处理最后一组
+    if (s.length - start > 2) {
+        res.push([start, s.length - 1]);
     }
 
     return res;
-}
+};
 ```
 
 </br>
