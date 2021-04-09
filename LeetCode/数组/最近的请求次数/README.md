@@ -61,8 +61,6 @@ RecentCounter.prototype.ping = function (t) {
 };
 ```
 
-由于 JS 的 Array 对象自带 sort 方法，变将这个问题直接简化
-
 </br>
 
 **题目来自：[LeetCode-最近的请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/)**

@@ -30,19 +30,24 @@
 </br>
 </br>
 
+### 思路
+
+-   用一个数组来保存不重复的字符，用一个变量来记录最大字符长度
+
+-   遍历 s 字符串，当碰到重复字符的时候，就用当前的字符长度跟最大字符长度进行比较
+
+-   发现重复字符之后，从数组中删除重复位置及其之前的字符
+
+</br>
+</br>
+
 ### 求解
-
--   用双指针维护一个滑动窗口，用来剪切子串
-
--   不断移动右指针，遇到重复字符，就把做指针移动到重复字符的下一位
-
--   过程中记录所有窗口的长度，并返回最大值
 
 ```javascript
 var lengthOfLongestSubstring = function (s) {
     // 最大的字串长度
     let maxLength = 0;
-    // 当前子串这个数组（类似于一个滑动窗口）
+    // 这个数组用来保存不重复的字符
     let arr = [];
 
     for (let i = 0; i < s.length; i++) {
@@ -56,7 +61,7 @@ var lengthOfLongestSubstring = function (s) {
         arr.push(s[i]);
     }
 
-    // 处理最后一组arr窗口
+    // 处理最后一组arr
     maxLength = arr.length > maxLength ? arr.length : maxLength;
 
     return maxLength;
