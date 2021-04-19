@@ -1,3 +1,7 @@
+# 组件的使用
+
+</br>
+
 ### props 和 $emit（父子组件通信）
 
 ● props：父组件向子组件**传递数据**
@@ -7,39 +11,39 @@
 ```html
 <!-- parent 父组件 -->
 <template>
-	<div>
-		<h3>props和$emit的使用</h3>
-		<child text="child" @over="over" />
-	</div>
+    <div>
+        <h3>props和$emit的使用</h3>
+        <child text="child" @over="over" />
+    </div>
 </template>
 <script>
-	import child from "./child.vue";
-	export default {
-		components: { child },
-		methods: {
-			over() {
-				console.log("over");
-			},
-		},
-	};
+    import child from "./child.vue";
+    export default {
+        components: { child },
+        methods: {
+            over() {
+                console.log("over");
+            },
+        },
+    };
 </script>
 
 <!-- child 子组件 -->
 <template>
-	<h6>子组件：{{ text }}</h6>
+    <h6>子组件：{{ text }}</h6>
 </template>
 <script>
-	export default {
-		props: {
-			text: {
-				type: String,
-				default: "默认值",
-			},
-		},
-		mounted() {
-			this.$emit("over");
-		},
-	};
+    export default {
+        props: {
+            text: {
+                type: String,
+                default: "默认值",
+            },
+        },
+        mounted() {
+            this.$emit("over");
+        },
+    };
 </script>
 ```
 
