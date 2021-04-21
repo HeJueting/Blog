@@ -126,23 +126,30 @@ console.log(data); // [1,2,3,4]
 ### proxy 监听
 
 ```javascript
-/*
- *  监听对象
- */
-let target = { age: 18, name: "Niko Bellic" };
 let handlers = {
-    get(target, key) {
+    get(target, key, receiver) {
         console.log(`触发了get方法，key:${key}`);
-        return target[key];
+        const result = Reflect.get(target, key, receiver);
+        return result;
     },
-    set(target, key, value) {
+    set(target, key, value, receiver) {
         console.log(`触发了set方法，key:${key}，value:${value}`);
-        target[key] = value;
-        // 返回 true 代表属性设置成功
-        return true;
+        const result = Reflect.set(target, key, value, receiver);
+        return result;
+    },
+    deleteProperty(target, key) {
+        console.log(`删除属性，key:${key}`);
+        const result = Reflect.deleteProperty(target, key);
+        return result;
     },
 };
 let proxy = new Proxy(target, handlers);
+```
+
+**监听对象**
+
+```javascript
+let target = { age: 18, name: "Niko Bellic" };
 
 // 触发了get方法，key:age
 console.log(proxy.name);
@@ -150,23 +157,16 @@ console.log(proxy.name);
 proxy.age = 18;
 // 触发了set方法，key:live，value:CQ
 proxy.live = "CQ";
+// 删除属性，key:name
+delete proxy.name;
+```
 
-/*
- * 监听数组
- */
+</br>
+
+**监听数组**
+
+```javascript
 let target = [1, 2, 3];
-let handlers = {
-    get(target, key) {
-        console.log(`触发了get方法，key:${key}`);
-        return target[key];
-    },
-    set(target, key, value) {
-        console.log(`触发了set方法，key:${key}，value:${value}`);
-        target[key] = value;
-        return true;
-    },
-};
-let proxy = new Proxy(target, handlers);
 
 // 触发了get方法，key:0
 console.log(proxy[0]);
@@ -178,6 +178,72 @@ proxy.push(4);
 // 触发了set方法，key:0，value:0
 proxy[0] = 0;
 ```
+
+</br>
+
+**Vue3 如何实现响应式**
+
+```javascript
+// 监听处理
+const handlers = {
+    get(target, key, receiver) {
+        console.log(`触发get方法...key：${key}`);
+        // 深度监听
+        const result = Reflect.get(target, key, receiver);
+        return observe(result);
+    },
+    set(target, key, value, receiver) {
+        // 不处理重复的重复的数据
+        if (target[key] === value) {
+            return true;
+        }
+        console.log(`触发set方法...key：${key}`);
+        const result = Reflect.set(target, key, value, receiver);
+        return result;
+    },
+    deleteProperty(target, key) {
+        const result = Reflect.deleteProperty(target, key);
+        return result;
+    },
+};
+// 监听的方法
+function observe(target) {
+    // 不用监听基本数据类型
+    if (typeof target !== "object" && target !== "null") {
+        return target;
+    }
+    const proxy = new Proxy(target, handlers);
+    return proxy;
+}
+
+const target = {
+    name: "hejueting",
+    obj: {
+        location: "CQ",
+    },
+    arr: [1, 2, 3],
+};
+const proxy = observe(target);
+
+// 触发get方法...key：name
+console.log(proxy.name);
+// 触发get方法...key：obj
+// 触发get方法...key：location
+console.log(proxy.obj.location);
+// 触发set方法...key：age
+proxy.age = 24;
+// 触发get方法...key：arr
+// 触发get方法...key：push
+// 触发get方法...key：length
+// 触发set方法...key：3
+proxy.arr.push(4);
+```
+
+</br>
+
+**相比于 Object.defineProperty 的优势**
+
+-   不会深度监听，执行到 get 才会去递归
 
 -   可以监听对象新增、删除属性
 
