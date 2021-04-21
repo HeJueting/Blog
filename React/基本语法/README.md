@@ -166,9 +166,12 @@ class App extends React.Component {
 }
 
 // 中间的组件再也不必指明往下传递 theme 了。
-function Toolbar() {
-    console.log(this.context);
-    return <div>Toolbar</div>;
+class Toolbar extends React.Component {
+    static contextType = ThemeContext;
+    render() {
+        console.log("this.context:", this.context);
+        return <button />;
+    }
 }
 ```
 
