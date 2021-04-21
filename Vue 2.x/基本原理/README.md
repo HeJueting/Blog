@@ -123,6 +123,69 @@ console.log(data); // [1,2,3,4]
 </br>
 </br>
 
+### proxy 监听
+
+```javascript
+/*
+ *  监听对象
+ */
+let target = { age: 18, name: "Niko Bellic" };
+let handlers = {
+    get(target, key) {
+        console.log(`触发了get方法，key:${key}`);
+        return target[key];
+    },
+    set(target, key, value) {
+        console.log(`触发了set方法，key:${key}，value:${value}`);
+        target[key] = value;
+        // 返回 true 代表属性设置成功
+        return true;
+    },
+};
+let proxy = new Proxy(target, handlers);
+
+// 触发了get方法，key:age
+console.log(proxy.name);
+// 触发了set方法，key:age，value:18
+proxy.age = 18;
+// 触发了set方法，key:live，value:CQ
+proxy.live = "CQ";
+
+/*
+ * 监听数组
+ */
+let target = [1, 2, 3];
+let handlers = {
+    get(target, key) {
+        console.log(`触发了get方法，key:${key}`);
+        return target[key];
+    },
+    set(target, key, value) {
+        console.log(`触发了set方法，key:${key}，value:${value}`);
+        target[key] = value;
+        return true;
+    },
+};
+let proxy = new Proxy(target, handlers);
+
+// 触发了get方法，key:0
+console.log(proxy[0]);
+// 触发了get方法，key:push
+// 触发了get方法，key:length
+// 触发了set方法，key:3，value:4
+// 触发了set方法，key:length，value:4
+proxy.push(4);
+// 触发了set方法，key:0，value:0
+proxy[0] = 0;
+```
+
+-   可以监听对象新增、删除属性
+
+-   可以监听数组
+
+</br>
+</br>
+
 ### 用 JS 模拟 DOM 结构
 
 DOM 操作非常耗费性能，虚拟 DOM 就是利用 JS 去模拟 DOM 结构
