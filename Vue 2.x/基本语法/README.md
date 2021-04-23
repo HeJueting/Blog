@@ -141,3 +141,15 @@ const objs = { a: 'a', b: 'b' };
 
 </br>
 </br>
+
+### VueX 的使用
+
+-   state：保存状态
+
+-   getters：辅助我们去获取筛选后的 state
+
+-   action：提交 mutation，告诉 mutation 如何修改 state（这里可以异步）
+
+-   mutation：修改 state
+
+-   moudles：vuex 的状态树模块化

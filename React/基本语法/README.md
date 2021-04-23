@@ -193,3 +193,26 @@ function App() {
     );
 }
 ```
+
+</br>
+</br>
+
+### React.PureComponent 和 React.memo
+
+-   React.PureComponent：以浅层对比 prop 和 state 的方式来实现了 shouldComponentUpdate 函数。
+
+-   React.memo：用来缓存组件。相同 props 的情况下渲染相同的结果，以此通过记忆组件渲染结果的方式来提高组件的性能表现
+
+</br>
+</br>
+
+### 高阶组件（HOC）与 render props
+
+都是用来抽离组件公共逻辑
+
+-   高阶组件：是一个函数，接收一个组件，返回一个新组件，用于抽离组件之间的公共逻辑
+
+-   render props：利用 props 传递一个 render 属性，这个 render 属性其实返回的是一个组件
+
+</br>
+</br>
