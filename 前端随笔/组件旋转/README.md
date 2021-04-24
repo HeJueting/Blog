@@ -230,7 +230,3 @@ function setBoxRotate() {
 
 </br>
 </br>
-
-### 博客原文：[hejueting.cn](www.hejueting.cn)
-
-</br>
