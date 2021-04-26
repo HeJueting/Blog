@@ -45,13 +45,37 @@
 
 -   mode：指定环境
 
-    1. development：默认开启一些开发环境下的插件，将 process.env.NODE_ENV 的值设为 development
-    2. production：默认开启一些生产环境下的插件，将 process.env.NODE_ENV 的值设为 production
-    3. 不会开启任何 webpack 优化措施
-
 -   module：lodaer 文件解析，Webpack 只支持 js 和 json 两种文件类型，其他文件类型需要通过 loaders 去进行转化
 
 -   plugins：插件，用于打包文件的优化，资源管理和环境变量的注入，作用于整个构建过程
 
 </br>
 </br>
+
+### module chunk bundle 的概念
+
+-   module：webpack 中一切皆模块
+
+-   chunk：多个模块的一个集合，例如：entry、import
+
+-   bundle：最终打包的结果
+
+</br>
+</br>
+
+### tree shaking（摇树优化）
+
+它是 webpack 的一种优化策略。对于一个包中，使用了 ES6 的 moudle 语法，没有使用到的方法（没有副作用），不会打包进入 bundle 中：
+
+1. 代码不会被执行，不可到达
+
+2. 代码执行的结果不会被用到
+
+3. 代码只会影响死变量（只写不读）
+
+原理：
+
+1. ES6 模块的特点，只能作为模块顶层的语句出现
+2. import 的模块名只能是字符串常量
+3. import 的常量是不可被篡改的
+4. 利用这三个特性，就可以做到将没有使用的方法不打包进入 bundle.js
