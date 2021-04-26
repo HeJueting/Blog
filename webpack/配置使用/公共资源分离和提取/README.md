@@ -53,7 +53,7 @@ module.exports = {
 
 ### 提取
 
-利用 SplitChunksPluginj 进行公共脚本分离，该插件已经在 webpack4 中内置
+利用 SplitChunksPluginj 进行公共脚本分离，该插件已经在 webpack4 中内置。当我们配置了 mode 属性后，webpack 会开启该配置项的默认配置，你也可以再定制化配置 optimization 属性
 
 **详细配置如下：**
 
