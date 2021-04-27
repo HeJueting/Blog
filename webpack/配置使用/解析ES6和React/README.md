@@ -15,14 +15,16 @@ npm i @babel/core @babel/preset-env babel-loader @babel/preset-react -D
 ### webpack 配置
 
 ```javascript
-module: {
-    rules: [
-        {
-            test: /\.(js)$/,
-            use: "babel-loader",
-        },
-    ];
-}
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.(js)$/,
+                use: "babel-loader",
+            },
+        ],
+    },
+};
 ```
 
 </br>

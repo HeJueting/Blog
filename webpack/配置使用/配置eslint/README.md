@@ -111,6 +111,16 @@ npm i eslint -g
 eslint --fix --ext .jsx,.js src/
 ```
 
+3、配置 package.json，使用 npm run lint 快速修复代码
+
+```json
+{
+    "scripts": {
+        "lint": "eslint --fix --ext .jsx,.js src/"
+    }
+}
+```
+
 </br>
 </br>
 
@@ -142,13 +152,13 @@ npm i husky -D
 
 ```json
 {
-    "scripts": {
-        "lint": "eslint --fix --ext .js src/"
-    },
     "husky": {
         "hooks": {
-            "pre-commit": "npm run lint && git add ."
+            "pre-commit": "lint-staged"
         }
+    },
+    "lint-staged": {
+        "*.js": ["eslint --fix --ext .js", "git add"]
     }
 }
 ```
