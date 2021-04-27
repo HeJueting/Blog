@@ -1,4 +1,4 @@
-# 热更新
+# webpack 4.x 热更新
 
 </br>
 
@@ -40,7 +40,7 @@ module.export = {
 
 ### webpack-dev-server
 
-该插件为我们提供了一个简单的 web server，并且具有热更新的功能（新代码生效，网页不刷新，状态不丢失）。设置如下：
+[该插件](https://webpack.docschina.org/configuration/dev-server/)为我们提供了一个简单的 web server，并且具有热更新的功能（新代码生效，网页不刷新，状态不丢失）。设置如下：
 
 **1、package.json 配置**
 

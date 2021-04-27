@@ -1,12 +1,12 @@
-# 解析图片和字体
+# webpack 4.x 解析图片和字体
 
 </br>
 
 ### 安装依赖
 
--   file-loader 用于解析图片和字体资源
+-   [file-loader](https://www.webpackjs.com/loaders/file-loader/) 用于解析图片和字体资源
 
--   url-loader 用于小图片和小字体 base64 的转换
+-   [url-loader](https://www.webpackjs.com/loaders/url-loader/) 用于小图片和小字体 base64 的转换
 
 ```
 npm i file-loader url-loader -D

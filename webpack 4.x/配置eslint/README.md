@@ -1,4 +1,4 @@
-# 配置 eslint
+# webpack 4.x 配置 eslint
 
 </br>
 
@@ -6,11 +6,9 @@
 
 我们没有必要从 0 开始打造自己的 eslint 规范，圈内有许多开源的 eslint 规范，我们可以直接基于这些规范进行开发和定制化：
 
--   爱彼迎团队：eslint-config-airbnb
+-   爱彼迎团队：[eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)
 
--   腾讯 alloyteam 团队：eslint-config-alloy
-
--   腾讯 ivweb 团队：eslint-config-ivweb
+-   腾讯 alloyteam 团队：[eslint-config-alloy](https://github.com/AlloyTeam/eslint-config-alloy)
 
 </br>
 </br>
@@ -28,7 +26,7 @@ npm i eslint-config-airbnb eslint-plugin-import eslint-plugin-react
 eslint-plugin-react-hook eslint-plugin-jsx-a11y -D
 ```
 
-**注意：** eslint-config-airbnb 是基于 ECMAScript 6+ 和 React 的规范，它需要安装 eslint、eslint-plugin-import、eslint-plugin-react、eslint-plugin-react-hook 和 eslint-plugin-jsx-a11y。如果不是使用的 React 进行项目开发, 可以参考 eslint-config-airbnb-base
+**注意：** eslint-config-airbnb 是基于 ECMAScript 6+ 和 React 的规范，它需要安装 eslint、eslint-plugin-import、eslint-plugin-react、eslint-plugin-react-hook 和 eslint-plugin-jsx-a11y。如果不是使用的 React 进行项目开发, 可以参考 [eslint-config-airbnb-base](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base)
 
 </br>
 </br>

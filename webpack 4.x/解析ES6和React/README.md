@@ -1,4 +1,4 @@
-# ES6 和 React 语法解析
+# webpack 4.x ES6 和 React 语法解析
 
 </br>
 

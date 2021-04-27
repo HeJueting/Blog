@@ -1,10 +1,10 @@
-# 公共资源分离和提取
+# webpack 4.x 公共资源分离和提取
 
 </br>
 
-### 分离：
+### 分离
 
-使用 html-webpack-externals-plugin 插件，将 react、react-dom 等基础包通过 cdn 方式引入，不打入 bundle 中
+使用 [html-webpack-externals-plugin](https://www.npmjs.com/package/html-webpack-externals-plugin) 插件，将 react、react-dom 等基础包通过 cdn 方式引入，不打入 bundle 中
 
 **1、安装依赖**
 
@@ -53,7 +53,7 @@ module.exports = {
 
 ### 提取
 
-利用 SplitChunksPluginj 进行公共脚本分离，该插件已经在 webpack4 中内置。当我们配置了 mode 属性后，webpack 会开启该配置项的默认配置，你也可以再定制化配置 optimization 属性
+利用 [SplitChunksPluginjs](https://webpack.docschina.org/plugins/split-chunks-plugin/) 进行公共脚本分离，该插件已经在 webpack4 中内置。当我们配置了 mode 属性后，webpack 会开启该配置项的默认配置，你也可以再定制化配置 optimization 属性
 
 **详细配置如下：**
 

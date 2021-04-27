@@ -1,8 +1,10 @@
-# 按需加载和代码分割
+# webpack 4.x 按需加载和代码分割
 
 </br>
 
 ### @babel/plugin-syntax-dynamic-import
+
+参考地址：[https://babeljs.io/docs/en/babel-plugin-syntax-dynamic-import](https://babeljs.io/docs/en/babel-plugin-syntax-dynamic-import)
 
 **1、安装依赖**
 

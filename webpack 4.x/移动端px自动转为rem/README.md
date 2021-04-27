@@ -1,8 +1,10 @@
-# 移动端 px 自动转为 rem
+# webpack 4.x px 自动转为 rem
 
 </br>
 
 ### 安装依赖
+
+参考：[px2rem-loader](https://www.npmjs.com/package/px2rem-loader)
 
 ```
 npm i px2rem-loader -D

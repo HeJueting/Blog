@@ -1,4 +1,8 @@
-# 优化构建速度
+# webpack 优化构建速度
+
+</br>
+
+### 总结归纳
 
 -   使用高版本的 webpack 和 node.js
 
@@ -50,7 +54,7 @@ module.exports = {
 
 ### 分包，预编译模块
 
-此前使用分包的方式，是将 react 和 react-dom 以 CDN 的形式引入项目中。我们还可以使用 DLLPlugin 和 DLLReferencePlugin 进行优化，将 react、react-dom、redux、react-redux..等等公共资源构建成为一个包，只打包一次公共资源包，之后就直接使用。
+此前使用分包的方式，是将 react 和 react-dom 以 CDN 的形式引入项目中。我们还可以使用 [DLLPlugin 和 DLLReferencePlugin](https://webpack.docschina.org/plugins/dll-plugin/) 进行优化，将 react、react-dom、redux、react-redux..等等公共资源构建成为一个包，只打包一次公共资源包，之后就直接使用。
 
 </br>
 </br>
@@ -59,7 +63,7 @@ module.exports = {
 
 **1、开启 babel-loader 缓存**
 
-开启成功后，node_moudle 下面会新增一个.cache 目录，提升二次解析速度
+[babel-loader](https://webpack.docschina.org/loaders/babel-loader/) 缓存开启成功后，node_moudle 下面会新增一个.cache 目录，提升二次解析速度
 
 ```javascript
 module.exports = {
@@ -76,7 +80,7 @@ module.exports = {
 
 **2、开启压缩缓存**
 
-使用 terser-webpack-plugin 插件缓存，开启压缩缓存，提升二次压缩速度
+使用 [terser-webpack-plugin](https://webpack.docschina.org/plugins/terser-webpack-plugin/) 插件缓存，开启压缩缓存，提升二次压缩速度
 
 ```
 npm i terser-webpack-plugin -D
@@ -96,7 +100,7 @@ module.exports = {
 
 **3、模块缓存**
 
-使用 cache-loader 或者 hard-source-webpack-plugin 用于缓存 webpack 内部模块处理的中间结果，提升二次模块转换速度
+使用 cache-loader 或者 [hard-source-webpack-plugin](https://github.com/mzgoddard/hard-source-webpack-plugin) 用于缓存 webpack 内部模块处理的中间结果，提升二次模块转换速度
 
 ```
 npm install hard-source-webpack-plugin -D

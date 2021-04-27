@@ -1,10 +1,10 @@
-# 代码压缩
+# webpack 4.x 代码压缩
 
 </br>
 
 ### HTML 压缩
 
-使用 html-webpack-plugin 插件，不仅可以帮你创建 html 文件，还会帮你压缩 html 文件
+使用 [html-webpack-plugin](https://www.webpackjs.com/plugins/html-webpack-plugin/) 插件，不仅可以帮你创建 html 文件，还会帮你压缩 html 文件
 
 **1、安装依赖**
 
@@ -14,7 +14,7 @@ npm i html-webpack-plugin -D
 
 **2、webpack 配置**
 
-如果 minify 开启后，该插件将会使用 html-minifier-terser 去压缩 HTML
+如果 minify 开启后，该插件将会使用 [html-minifier-terser](https://github.com/terser/html-minifier-terser) 去压缩 HTML
 
 ```javascript
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -41,7 +41,7 @@ module.exports = {
 
 ### CSS 压缩
 
-使用 optimize-css-assets-webpack-plugin 插件，它将在 Webpack 构建过程中搜索 CSS 资产，并优化最小化 CSS，默认情况下，它需要使用 cssnano，但可以指定自定义 CSS 处理器
+使用 [optimize-css-assets-webpack-plugin](https://www.npmjs.com/package/optimize-css-assets-webpack-plugin) 插件，它将在 Webpack 构建过程中搜索 CSS 资产，并优化最小化 CSS，默认情况下，它需要使用 cssnano，但可以指定自定义 CSS 处理器
 
 **1、安装依赖**
 
@@ -68,16 +68,16 @@ module.exports = {
 </br>
 </br>
 
-### JavaScript
+### JavaScript 压缩
 
-使用 uglifyjs-webpack-plugin 插件，已经内置在 webpack4 中，当 mode 为 production 时，默认开启该插件，我们不需要额外配置
+使用 [uglifyjs-webpack-plugin](https://webpack.docschina.org/plugins/uglifyjs-webpack-plugin/) 插件，已经内置在 webpack4 中，当 mode 为 production 时，默认开启该插件，我们不需要额外配置
 
 </br>
 </br>
 
 ### 自动清除构建目录
 
-每次打包构建的时候，不会自动清除目录，打包出来的文件会越来越多。我们可以使用 clean-webpack-plugin 插件在打包前，帮我们自动清理目录
+每次打包构建的时候，不会自动清除目录，打包出来的文件会越来越多。我们可以使用 [clean-webpack-plugin](https://www.npmjs.com/package/clean-webpack-plugin) 插件在打包前，帮我们自动清理目录
 
 **1、安装依赖**
 
