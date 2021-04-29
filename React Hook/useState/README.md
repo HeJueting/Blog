@@ -1,19 +1,25 @@
 # useState
 
-> 将 class 语法中 this.state 和 this.setState 的功能集成于一体的一个 hook
+将 class 语法中 this.state 和 this.setState 的功能集成于一体的一个 hook
 
 </br>
 
 ### 知识点
 
--   useState 的参数也可以是一个函数，这个函数的返回值便作为 state 的初始值
+-   useState 的参数也可以是一个函数，这个函数的返回值便作为 state 的初始值。如果 initialState 需要计算得到，就可以传入一个函数，避免多次计算
 
 ```javascript
 // 可以传入一个初始变量作为state的值
 const [state, setState] = useState(0);
 
 // 也可以传入一个函数，该函数的返回值便是state的初始值
-const [state, setState] = useState(() => 0);
+const [state, setState] = useState(() => {
+    let res = 0;
+    for (let i = 0; i < 1000; i++) {
+        res += i;
+    }
+    return res;
+});
 ```
 
 </br>
@@ -45,5 +51,3 @@ setState((prevState) => {
 
 </br>
 </br>
-
-**注意：** 以上内容基于 React 17.0.1 版本学习记录

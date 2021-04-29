@@ -4,7 +4,7 @@
 
 ### 代码更精简，更容易理解
 
-> 例如：实现监听鼠标在网页中移动的位置
+例如：实现监听鼠标在网页中移动的位置
 
 -   **使用 class 语法实现**
 
@@ -80,9 +80,9 @@ function Mouse() {
 
 ### 更好的复用状态逻辑
 
-> 如果需要把监听鼠标移动这个逻辑抽离出来，class 语法常用的两种方式: [render props](https://zh-hans.reactjs.org/docs/render-props.html)、[HOC 高阶组件](https://zh-hans.reactjs.org/docs/higher-order-components.html)
+如果需要把监听鼠标移动这个逻辑抽离出来，class 语法常用的两种方式: [render props](https://zh-hans.reactjs.org/docs/render-props.html)、[HOC 高阶组件](https://zh-hans.reactjs.org/docs/higher-order-components.html)
 
--   **class 语法，使用 render props 来抽离**
+-   **使用 render props 实现**
 
 ```javascript
 // Mouse组件
@@ -129,7 +129,7 @@ class App extends React.Component {
 }
 ```
 
--   **class 语法，使用 HOC 高阶组件来抽离**
+-   **使用 HOC 实现**
 
 ```javascript
 // MouseWithHOC方法
@@ -179,7 +179,7 @@ class App extends React.Component {
 }
 ```
 
--   **hook 语法来抽离**
+-   **使用 hook 实现**
 
 ```javascript
 // 自定义useHook
@@ -215,5 +215,3 @@ function Component() {
 
 </br>
 </br>
-
-**注意：** 以上内容基于 React 17.0.1 版本学习记录

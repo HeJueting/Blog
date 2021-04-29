@@ -1,6 +1,6 @@
 # useRef
 
-> 用来访问 React 的 dom 元素
+用来访问 React 的 dom 元素
 
 </br>
 
@@ -106,5 +106,3 @@ function App() {
 
 </br>
 </br>
-
-**注意：** 以上内容基于 React 17.0.1 版本学习记录

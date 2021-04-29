@@ -1,6 +1,6 @@
 # useEffect
 
-> 将 class 语法中的 componentDidMount 和 componentsDidUpdate 功能集成于 useEffect
+将 class 语法中的 componentDidMount 和 componentsDidUpdate 功能集成于 useEffect
 
 </br>
 
@@ -52,5 +52,3 @@ useEffect(() => {
 
 </br>
 </br>
-
-**注意：** 以上内容基于 React 17.0.1 版本学习记录

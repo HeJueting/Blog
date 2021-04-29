@@ -1,6 +1,6 @@
 # useCallback
 
-> 缓存函数，配合 React.memo 避免子组件不必要的渲染
+缓存函数，配合 React.memo 避免子组件不必要的渲染
 
 </br>
 
@@ -42,13 +42,17 @@ function Parent() {
 
 第一次渲染的时候，控制台打印结果:
 
-> parent render
-> child render
+```
+parent render
+child render
+```
 
 当点击 add 按钮后，控制台打印结果依然是:
 
-> parent render
-> child render
+```
+parent render
+child render
+```
 
 虽然我们使用了 React.memo 进行了优化，但是父组件 count 值的更新还是影响了子组件的重新渲染。这是因为给 Child 传入的 childHandleClick 方法，在父组件重新渲染时，该函数又会进行重新定义，前后两次定义的函数虽然内容相同，但是引用的地址值却不同，就造成了 Child 的重新渲染
 
@@ -101,5 +105,83 @@ const childHandleClick = useCallback(func, []);
 
 </br>
 </br>
+</br>
+</br>
 
-**注意：** 以上内容基于 React 17.0.1 版本学习记录
+# useMemo
+
+缓存变量，避免某些不必要的逻辑重复执行；也可以用来缓存函数，useMemo(() => fn, deps) 就等价于 useCallback(fn, deps)
+
+</br>
+
+### 案例
+
+```javascript
+function App() {
+    const [val, setValue] = useState("1");
+    const [count, setCount] = useState(1);
+    function expensive() {
+        let sum = 0;
+        for (let i = 0; i < count * 10000; i++) {
+            sum += i;
+        }
+        return sum;
+    }
+    return (
+        <div>
+            <p>
+                {val}-{count}-{expensive()}
+            </p>
+            <input value={val} onChange={(event) => setValue(event.target.value)} />
+            <button
+                onClick={() => {
+                    setCount(count + 1);
+                }}
+            >
+                count++
+            </button>
+        </div>
+    );
+}
+```
+
+无论是 count 值变化还是 input 标签有输入值变化时，p 标签内容的都会重新渲染，expensive()方法每次也会重新计算返回 sum 值，但是 val 值的改变其实并不影响 expensive()方法的返回值，只有 count 值的变化才会影响它的结果
+
+</br>
+</br>
+
+### 优化
+
+我们需要只有 count 值变化，expensive()方法才会重新计算
+
+```javascript
+function App() {
+    const [val, setValue] = useState("1");
+    const [count, setCount] = useState(1);
+    const expensive = useMemo(() => {
+        let sum = 0;
+        for (let i = 0; i < count * 10000; i++) {
+            sum += i;
+        }
+        return sum;
+    }, [count]);
+    return (
+        <div>
+            <p>
+                {val}-{count}-{expensive}
+            </p>
+            <input value={val} onChange={(event) => setValue(event.target.value)} />
+            <button
+                onClick={() => {
+                    setCount(count + 1);
+                }}
+            >
+                count++
+            </button>
+        </div>
+    );
+}
+```
+
+</br>
+</br>

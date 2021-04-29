@@ -1,6 +1,6 @@
 # useReducer
 
-> useState 的替代方案，适用于 state 逻辑比较复杂且包涵多个子值
+useState 的替代方案，适用于 state 逻辑比较复杂且包涵多个子值
 
 </br>
 
@@ -43,5 +43,3 @@ function App() {
 
 </br>
 </br>
-
-**注意：** 以上内容基于 React 17.0.1 版本学习记录
