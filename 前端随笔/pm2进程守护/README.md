@@ -27,21 +27,21 @@ pm2 --version
 
 ### 常用命令
 
-- **查看帮助文档**：pm2 --version
+-   **查看帮助文档**：pm2 --version
 
-- **查看进程列表**：pm2 list
+-   **查看进程列表**：pm2 list
 
-- **启动程序**：pm2 start
+-   **启动程序**：pm2 start
 
-- **重启项目**：pm2 restart AppName|id|all
+-   **重启项目**：pm2 restart AppName|id|all
 
-- **停止项目**：pm2 stop AppName|id|all
+-   **停止项目**：pm2 stop AppName|id|all
 
-- **删除项目**：pm2 delete AppName|id|all
+-   **删除项目**：pm2 delete AppName|id|all
 
-- **查看项目基本信息**：pm2 info AppName|id|all
+-   **查看项目基本信息**：pm2 info AppName|id|all
 
-- **查看项目日志**：pm2 log AppName|id
+-   **查看项目日志**：pm2 log AppName|id
 
 PS：pm2 start 启动程序后，这个程序就变成了一个 pm2 项目，通过 pm2 list 命令可以查看：项目名（AppName），项目 id（id）。上述命令中的 all 代表所有。
 
