@@ -9,50 +9,50 @@ const obj = {};
 
 // string
 obj["str"] = "str";
-obj.str); //=> "str"
-obj["str"]); //=> "str"
+obj.str; //=> "str"
+obj["str"]; //=> "str"
 
 // number
 obj[0] = 0;
-obj.0);  //=> 语法报错
-obj[0]); //=> 0
-obj['0']); //=> 0
+obj.0;  //=> 语法报错
+obj[0]; //=> 0
+obj['0']; //=> 0
 
 // boolean
 obj[true] = true;
 obj.true);  //=> true
-obj[true]); //=> true
-obj['true']); //=> true
+obj[true]; //=> true
+obj['true']; //=> true
 
 // null
 obj[null] = null;
-obj.null);  //=> null
-obj[null]); //=> null
-obj['null']); //=> null
+obj.null;  //=> null
+obj[null]; //=> null
+obj['null']; //=> null
 
 // undefined
 obj[undefined] = undefined;
-obj.undefined);  //=> undefined
-obj[undefined]); //=> undefined
-obj['undefined']); //=> undefined
+obj.undefined;  //=> undefined
+obj[undefined]; //=> undefined
+obj['undefined']; //=> undefined
 
 // object
 const o = {};
 obj[o] = 1;
-obj); // { [object Object]: 1 }
+obj; // { [object Object]: 1 }
 obj[{}] = 2;
-obj); // { [object Object]: 2 }
-obj['[object Object]']); // 2
+obj; // { [object Object]: 2 }
+obj['[object Object]']; // 2
 
 // symbol
 const sym1 = Symbol('sym');
 const sym2 = Symbol('sym');
 obj[sym1] = 'sym1';
 obj[sym2] = 'sym2';
-obj); // { Symbol(sym): "sym1", Symbol(sym): "sym2" }
-obj[sym1]); // "sym1"
-obj[sym2]); // "sym2"
-obj['Symbol(sym)']); // 语法报错
+obj; // { Symbol(sym): "sym1", Symbol(sym): "sym2" }
+obj[sym1]; // "sym1"
+obj[sym2]; // "sym2"
+obj['Symbol(sym)']; // 语法报错
 ```
 
 **总结：** 简单理解，任意数据类型（symbol 除外）当作为对象属性时，会自动事先转化为字符串
@@ -72,9 +72,9 @@ Animal.prototype.live = "earth";
 
 const tiger = new Animal("tiger");
 
-tiger); // { name: "tiger" }
-tiger.name); // tiger
-tiger.live); // earth
+tiger; // { name: "tiger" }
+tiger.name; // tiger
+tiger.live; // earth
 ```
 
 tiger 对象上的 name 属性就具有所有权，而 live 属性是从 Animal 原型链上所继承的，不具有 live 属性的所有权
