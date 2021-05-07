@@ -6,7 +6,7 @@
 
 ### 什么是 React.memo
 
-React.memo 功能类似于 React.PureComponent，每当组件中的 props 和 state 发生变化时，React 将检查 上一个 state 和 props 以及下一个 props 和 state 是否相等，如果不相等则函数组件将重新渲染，如果它们相等则函数组件将不会重新渲染
+React.memo 功能类似于 React.PureComponent，但它只会**浅比较**当组件中的 props，React 将检查 上一个 props 以及下一个 props 是否相等，如果不相等则函数组件将重新渲染，如果它们相等则函数组件将不会重新渲染
 
 </br>
 </br>
@@ -15,28 +15,28 @@ React.memo 功能类似于 React.PureComponent，每当组件中的 props 和 st
 
 ```javascript
 const Child = React.memo((props) => {
-    console.log("child render");
-    return <div onClick={props.childHandleClick}>子组件</div>;
+	console.log("child render");
+	return <div onClick={props.childHandleClick}>子组件</div>;
 });
 
 function Parent() {
-    const [count, setCount] = useState(0);
-    const childHandleClick = () => {
-        console.log("to do something");
-    };
-    console.log("parent render");
-    return (
-        <div>
-            <button
-                onClick={() => {
-                    setCount(count + 1);
-                }}
-            >
-                add
-            </button>
-            <Child childHandleClick={childHandleClick} />
-        </div>
-    );
+	const [count, setCount] = useState(0);
+	const childHandleClick = () => {
+		console.log("to do something");
+	};
+	console.log("parent render");
+	return (
+		<div>
+			<button
+				onClick={() => {
+					setCount(count + 1);
+				}}
+			>
+				add
+			</button>
+			<Child childHandleClick={childHandleClick} />
+		</div>
+	);
 }
 ```
 
@@ -63,14 +63,14 @@ child render
 
 ```javascript
 const Child = React.memo((props) => {
-    console.log("child render");
-    return <div onClick={props.childHandleClick}>子组件</div>;
+	console.log("child render");
+	return <div onClick={props.childHandleClick}>子组件</div>;
 });
 function App() {
-    const childHandleClick = useCallback(() => {
-        console.log("to do something");
-    }, []);
-    // 省略相同的代码......
+	const childHandleClick = useCallback(() => {
+		console.log("to do something");
+	}, []);
+	// 省略相同的代码......
 }
 ```
 
@@ -85,12 +85,12 @@ function App() {
 
 ```javascript
 const childHandleClick = useCallback(() => {
-    console.log("to do something");
+	console.log("to do something");
 }, []);
 
 // 既然useCallback可以缓存函数(也就是它的第一个参数)，以上代码可以等价于
 const func = () => {
-    console.log("to do something");
+	console.log("to do something");
 };
 const childHandleClick = useCallback(func, []);
 ```
@@ -118,30 +118,30 @@ const childHandleClick = useCallback(func, []);
 
 ```javascript
 function App() {
-    const [val, setValue] = useState("1");
-    const [count, setCount] = useState(1);
-    function expensive() {
-        let sum = 0;
-        for (let i = 0; i < count * 10000; i++) {
-            sum += i;
-        }
-        return sum;
-    }
-    return (
-        <div>
-            <p>
-                {val}-{count}-{expensive()}
-            </p>
-            <input value={val} onChange={(event) => setValue(event.target.value)} />
-            <button
-                onClick={() => {
-                    setCount(count + 1);
-                }}
-            >
-                count++
-            </button>
-        </div>
-    );
+	const [val, setValue] = useState("1");
+	const [count, setCount] = useState(1);
+	function expensive() {
+		let sum = 0;
+		for (let i = 0; i < count * 10000; i++) {
+			sum += i;
+		}
+		return sum;
+	}
+	return (
+		<div>
+			<p>
+				{val}-{count}-{expensive()}
+			</p>
+			<input value={val} onChange={(event) => setValue(event.target.value)} />
+			<button
+				onClick={() => {
+					setCount(count + 1);
+				}}
+			>
+				count++
+			</button>
+		</div>
+	);
 }
 ```
 
@@ -156,30 +156,30 @@ function App() {
 
 ```javascript
 function App() {
-    const [val, setValue] = useState("1");
-    const [count, setCount] = useState(1);
-    const expensive = useMemo(() => {
-        let sum = 0;
-        for (let i = 0; i < count * 10000; i++) {
-            sum += i;
-        }
-        return sum;
-    }, [count]);
-    return (
-        <div>
-            <p>
-                {val}-{count}-{expensive}
-            </p>
-            <input value={val} onChange={(event) => setValue(event.target.value)} />
-            <button
-                onClick={() => {
-                    setCount(count + 1);
-                }}
-            >
-                count++
-            </button>
-        </div>
-    );
+	const [val, setValue] = useState("1");
+	const [count, setCount] = useState(1);
+	const expensive = useMemo(() => {
+		let sum = 0;
+		for (let i = 0; i < count * 10000; i++) {
+			sum += i;
+		}
+		return sum;
+	}, [count]);
+	return (
+		<div>
+			<p>
+				{val}-{count}-{expensive}
+			</p>
+			<input value={val} onChange={(event) => setValue(event.target.value)} />
+			<button
+				onClick={() => {
+					setCount(count + 1);
+				}}
+			>
+				count++
+			</button>
+		</div>
+	);
 }
 ```
 

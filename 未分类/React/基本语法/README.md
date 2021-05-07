@@ -50,34 +50,34 @@ render() {
 
 ```javascript
 class Test extends React.Component {
-    constructor(props) {
-        super(props);
-        this.btnOneClick = this.btnOneClick.bind(this);
-    }
-    // 必须要绑定this
-    btnOneClick(e) {
-        console.log(e);
-        console.log("Click Button One");
-    }
-    // 不用绑定bind
-    btnTwoClick = (e, str) => {
-        console.log(e, str);
-        console.log("Click Button Two");
-    };
-    render() {
-        return (
-            <div>
-                <button onClick={this.btnOneClick}>Button One</button>
-                <button
-                    onClick={(e) => {
-                        this.btnTwoClick(e, "btn two");
-                    }}
-                >
-                    Button Two
-                </button>
-            </div>
-        );
-    }
+	constructor(props) {
+		super(props);
+		this.btnOneClick = this.btnOneClick.bind(this);
+	}
+	// 必须要绑定this
+	btnOneClick(e) {
+		console.log(e);
+		console.log("Click Button One");
+	}
+	// 不用绑定bind
+	btnTwoClick = (e, str) => {
+		console.log(e, str);
+		console.log("Click Button Two");
+	};
+	render() {
+		return (
+			<div>
+				<button onClick={this.btnOneClick}>Button One</button>
+				<button
+					onClick={(e) => {
+						this.btnTwoClick(e, "btn two");
+					}}
+				>
+					Button Two
+				</button>
+			</div>
+		);
+	}
 }
 ```
 
@@ -126,7 +126,7 @@ class Test extends React.Component {
     2. shouldComponentUpdate：返回 false 可以阻止更新
     3. render
     4. getSnapshotBeforeUpdate(prevProps, prevState)：返回值作为 componentDidUpdate 的第三个参数
-    5. componentDidupdate
+    5. componentDidupdate(prevProps, prevState, snapshot)
 
 -   销毁阶段
 
@@ -154,24 +154,24 @@ ReactDOM.createPortal(child, container);
 // 为当前的 theme 创建一个 context（“light”为默认值）。
 const ThemeContext = React.createContext("light");
 class App extends React.Component {
-    render() {
-        // 使用一个 Provider 来将当前的 theme 传递给以下的组件树。
-        // 无论多深，任何组件都能读取这个值。
-        return (
-            <ThemeContext.Provider value="dark">
-                <Toolbar />
-            </ThemeContext.Provider>
-        );
-    }
+	render() {
+		// 使用一个 Provider 来将当前的 theme 传递给以下的组件树。
+		// 无论多深，任何组件都能读取这个值。
+		return (
+			<ThemeContext.Provider value="dark">
+				<Toolbar />
+			</ThemeContext.Provider>
+		);
+	}
 }
 
 // 中间的组件再也不必指明往下传递 theme 了。
 class Toolbar extends React.Component {
-    static contextType = ThemeContext;
-    render() {
-        console.log("this.context:", this.context);
-        return <button />;
-    }
+	static contextType = ThemeContext;
+	render() {
+		console.log("this.context:", this.context);
+		return <button />;
+	}
 }
 ```
 
@@ -184,13 +184,13 @@ class Toolbar extends React.Component {
 import React from "react";
 const AsyncComponent = React.lazy(() => import("./asyncComponent"));
 function App() {
-    return (
-        <div>
-            <React.Suspense fallback={<div>Loading...</div>}>
-                <AsyncComponent />
-            </React.Suspense>
-        </div>
-    );
+	return (
+		<div>
+			<React.Suspense fallback={<div>Loading...</div>}>
+				<AsyncComponent />
+			</React.Suspense>
+		</div>
+	);
 }
 ```
 
