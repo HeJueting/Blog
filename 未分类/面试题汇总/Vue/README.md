@@ -57,9 +57,9 @@ let proxy = new Proxy(target, handlers);
 
 ```javascript
 export default {
-    data() {
-        return {};
-    },
+	data() {
+		return {};
+	},
 };
 ```
 
@@ -134,54 +134,14 @@ export default {
 </br>
 </br>
 
-### vue-router 的原理
-
-一共有三种模式
-
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-
-### v-show 和 v-if 的区别
-
--   v-show 通过 display 属性隐藏 dom
-
--   v-if 不会渲染 dom
-
-</br>
-</br>
-
-### 描述 Vue 组件的生命周期（父子组件）
+### 描述 Vue 组件的生命周期
 
 -   挂载阶段
 
     1. beforeCreate
-    2. created
+    2. created：创建好了 Vue 实例，但是 dom 还未渲染完成
     3. beforeMount
-    4. mounted
+    4. mounted：dom 已经更新完成，用于执行 ajax 等操作
 
 -   更新阶段
 
@@ -190,7 +150,7 @@ export default {
 
 -   销毁阶段
 
-    1. beforeDestroy
+    1. beforeDestroy：销毁实例之前触发，用于执行注销事件监听、定时器等操作
     2. destroyed
 
 父组件(beforeCreate/beforeUpdate/beforeDestroy) -> 子组件（beforeCreate/beforeUpdate/beforeDestroy） -> 子组件（created/updated/destroyed） -> 父组件（created/updated/destroyed）
@@ -198,20 +158,57 @@ export default {
 </br>
 </br>
 
-### 对 MVVM 的理解
+### 简述 vue-router
 
-View + ViewModal + Modal
+1. Hash 和 History 两种路由模式
+2. 路由钩子可全局配置所有路由，也可以单独配置每个路由
+3. router.beforeEach：每个路由进入前触发，一般用于登录校验
+4. router.afterEach：进入路由后触发
+5. 动态路由(/path/:id)
+6. 通过 import 以及结合 webpack 实现路由懒加载
 
 </br>
 </br>
 
+### v-show、v-if
+
+1. v-show 通过 display 属性显示/隐藏 dom
+
+2. v-if 销毁/重新渲染 dom
+
 </br>
 </br>
 
-### ajax 请求应该放在哪一个生命周期？
+### 动态组件 和 keep-alive
 
-应该放在 mounted 中处理，ajax 请求是一个异步操作，且 JS 是一个单线程，将 ajax 放在 mounted 之前去处理没有任何意义。可以继续聊一聊 React Fiber....
+通过 :is 属性去动态渲染某个不确定的组件，可结合 keep-alive 缓存组件
 
+```html
+<keep-alive :include="/a|b/">
+	<component :is="witchComponent"></component>
+</keep-alive>
+```
+
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
+</br>
 </br>
 </br>
 
@@ -228,14 +225,7 @@ View + ViewModal + Modal
 </br>
 </br>
 
-### 多个组件有相同逻辑，如何抽离
-
-使用 minxi（代码可读性差）
-
-</br>
-</br>
-
-### 何时使用 keep-alive
+### 何时使用
 
 -   缓存组件，不需要重复渲染
 
@@ -243,28 +233,6 @@ View + ViewModal + Modal
 
 </br>
 </br>
-
-### 何时使用 beforeDestory
-
--   解除自定义事件 event.$off
-
--   清除定时器
-
--   取消事件监听
-
-</br>
-</br>
-
-</br>
-</br>
-
-### Vuex 中 action 和 mutation 的区别
-
--   action 中可以处理异步，mutation 不可以
-
--   mutation 用于具体操作哪个数据的变更
-
--   action 可以整合多个 mutation
 
 </br>
 </br>
