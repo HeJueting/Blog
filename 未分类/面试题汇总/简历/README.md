@@ -40,21 +40,21 @@
 
 **View 的登录逻辑**
 
-jwt
+基于 JWT 的用户认证机制，登陆成功后服务端会返回 jwt 信息，前端通过 localForage 将该信息保存在浏览器本地，每次数据请求时，都会在请求头加上 Authorization 字段携带该 jwt 信息
 
 **技术难点 1：如何实现用户体系的统一？**
 
 1. 方案一：直接抹掉 View 的用户体系，使用 OneNET 平台的用户体系
 
     - View 已基本成型，登录逻辑，用户逻辑都需要变动，改动量过大
-    - 如果 View 进行私有化部署，则必须依赖于主站的用户体系，耦合性过大
+
+    - 如果 View 进行私有化部署，则必须依赖于主站的用户体系，耦合性过大，部署成本过高
 
 2. 方案二：将主站的用户与 View 的用户进行一一映射
 
     - 当用户通过主站登录进入 view 时，会默认在 view 中创建一个用户，并通过 detail 字段保存主站用户信息
-    - 当用户直接进入 view 时，会根据
 
-新增一个 detail 字段用于保存主站的用户信息，其中将主站的 uid 与 view 用户体系的 uid 进行映射
+    - 每次进入 view 时，根据 jwt 中的用户信息去请求主站的登录接口，判断该用户是否登录，如果登录则重置 view 的 jwt 信息进行，如果没有登录就跳转到主站登录页面，此后所有的请求还是基于 View 本身 jwt 信息去校验是否登录（原本 view 是基于自身的 jwt 信息去判断是否登录）
 
 </br>
 </br>
@@ -67,12 +67,216 @@ jwt
 
 **技术难点 1：如何实现权限限制？**
 
-1. 由于 view 拥有独立的用户体系，因此
-
 1. 服务端返回用户的权限等级，然后将用户的权限信息保存在 vuex 中，前端通过 JSON 数据结构去维护用户的权限
 
-1. 切记不能将用户敏感信息保存在本地
+2. 切记不能将用户敏感信息保存在本地
 
 **技术难点 2：如何实现权限自动刷新？**
 
-前端跟 node 端使用 websocket 建立双向通信，node 端提供一个接口给计费侧，当用户购买完 view 后，直接调用
+前端跟 node 端使用 websocket 建立双向通信，node 端提供一个接口给计费侧，当用户购买完 view 后，计费侧直接调用 node 端的接口，再由 node 端下发更新权限的消息命令
+
+**技术难点 3：网页水印的实现**
+
+1. 主要是基于 background-repeat 去实现
+
+2. 可以通过 canvas 自定义水印内容
+
+3. 通过 MutationObserver 这个 API 去监听具有水印的 dom 元素是否变化，如果变化则重新初始化水印，避免用户通过控制台去操作水印
+
+4. 在调研水印实现的过程中，发现了图片隐写术这样好玩的技术（阿里月饼门事件）...我基于 LBS 隐写技术去玩了玩，该技术主要是基于 RGB 通道去实现。
+
+    - 图片是由一个一个的像素点组成的，通过 canvas 的 getImageData 可以拿到这些像素点的具体色值信息，这是一个数组，四个为一组代表 rgba
+
+    - 一共存在 256^3 种颜色，但人眼可识别的颜色有限，我们就可以对这些像素点的色值下手脚，将他们的 r 通道的值都转为偶数（代表图片本身展示的内容）
+
+    - 同理通过 getImageData 拿到需要隐写内容的信息，然后通过 r 通道数值 +1 变成奇数的方式悄悄写入（用户肉眼是无感知的）
+
+    - 解密的时候就将 r 通道为奇数的像素全部置为 0 或 255 即可，肉眼就可以观察出来了
+
+</br>
+</br>
+
+### 全局变量
+
+这个需求是非常有意义，大大提高了 View 的适用性，以应对不同场景下的需求。通过该功能，可以建立组件之间的联系，使组件之间拥有联动功能
+
+1. 通过 vuex 去维护一个数据，代表全局变量
+
+2. 该全局变量会作为过滤器的第三个参数
+
+3. 对于几种特殊组件可以通过配置，点击的形式去修改全局变量。例如点击标题组件，全局变量的值就会修改为标题的 value 值
+
+</br>
+</br>
+
+### 组件加载逻辑优化
+
+一个大屏可能会用到十几种组件，这些组件资源都是通过 http 请求从服务端拉取的，有时候碰到网络状况不好的情况，有可能会出现个别组件资源拉取失败的情况，优化措施：
+
+1. 通过一个 Map 对象去缓存已经加载的组件资源，url 作为 key，JS 的资源内容作为 value
+
+2. 每次请求前先通过 url 在 Map 对象中寻找该资源是否已经加载过，如果是直接获取这个已经缓存的 JS 资源，如果不是再进行 http 请求（减少 http 请求次数）
+
+3. 通过轮询的方式（最多请求 5 次）去请求组件资源，避免网络问题带来影响
+
+**promise**
+
+其中运用到了 promise 对象的特性进行缓存，promise 有 pending/resolve/reject 三种状态，一旦状态改变，任何时刻都可以得到 promise 的结果，因此直接将 promise 对象加入到缓存的 Map 对象中，如果失败则删除这个缓存资源；如果成功，缓存的结果也会被直接记录到 Map 对象中
+
+1. promise 优点：解决了回调地狱的问题，通过 then 方式让回调变得更优雅
+
+2. promise 缺点：一旦创建了就无法取消，且处于 pending 状态时，无法得知目前进展
+
+3. 手写 promise
+
+```javascript
+function Promise(executor) {
+    this.status = "PENDING";
+    this.value = undefined;
+    this.reason = undefined;
+    // 存放成功的回调函数
+    this.onResolvedCallbacks = [];
+    // 存放失败的回调函数
+    this.onRejectedCallbacks = [];
+
+    const resolve = (value) => {
+        if (this.status === "PENDING") {
+            this.status = "FULFILLED";
+            this.value = value;
+            // 执行所有回调函数
+            this.onResolvedCallbacks.forEach((fn) => fn());
+        }
+    };
+    const reject = (reason) => {
+        if (this.status === "PENDING") {
+            this.status = "REJECTED";
+            this.reason = reason;
+            // 依次将对应的函数执行
+            this.onRejectedCallbacks.forEach((fn) => fn());
+        }
+    };
+
+    try {
+        // 执行Promise传入的这个函数
+        executor(resolve, reject);
+    } catch (err) {
+        reject(err);
+    }
+}
+
+Promise.prototype.then = function (onFulfilled, onRejected) {
+    console.log("执行then函数");
+    if (this.status === "FULFILLED") {
+        onFulfilled(this.value);
+    }
+    if (this.status === "REJECTED") {
+        onRejected(this.reason);
+    }
+    if (this.status === "PENDING") {
+        this.onResolvedCallbacks.push(() => {
+            onFulfilled(this.value);
+        });
+        this.onRejectedCallbacks.push(() => {
+            onRejected(this.reason);
+        });
+    }
+};
+
+const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve("成功");
+    }, 1000);
+}).then(
+    (data) => {
+        console.log("success", data);
+    },
+    (err) => {
+        console.log("faild", err);
+    }
+);
+```
+
+</br>
+</br>
+
+### 数据请求优化
+
+view 通过数据源配置来获取数据，然后运用到各个组件中，最初每一个数据源都是通过 http 请求去 node 端中转获取，如果数据源数量一旦较多，意味着同一时刻可能会发起多个 http 请求，优化如下：
+
+1. 用一个数组去收集当前发起的 http 数据请求，然后在同一时刻只发起一次请求，由于 websocket 的引入，甚至不用再次跟服务端建立 TCP 连接，所有的数据请求直接走 websocket 去获取
+
+2. 考虑到私有化部署，采用优雅降级方案，如果 websocket 建立连接失败的话，还是会通过 http 请求去一次性获取当前时刻需要请求的数据
+
+</br>
+</br>
+
+### 沙箱运行
+
+... to do list
+
+</br>
+</br>
+
+### 多功能地图
+
+由于百度、高德地图商用收费较高。于是我就参考阿里的 data-v 基于 leaflet 开发地图组件，支持散点、热力、飞线功能，虽然使用了
+
+1. 优势：支持各种开源地图厂商提供的 2D 瓦片地图，可深度定制化
+
+2. 劣势：国内学习文档比较青涩，基本都是英文文档，不容易上手。对于高度定制化开发（飞线地图），需要适当阅读一下 leaflet 源码（参考一下 marker 和 circle 的实现），以及多参阅一下 leaflet extending 的扩展文档
+
+3. 以多图层的概念去理解，地图中添加的任意内容其实就是通过 z-index 添加了新的展示层。开发散点、热力、飞线地图其实就是基于 leaflet 开发一个图层，最后通过 addlayer 添加到 leaflet 地图中
+
+</br>
+</br>
+
+### 弹窗、浮窗
+
+弹窗和浮窗组件通过自定义的方式去展示，适用于多种应用场景
+
+1. 给 view 中的所有组件新增一个 visible 属性，控制他们的显示与隐藏
+
+2. 页面中的每一个组件都有独立的一个 id，在控制面板中，配置弹窗组件的触发者 id 和展示者 id....
+
+</br>
+</br>
+
+### 微前端
+
+**什么是微前端？**
+
+每个前端项目都是独立的一个应用，他们可以独立开发、独立运行、独立部署，但他们可通过微前端这样的架构进行聚合成一个应用了。主要的应用场景，是将公司或部门中各个独立的项目聚合成一个统一的平台。
+
+**微前端方案**
+
+1. iframe 嵌套：天然隔离，互不影响，但是 iframe 之间的样式显示具有一定局限性
+
+2. Web Components：子应用采取 Web Components 的技术编写（样式隔离，单独部署），但历史项目改动成本过高
+
+3. 组合式应用路由分发：应用独立构建和部署，运行时由父应用来进行路由管理，应用加载，启动，卸载，以及通信机制。但需要开发和设计，也需要解决样式冲突、全局变量的污染以及通信等问题
+
+</br>
+</br>
+
+### 开发数据集编辑器
+
+用户通过左侧数据表拖拽进入编辑器中
+
+**技术难点 1：如何实现拖拽？**
+
+1. 数据表设置 draggable 属性，添加 dragstart 和 dragend 方法
+
+2. 编辑器通过 drop 事件响应判断是否有数据表拖拽进入编辑器中
+
+3. 优化：可为编辑器添加 dragEnter、dragLeave 事件，去动态控制编辑器的边线框
+
+**技术难点 2：页面中的元素如何连线？**
+
+1. 通过 CSS 的伪元素 before 和 after 去连线
+
+**技术难点 3：将服务端的数据结构映射到前端展示中**
+
+......
+
+</br>
+</br>
