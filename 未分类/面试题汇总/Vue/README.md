@@ -2,7 +2,30 @@
 
 </br>
 
-### Vue 和 localStroage 的区别
+### 1、Vue 常见性能优化
+
+1. v-show 和 v-if
+
+2. computed
+
+3. v-for 中添加 key，以及不和 v-if 同时使用
+
+4. 自定义事件、事件监听、定时器的销毁
+
+5. keep-alive
+
+6. 合理使用异步组件
+
+7. data 层级不要太深（深度监听，会递归到底）
+
+8. 图片懒加载 / 防抖函数 / 使用 web worker 处理复杂任务 / CDN ...
+
+9. 结合 webpack 的优化措施 ...
+
+</br>
+</br>
+
+### 2、Vuex 和 localStroage 的区别
 
 1. vuex 存储在内存中，而 localStroage 存储在本地，读取内存中的数据要快于本地磁盘
 
@@ -13,7 +36,7 @@
 </br>
 </br>
 
-### Vue 如何实现数据双向绑定
+### 3、Vue 如何实现数据双向绑定
 
 **绑定过程**
 
@@ -44,7 +67,7 @@ let proxy = new Proxy(target, handlers);
 </br>
 </br>
 
-### 计算属性 computed
+### 4、计算属性 computed
 
 1. computed 计算属性用于缓存计算量大，且改变机会少的操作，提高性能
 
@@ -53,13 +76,13 @@ let proxy = new Proxy(target, handlers);
 </br>
 </br>
 
-### 为何组件的 data 必须是一个函数？
+### 5、为何组件的 data 必须是一个函数？
 
 ```javascript
 export default {
-	data() {
-		return {};
-	},
+    data() {
+        return {};
+    },
 };
 ```
 
@@ -68,7 +91,7 @@ export default {
 </br>
 </br>
 
-### 描述组件渲染和更新的过程
+### 6、描述组件渲染和更新的过程
 
 **初次渲染过程**
 
@@ -85,7 +108,7 @@ export default {
 </br>
 </br>
 
-### Vue 组件如何通讯
+### 7、Vue 组件如何通讯
 
 1. props 和 $emit（父子组件）
 2. 自定义事件，event.$on / event.$off / event.$emit （兄弟组件）
@@ -94,7 +117,7 @@ export default {
 </br>
 </br>
 
-### Vue 中 data 发生改变后，会立刻同步重新渲染吗？
+### 8、Vue 中 data 发生改变后，会立刻同步重新渲染吗？
 
 1. 数据改变后，并不会立刻更新视图，他会开启一个异步任务队列，将需要变化的 data 加入这个队列中，最后再统一进行视图更新，提高渲染性能
 
@@ -103,7 +126,7 @@ export default {
 </br>
 </br>
 
-### 插槽、作用域插槽、具名插槽
+### 9、插槽、作用域插槽、具名插槽
 
 插槽：类似于 React 中的 children，父组件传递内容给子组件
 
@@ -114,7 +137,7 @@ export default {
 </br>
 </br>
 
-### 简述一下 vuex
+### 10、简述一下 vuex
 
 **流程**
 
@@ -134,7 +157,7 @@ export default {
 </br>
 </br>
 
-### 描述 Vue 组件的生命周期
+### 11、描述 Vue 组件的生命周期
 
 -   挂载阶段
 
@@ -158,7 +181,7 @@ export default {
 </br>
 </br>
 
-### 简述 vue-router
+### 12、简述 vue-router
 
 1. Hash 和 History 两种路由模式
 2. 路由钩子可全局配置所有路由，也可以单独配置每个路由
@@ -170,7 +193,7 @@ export default {
 </br>
 </br>
 
-### v-show、v-if
+### 13、v-show、v-if
 
 1. v-show 通过 display 属性显示/隐藏 dom
 
@@ -179,104 +202,36 @@ export default {
 </br>
 </br>
 
-### 动态组件 和 keep-alive
+### 14、动态组件 和 keep-alive
 
 通过 :is 属性去动态渲染某个不确定的组件，可结合 keep-alive 缓存组件
 
 ```html
 <keep-alive :include="/a|b/">
-	<component :is="witchComponent"></component>
+    <component :is="witchComponent"></component>
 </keep-alive>
 ```
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+### 15、如何自己实现 v-modal
 
-### 如何自己实现 v-modal
+1. 父组件通过 v-modal 给子组件绑定一个 value 值
 
--   父组件通过 v-modal 给子组件绑定一个 value 值
+2. 子组件接收一个 props 对象，包涵了父组件传来的 value 值
 
--   子组件接收一个 props 对象，包涵了父组件传来的 value 值
+3. 再定义 modal 属性，包涵一个 prop（与父组件传来 value 字段保持一致） 和 event（改变这个 value 值的 change 事件名）
 
--   再定义 modal 属性，包涵一个 prop（与父组件传来 value 字段保持一致） 和 event（改变这个 value 值的 change 事件名）
-
--   子组件通过 $emit 去修改这个 value 值
+4. 子组件通过 $emit 去修改这个 value 值
 
 </br>
 </br>
 
-### 何时使用
+### 16、如何实现自定义指令
 
--   缓存组件，不需要重复渲染
+1. 通过 Vue.directives 或者在组件内部使用 directives 属性去指定指令内容
 
--   多个静态 tab 页的切换
+2. 通过自定义指令提供的生命钩子，去执行相关操作逻辑
 
-</br>
-</br>
-
-</br>
-</br>
-
-### 异步加载
-
--   较大组件的加载
-
--   路由异步加载
-
--   通过 import 函数异步加载
-
-</br>
-</br>
-
-### 用 vnode（虚拟 dom） 描述一个 DOM 结构
-
-</br>
-</br>
-
-### 简述 Dom Diff 算法
-
-</br>
-</br>
-
-### Vue 常见性能优化
-
--   v-show 和 v-if
-
--   computed
-
--   v-for 中添加 key，以及不和 v-if 同时使用
-
--   自定义事件、事件监听、定时器的销毁
-
--   keep-alive
-
--   合理使用异步组件
-
--   data 层级不要太深（深度监听，会递归到底）
-
--   图片懒加载（当元素处于可视范围内的时候加载图片）
-
--   结合 webpack....
+3. 一般适用于 dom 操作
 
 </br>
 </br>
