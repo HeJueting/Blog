@@ -152,3 +152,105 @@ flex 属性代表 flex-grow，flex-shrink，flex-basis 这三种属性，他有�
 
 </br>
 </br>
+
+### 10、grid 布局
+
+1. grid-template-columns（每一列的宽度）、grid-template-rows（每一行的高度）
+
+2. grid-column-gap（每一列的间隔）、grid-row-gap（每一行的间隔）
+
+3. grid-template-areas：定义网格区域
+
+```css
+.test {
+    /* 代表将9个单元格划分为 a b c d e f g h i 共9块区域 */
+    grid-template-areas:
+        "a b c"
+        "d e f"
+        "g h i";
+    /* 代表将9个单元格划分为 a b c 共3块区域 */
+    grid-template-areas:
+        "a a a"
+        "b b b"
+        "c c c";
+    /* 代表将9个单元格划分为 header main sidebar footer 共4块区域 */
+    grid-template-areas:
+        "header header header"
+        "main main sidebar"
+        "footer footer footer";
+}
+```
+
+4. grid-auto-flow：设置子元素放置顺序，默认 “先行后列”
+
+5. 子元素在容器中的对齐方式
+
+    - 适用于所有元素：justify-items（水平方向）、align-items （竖直方向）
+
+    - 适用于某个元素：justify-self（水平方向）、align-self （竖直方向）
+
+6. 整个容器在内容区域的对齐方式：justify-content（水平方向）、align-content（竖直方向）
+
+7. 设置浏览器自动创建的多余网格的列宽和行高（如：只有 9 个网格，却有 11 个子元素）：grid-auto-columns、grid-auto-rows
+
+8. 指定子元素的位置，参照系是网格线：grid-column-start、grid-column-end、grid-row-start、grid-row-end
+
+</br>
+</br>
+
+### 11、物理像素、设备独立像素、CSS 像素、devicePixelRatio
+
+1. 物理像素：显示器的最小物理单位
+
+2. 设备独立像素：设备的像素，例如：chrome 检查 iphone，显示 375×812。一个设备独立像素里可能包含 1 个或者多个物理像素点，包含的越多则屏幕看起来越清晰
+
+3. CSS 像素：一般情况下（页面缩放比为 1），1 个 CSS 像素 等于 1 个设备独立像素
+
+4. devicePixelRatio：一个 CSS 像素的大小与一个物理像素的大小，例如：iphone 手机下 的 1 个 CSS 像素可能是由 2 个物理像素组成
+
+</br>
+</br>
+
+### 12、如何解决移动端 1px 的问题
+
+1. 很多移动端浏览器都已经支持，chrome 暂不支持但可以设置
+
+2. transform: scale(0.5) 来实现，但是 transform 缩小的元素还是会在网页中占据原有空间大小
+
+3. 利用 JS 根据 window.devicePixelRatio 的大小动态设置 viweport 的 initial-scale、maximum-scale、minimum-scale 属性
+
+</br>
+</br>
+
+### 回流和重绘、GPU 加速
+
+**渲染进程 和 GPU 进程**
+
+1. 渲染进程：解析 HTML 和 CSS 文件并生成相应的 render tree，然后去渲染；运行 JS 代码
+
+2. GPU 进程：CSS 3D 的渲染以及页面的绘制
+
+**回流和重绘**
+
+回流一定会引起页面重绘
+
+1. 回流：计算得到 render tree -> 渲染元素 -> GPU 绘制，页面会重新布局和绘制
+
+    - 浏览器 resize
+    - 元素位置尺寸改变
+    - 元素的增删
+
+2. 重绘：仅重新 GPU 绘制，并不会重新布局
+
+    - 元素的 color 和 background 改变
+
+**优化措施**
+
+1. 使用 transform 提代位置的变化，该属性不会触发回流
+
+2. 减少 DOM 操作，合并 DOM 操作
+
+to do list....
+
+</br>
+</br>
