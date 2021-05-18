@@ -224,7 +224,7 @@ flex 属性代表 flex-grow，flex-shrink，flex-basis 这三种属性，他有�
 
 ### 页面的回流与重绘
 
-整个渲染流程：构建 dom 树 → 构建 styleSheets → 计算元素位置，构建布局树 → 划分图层 → 拆分绘制命令，生成绘制列表 → 合成线程将图层划分为图块 → GPU 加速栅格化，将图块转化为位图 → 显示
+整个渲染流程：构建 DOM 树 ——> 构建 StyleSheets ——> 构建布局树 ——> 划分图层 ——> 图层绘制 ——> 栅格化操作 ——> 显示
 
 1. 回流：走完整个渲染流程
 
@@ -236,10 +236,10 @@ flex 属性代表 flex-grow，flex-shrink，flex-basis 这三种属性，他有�
 
     - 元素的 color 和 background 改变
 
-3. transform 动画：需要配合 will-change 或者 translate3D(0) 开启 GPU 加速。开启 GPU 加速后，实际是创建了新的图层，直接进入到 GPU 生成位图阶段
+3. transform 动画：配合 will-change 或者 translate3D(0) 开启 GPU 加速。
 
-    - translate3D(0) 模拟虚假的 3D 变化，开启 GPU 加速
-    - will-change
+    - 开启后，相当于创建了一个新的动画图层，GPU 进程对直接对该动画图层进行渲染
+    - 不必历经构建布局树、划分图层、图层绘制、栅格化的流程
 
 </br>
 </br>
