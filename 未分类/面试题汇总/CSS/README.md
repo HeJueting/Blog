@@ -222,35 +222,24 @@ flex 属性代表 flex-grow，flex-shrink，flex-basis 这三种属性，他有�
 </br>
 </br>
 
-### 回流和重绘、GPU 加速
+### 页面的回流与重绘
 
-**渲染进程 和 GPU 进程**
+整个渲染流程：构建 dom 树 → 构建 styleSheets → 计算元素位置，构建布局树 → 划分图层 → 拆分绘制命令，生成绘制列表 → 合成线程将图层划分为图块 → GPU 加速栅格化，将图块转化为位图 → 显示
 
-1. 渲染进程：解析 HTML 和 CSS 文件并生成相应的 render tree，然后去渲染；运行 JS 代码
-
-2. GPU 进程：CSS 3D 的渲染以及页面的绘制
-
-**回流和重绘**
-
-回流一定会引起页面重绘
-
-1. 回流：计算得到 render tree -> 渲染元素 -> GPU 绘制，页面会重新布局和绘制
+1. 回流：走完整个渲染流程
 
     - 浏览器 resize
     - 元素位置尺寸改变
     - 元素的增删
 
-2. 重绘：仅重新 GPU 绘制，并不会重新布局
+2. 重绘：不需要重新计算元素位置并构建布局树，也不需要划分图层
 
     - 元素的 color 和 background 改变
 
-**优化措施**
+3. transform 动画：需要配合 will-change 或者 translate3D(0) 开启 GPU 加速。开启 GPU 加速后，实际是创建了新的图层，直接进入到 GPU 生成位图阶段
 
-1. 使用 transform 提代位置的变化，该属性不会触发回流
-
-2. 减少 DOM 操作，合并 DOM 操作
-
-to do list....
+    - translate3D(0) 模拟虚假的 3D 变化，开启 GPU 加速
+    - will-change
 
 </br>
 </br>
