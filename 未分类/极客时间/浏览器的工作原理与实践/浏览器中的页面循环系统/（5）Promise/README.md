@@ -157,5 +157,7 @@ getData("https://yapi.baidu.com/mock/60651/test").then((data) => {
 });
 ```
 
+to do list ... 如何实现 then 方法的链式调用
+
 </br>
 </br>
