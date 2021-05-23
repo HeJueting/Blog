@@ -1,4 +1,4 @@
-# DOM 的构建
+# JavaScript 是如何影响 DOM 树构建的
 
 </br>
 
@@ -26,11 +26,11 @@
 
 ```html
 <body>
-	<div>1</div>
-	<script>
-		let div1 = document.getElementsByTagName('div')[0]    div1.innerText = 'time.geekbang'
-	</script>
-	<div>test</div>
+    <div>1</div>
+    <script>
+        let div1 = document.getElementsByTagName('div')[0]    div1.innerText = 'time.geekbang'
+    </script>
+    <div>test</div>
 </body>
 ```
 
@@ -38,9 +38,9 @@
 
 ```html
 <body>
-	<div>1</div>
-	<script type="text/javascript" src="foo.js"></script>
-	<div>test</div>
+    <div>1</div>
+    <script type="text/javascript" src="foo.js"></script>
+    <div>test</div>
 </body>
 ```
 
@@ -49,25 +49,25 @@
 
 ### CSS 的影响
 
-1. CSS 的内容并不会影响 DOM 的构建
+1. 如果代码里引用了外部的 CSS 文件，那么在执行 JavaScript 之前，还需要等待外部的 CSS 文件下载完成，并解析生成 CSSOM 对象之后，才能执行 JavaScript 脚本
 
-</br>
-</br>
-
-### JavaScript 预解析操作
-
-Chrome 使用预解析操作来优化。当渲染引擎收到字节流之后，会开启一个预解析线程，用来分析 HTML 文件中包含的 JavaScript、CSS 等相关文件，解析到相关文件之后，预解析线程会提前下载这些文件
+2. 如果 css 文件下载超时，或者 css 解析太慢，浏览器也会先渲染 dom，等 css 下载完成再另一次渲染。
 
 </br>
 </br>
 
 ### 异步加载 JavaScript 脚本
 
-1. async：标志的脚本文件一旦加载完成，会立即执行
+1. async：脚本文件一旦加载完成，会立即执行
 
-2. defer：标记的脚本文件需要在 DOMContentLoaded 事件之前执行
+2. defer：脚本文件需要在 DOMContentLoaded 事件之前执行，不必等待 css 等文件完成被加载后执行
 
 </br>
 </br>
 
-3. 对 JavaScript 而言：DOM 提供给 JavaScript 脚本操作的接口，通过这套接口，JavaScript 可以对 DOM 结构进行访问，从而改变文档的结构、样式和内容
+### 浏览器预解析
+
+考虑到 javascript 和 css 文件下载阻塞的情况，**当渲染引擎收到字节流之后，会开启一个预解析线程，用来分析 HTML 文件中包含的 JavaScript、CSS 等相关文件**，解析到相关文件之后，预解析线程会提前下载这些文件
+
+</br>
+</br>

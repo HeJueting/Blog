@@ -15,9 +15,7 @@
 </br>
 </br>
 
-### 2、构建 StyleSheets
-
-15、解析 CSS
+### 2、构建 CSSOM 对象
 
 1. 渲染引擎接会收到 CSS 文本进行转换操作，转换为浏览器可以理解的结构 —— styleSheets（通过 document.styleSheets 可以查看）
 
