@@ -23,6 +23,8 @@
 
 3. 提供了 Cache 机制，用来缓存已经下载过的数据，减轻服务器的压力
 
+4. 需要使用 Connection: keep-alive 才能支持 TCP 复用
+
 </br>
 </br>
 
