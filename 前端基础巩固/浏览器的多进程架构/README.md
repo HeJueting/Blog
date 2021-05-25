@@ -13,9 +13,9 @@
 
 ### 打开一个页面，却打开了多个进程？
 
-![chrome任务管理器截图](./img/chrome-task-manage.png)
-
 当我们使用 chrome 浏览器打开 [https://www.baidu.com/](https://www.baidu.com/) 时，通过 **右上角 ——> 更多工具 ——> 任务管理器** 可查看到 chrome 为我们打开了 N 个进程：
+
+![chrome任务管理器截图](./img/chrome-task-manage.png)
 
 1. 浏览器进程：即图中的 “浏览器”，主要负责**界面显示、用户交互、子进程管理，同时提供存储等功能**
 
@@ -31,7 +31,7 @@
 
 7. Storage Service：暂不清楚，网上也没有找到相关资料...（难道是将浏览器进程中的存储功能抽离出来成为单独的一个进程？）
 
-8. Audio Service：负责处理浏览器音频/视频（具体的作用暂不清除...）
+8. Audio Service：暂不清楚，网上也没有找到相关资料...（应该是负责处理浏览器音频/视频资源）
 
 </br>
 </br>
@@ -51,9 +51,9 @@
 
 ### 浏览器如何分配渲染进程
 
-![渲染进程示例图](./img/render-task-rules.png)
-
 如图所示，当我打开了三个标签页，Chrome 却只为我们创建了 2 个渲染进程，这是因为 Chrome 浏览器会将**浏览上下文组中属于同一站点的标签分配到同一个渲染进程中**
+
+![渲染进程示例图](./img/render-task-rules.png)
 
 </br>
 
@@ -65,13 +65,13 @@ A、B 两个**网站协议和域名相同**
 
 **什么是浏览器上下文组？**
 
-在 A 网页中，通过 a 标签打开 B 网页；或者通过 JavaScript 中的 window.open 方法来打开 B 网页，基于以上两种方式，A B 两个网页就称为浏览器上下文组。在 B 网页中，window.opener 的值就是指向极客邦标签页中的 window
+在 A 网页中，通过 a 标签打开 B 网页；或者通过 JavaScript 中的 window.open 方法来打开 B 网页，基于以上两种方式，A B 两个网页就称为浏览器上下文组。在 B 网页中，window.opener 的值就是指向 A 网页中的 window
 
 </br>
 
 **特殊情况**
 
-如果 a 标签的 rel 属性加上了 "noopener noreferrer" 字样（noreferrer 是为了兼容旧浏览器。），说明从 A 页面打开新的 B 页面，A 页面不想跟 B 页面共用一个渲染进程，不想让 B 页面能访问到 A 页面的 window 对象
+如果 a 标签的 rel 属性加上了 "noopener noreferrer" 字样（noreferrer 是为了兼容旧浏览器），说明从 A 页面打开新的 B 页面，A 页面不想跟 B 页面共用一个渲染进程，不想让 B 页面能访问到 A 页面的 window 对象
 
 ```html
 <a target="_blank" rel="noopener noreferrer">new tab</a>
