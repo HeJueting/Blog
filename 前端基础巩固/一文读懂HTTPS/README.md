@@ -18,7 +18,7 @@ HTTPS = HTTP + TSL/SSL（对称加密 + 非对称加密） + 数字证书
 
 ### 什么是 HTTPS
 
-简单来说 HTTPS 就是在 HTTP 基础之上，实现了**对传输数据的加密和解密**
+简单来说 HTTPS 就是建立在 HTTP 基础之上，实现了**对传输数据的加密和解密**
 
 ![https简易流程图](./img/https.png)
 
