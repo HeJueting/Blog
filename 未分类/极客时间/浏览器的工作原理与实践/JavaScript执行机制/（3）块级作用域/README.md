@@ -23,11 +23,11 @@
 ```javascript
 var myname = "极客时间";
 function showName() {
-    console.log(myname); // undefined
-    if (0) {
-        var myname = "极客邦";
-    }
-    console.log(myname); // undefined
+	console.log(myname); // undefined
+	if (0) {
+		var myname = "极客邦";
+	}
+	console.log(myname); // undefined
 }
 
 // 1. 执行该函数时，会创建一个执行上下文，
@@ -39,9 +39,9 @@ showName();
 
 ```javascript
 function foo() {
-    for (var i = 0; i < 7; i++) {}
-    // 循环运行结束之后，依然能访问到i，与其他语言表现不一致
-    console.log(i);
+	for (var i = 0; i < 7; i++) {}
+	// 循环运行结束之后，依然能访问到i，与其他语言表现不一致
+	console.log(i);
 }
 foo();
 ```
@@ -74,8 +74,8 @@ foo();
 ```javascript
 let myname = "极客时间";
 {
-    console.log(myname); // 报错：Identifier 'myname' has already been declared
-    let myname = "极客邦";
+	console.log(myname); // 报错：Cannot access 'myname' before initialization
+	let myname = "极客邦";
 }
 ```
 

@@ -61,27 +61,19 @@ var a = 1;
 
 #### 案例分析
 
-例如下面这段代码：
-
 ```javascript
-var name = "hejueting";
+var name = "Jordan";
 function showName() {
-    console.log(name); // undefined
-    if (false) {
-        var name = "kobe";
-    }
-    console.log(name); // undefined
+	console.log(name); // undefined
+	if (false) {
+		var name = "Kobe";
+	}
+	console.log(name); // undefined
 }
 showName();
 ```
 
-1. 创建全局执行上下文，由于变量提升，name 变量和 showName 函数保存在该执行上下文的变量环境中
-
-2. 执行代码，执行 shouName 函数，创建函数执行上下文，由于变量提升，name 变量保存在了该函数执行上下文中
-
-3. 执行代码，打印第一个 name，从函数执行上下文中访问 name 变量，发现为 undefined
-
-4. 跳过 if 语句，打印第二个 name，从函数执行上下文中访问 name 变量，发现也为 undefined
+![example](./img/example-1.jpg)
 
 </br>
 
@@ -105,93 +97,71 @@ showName();
 #### 案例分析
 
 ```javascript
-var name = "hejueting";
-{
-    const name = "hejueting";
-}
+var name = "Jordan";
 function showName() {
-    console.log(name);
+	if (true) {
+		const name = "Kobe";
+		{
+			const name = "Curry";
+			console.log(name); // Curry
+		}
+		console.log(name); // Kobe
+	}
+	console.log(name); // Jordan
 }
 showName();
+```
+
+![example](./img/example-2.jpg)
+
+</br>
+</br>
+
+### 暂时性死区
+
+指虽然通过 let/const 声明的变量已经在词法环境中了，但是在没有赋值之前访问该变量，JavaScript 引擎就会抛出错误
+
+```javascript
+let name = "Jordan";
+{
+	console.log(name); // 报错：Cannot access 'name' before initialization
+	let name = "Kobe";
+}
 ```
 
 </br>
 </br>
 
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-
-### 注意
+### 总结
 
 在编译阶段：
 
-1. var 定义的变量：创建、初始化，并保存在变量环境
-
-2. 声明的函数：创建、初始化、函数赋值，并会保存在变量环境
-
-3. let/const 定义的变量：仅创建，并保存在词法环境，因此提前访问会被报错
-
-</br>
-</br>
-
-### 案例分析
+1. var 定义的变量：**创建**、**初始化**，并保存在**变量环境**
 
 ```javascript
-showName();
+console.log(name); // undefined
+var name = "Jordan";
+```
+
+</br>
+
+2. 声明的函数：**创建**、**初始化**、**函数赋值**，并会保存在**变量环境**
+
+```javascript
+showName(); // Jordan
 function showName() {
-    console.log(1);
+	console.log("Jordan");
 }
-var showName = function () {
-    console.log(2);
-};
-showName();
-
-// 结果
-// 1
-// 2
 ```
 
-**编译阶段**
-
-1. var showName = undefined
-
-2. function showName 替换 showName
-
-**代码执行阶段**
-
-1. showName() 输出 1
-
-2. 重新定义 showName 函数 = function () { console.log(2) };
-
-3. 再次执行 showName() 函数，输出 2
-
-</br>
-</br>
 </br>
 
-### 暂时性死区错误
-
-指虽然通过 let 声明的变量已经在词法环境中了，但是在没有赋值之前，访问该变量 JavaScript 引擎就会抛出该错误
+3. let/const 定义的变量：**仅创建**，并保存在**词法环境**
 
 ```javascript
-let myname = "极客时间";
-{
-    console.log(myname); // 报错：Identifier 'myname' has already been declared
-    let myname = "极客邦";
-}
+console.log(name); // 报错：Cannot access 'name' before initialization
+const name = "Jordan";
 ```
-
-1. var 的创建和初始化被提升，赋值不会被提升
-
-2. function 的创建、初始化和赋值均会被提升
-
-3. let 的创建被提升，初始化和赋值不会被提升
 
 </br>
 </br>
