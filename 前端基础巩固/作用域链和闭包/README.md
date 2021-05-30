@@ -1,5 +1,12 @@
-# 作用域链
+# 作用域链和闭包
 
+</br>
+
+### 作用域
+
+作用域是指**在程序中定义变量的区域，该位置决定了变量的生命周期**，在 JavaScript 中，存在**全局作用域**、**函数作用域**、**块级作用域**
+
+</br>
 </br>
 
 ### 词法作用域
@@ -24,82 +31,84 @@ function b() {}
 // 词法作用域为：
 // c函数作用域 - b函数作用域 - a函数作用域 - 全局作用域
 function a() {
-	function b() {
-		function c() {}
-	}
+    function b() {
+        function c() {}
+    }
 }
 ```
-
-</br>
-</br>
-
-### 作用域
-
-作用域是指**在程序中定义变量的区域，该位置决定了变量的生命周期**，
 
 </br>
 </br>
 
 ### 作用域链
 
-在每个执行上下文的变量环境中，都包含了一个外部引用，用来指向外部的执行上下文，我们把这个**外部引用称为 outer**，outer 的指向规则由**词法作用域**决定，当访问一个变量时：
+在每个执行上下文的变量环境中，都包含了一个**外部引用 outer**，用来指向外部的执行上下文，**outer 的指向规则由词法作用域决定**，当访问一个变量时：
 
-1. 先访问当前执行上下文中，变量环境和词法环境中是否存在该变量
+1. 先访问当前执行上下文中，**变量环境和词法环境中**是否存在该变量
 
 2. 如果不存在，继续根据 outer 的指向继续访问上一个执行上下文中的变量
 
 通过 outer 的不断指向，就会生成一个链条，**该链条就是作用域链**
 
+</br>
+
+#### 案例分析
+
 ```javascript
-function bar() {
-	console.log(myName);
+function showName() {
+    console.log(name);
 }
-function foo() {
-	var myName = "极客邦";
-	bar();
+function init() {
+    const name = "Kobe";
+    showName();
 }
-var myName = "极客时间";
-foo(); // 极客时间
+var name = "Jordan";
+init(); // Jordan
 ```
 
-1. 词法作用域：
-    - bar 函数作用域 - 全局作用域
-    - foo 函数作用域 - 全局作用域
-2. 执行到 bar 函数时，在作用域链条上访问 myName 变量
-3. bar 执行上下文中没有 myName，全局环境中存在，输出：极客时间
+![example-1](./img/example-1.jpg)
+
+1. 根据词法作用域和 outer 指向规则，可以得到如上图所使的两条作用域链
+
+2. 执行到 showName 函数时，在作用域链上访问 name 变量输出：Jordan
 
 </br>
 </br>
 
 ### 闭包
 
-在 JavaScript 中，根据词法作用域的规则，内部函数总是可以访问其外部函数中声明的变量，当通过调用一个外部函数返回一个内部函数后，即使该外部函数已经执行结束了，但是内部函数引用外部函数的变量依然保存在内存中，我们就把这些变量的集合称为闭包
+在 JavaScript 中，根据词法作用域的规则，内部函数总是可以访问其外部函数中声明的变量。**当一个外部函数返回一个内部函数后，执行这个外部函数，即使该外部函数已经执行结束了，但是内部函数依然能访问到外部函数的变量，我们就把这些变量的集合称为闭包**
 
 ```javascript
-function foo() {
-	var myName = "极客时间";
-	let test = 1;
-	var innerBar = {
-		getName: function () {
-			console.log(test);
-			return myName;
-		},
-		setName: function (newName) {
-			myName = newName;
-		},
-	};
-	return innerBar;
+function returnShowName() {
+    var name = "Jordan";
+    const sport = "baseketball";
+    function showName() {
+        console.log(`${name} like ${sport}`);
+    }
+    return showName;
 }
-var bar = foo();
-bar.setName("极客邦");
-bar.getName(); // 1  极客帮
+const func = returnShowName();
+func(); // Jordan like baseketball
 ```
 
-1. 词法作用域：setName/getName —— foo —— 全局作用域
+![example-2](./img/example-2.jpg)
 
-2. 虽然 foo 函数执行完之后，会回收该函数中所定义的变量 myName 和 test，但是根据作用域链规则 getName 和 setName 是可以访问 myName 和 test 变量的
+1. 作用域链：showName —— returnShowName —— 全局作用域
 
-3. 因此 foo 函数执行完之后，通过 bar 继续访问 foo 函数中 myName 和 test 变量就会产生闭包
+2. 虽然 returnShowName 函数执行完之后，会回收该函数中所定义的变量 name 和 sport，但是根据作用域链规则 showName 函数依然能访问到这两个变量，因此输出：Jordan like baseketball，这就产生了闭包
+
+</br>
+
+#### 函数执行完后，为什么没有销毁掉闭包变量？
+
+以上述代码为例：
+
+1. 当内部函数引用了外部函数的变量，JavaScript 引擎会判断这是一个闭包，于是 Javascrpt 会在**堆空间创建一个 “closure(returnShowName)” 的对象**
+
+2. 虽然函数 returnShowName 执行完之后，执行上下文已经被销毁了，但是 “closure(returnShowName)” 的对象还保存在堆内存中
+
+3. 通过 func 方法访问 name 和 sport 变量时，实际是访问 closure(returnShowName) 对象中的 name 和 sport 属性
 
 </br>
 </br>
@@ -107,39 +116,40 @@ bar.getName(); // 1  极客帮
 ### 思考题
 
 ```javascript
-var bar = {
-	myName: "time.geekbang.com",
-	printName: function () {
-		console.log(myName);
-	},
+var person = {
+    name: "Jordan",
+    showName: function () {
+        console.log(name);
+    },
 };
-function foo() {
-	let myName = "极客时间";
-	return bar.printName;
+function init() {
+    const name = "Kobe";
+    return person.showName;
 }
-let myName = "极客邦";
-let printName = foo();
-printName(); // 极客邦
-bar.printName(); // 极客邦
+var name = "Curry";
+const showName = init();
+showName(); // Curry
+person.showName(); // Curry
 ```
 
-1. 根据词法作用域
+1. 根据词法作用域，确定作用域链：
 
-    - foo 函数作用域 —— 全局函数作用域
-    - function () { console.log(myName) } 函数作用域 —— 全局函数作用域
+    - init 函数作用域 —— 全局函数作用域
 
-2. 执行 printName 函数时，function () { console.log(myName) } 函数作用域中不存在 myName 变量，直接返回全局作用域中的 myName 变量
+    - function () { console.log(name); } 函数作用域 —— 全局函数作用域
 
-3. 同理 bar.printName()函数时，function () { console.log(myName) } 函数作用域中不存在 myName 变量，直接返回全局作用域中的 myName 变量
+2. 执行 showName 函数时，function () { console.log(name); } 函数作用域中不存在 name 变量，直接返回全局作用域中的 name 变量
+
+3. 同理执行 person.showName() 函数时，function () { console.log(name); } 函数作用域中不存在 name 变量，直接返回全局作用域中的 name 变量
 
 </br>
 </br>
 
 ### 总结
 
-1. 作用域链是由词法作用域决定的
+1. **作用域链是由词法作用域决定的**
 
-2. 而词法作用域是由代码结构来确定的
+2. **而词法作用域是由代码结构来确定的**
 
 </br>
 </br>
