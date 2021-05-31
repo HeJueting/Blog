@@ -133,18 +133,80 @@ JS 语法编译工具（JSX 编译成 JS，将 ES6 编译成 ES5），由 preset
 </br>
 </br>
 
-### 9、webpack 的工作流程
+### 9、文件指纹
 
-1. 初始化 webpack 配置
+1. Hash：和整个项目的构建相关，只要项目文件有修改，整个项目构建的 hash 值就会更改（A 页面的 JS 变化，B 页面的打包的 JS 名称也会跟着变化）
 
-2. 从 entry 开始递归分析依赖，对每个依赖模块进行 build
+2. Chunkhash：和 webpack 打包的 chunk 有关，不同的 entry 会生成不同的 chunkhash 值（A 页面的 JS 变化，不会引起 B 页面的打包的 JS 名称变化）
+
+3. Contenthash：根据文件内容来定义 hash，文件内容不变，则 contenthash 不变（同一个页面的 JS 文件发生变化，不会影响到该页面的 CSS 打包文件名称改变）
+
+</br>
+</br>
+
+### 10、chunck、moudule、bundle
+
+1. moudule：即模块，在 webpack 中，一切皆模块
+
+2. chunk：多个模块的集合，例如：entry 入口中所有依赖的模块的集合就是一个 chunck
+
+3. bundle：最后打包生成的产物
+
+</br>
+</br>
+
+### 11、webpack 的工作流程
+
+在 webpack4 中，webpack 拆分了一个 webpack-cli 工具出来，主要用来运行 webpack 命令
+
+1. 运行 npm run dev / npm run build 命令打包时，npm 工具会进入到 node_modules/.bin 目录下查找 webpack 命令（局部安装）
+
+2. .bin 命令下的命令实际上是通过每个包中 package.json 的 bin 属性去指定的，webpack 这个命令实际上是执行了 node_modules/webpack/bin/webpack.js 这个 js 文件
+
+```json
+{
+    "bin": {
+        "webpack": "bin/webpack.js"
+    }
+}
+```
+
+3. 运行这个 webpack.js 后，最终会找到 webpack-cli（webpack-command）这个 npm 包，并执行 cli 工具
+
+    - webpack4 中将 webpack 和 webpack-cli 做了分离
+    - webpack-command 是一个比较轻量的 webpack-cli
+
+4. webpack-cli 会对命令进行分析，然后根据我们的 webpack 配置和命令行的一些参数生成一个 options 对象，然后将该对象传递给 webpack，生成一个 compiler 对象
+
+    - webpack init 创建一份 webpack 配置文件
+    - webpack info 返回与本地环境相关的一些信息
+    - webpack help 查看命令帮助
+    - webpack generate-loader 生成 loader 代码
+    - webpack generate-plugin 生成 plugin 代码
+    - ...
+
+```javascript
+// 根据webpack配置和命令行生成的一个对象
+let options = ...;
+// 引用webpack，并创建一个compiler对象
+const webpack = require('webpack');
+compiler = webpack(options);
+```
+
+5. compiler 对象继承于 Tapable，这个类主要控制 webpack 中的钩子函数，也就是用于控制构建流程
+
+    - 在 webpack 源码中运行 plugin 的时候会把这个 complier 对象传递给这个 plugin，让 plugin 可以触发 webpack 中的声明钩子
+
+6. 执行 compiler.run，就会从 entry 开始递归分析每一个依赖并进行构建，构建过程中会利用 loader 将内容进行处理
+
+7. 构建完之后，会有很多钩子，在这些钩子中就可以对构建产物进行优化处理，最后输出构建产物
 
 ...
 
 </br>
 </br>
 
-### 10、webpack 的配置优化
+### 12、webpack 的配置优化
 
 **显示方面优化**
 
