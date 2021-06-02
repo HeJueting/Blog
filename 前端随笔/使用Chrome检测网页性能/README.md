@@ -59,7 +59,7 @@ Lighthouse 是一个开源的自动化工具，用于改进网络应用的质量
 
 </br>
 
-**Metrics：：性能指标的评分**
+**Metrics：：性能指标的统计**
 
 ![metrics](./img/lighthouse-performance-metrics.png)
 
