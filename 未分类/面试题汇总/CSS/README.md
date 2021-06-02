@@ -163,21 +163,21 @@ flex 属性代表 flex-grow，flex-shrink，flex-basis 这三种属性，他有�
 
 ```css
 .test {
-    /* 代表将9个单元格划分为 a b c d e f g h i 共9块区域 */
-    grid-template-areas:
-        "a b c"
-        "d e f"
-        "g h i";
-    /* 代表将9个单元格划分为 a b c 共3块区域 */
-    grid-template-areas:
-        "a a a"
-        "b b b"
-        "c c c";
-    /* 代表将9个单元格划分为 header main sidebar footer 共4块区域 */
-    grid-template-areas:
-        "header header header"
-        "main main sidebar"
-        "footer footer footer";
+	/* 代表将9个单元格划分为 a b c d e f g h i 共9块区域 */
+	grid-template-areas:
+		"a b c"
+		"d e f"
+		"g h i";
+	/* 代表将9个单元格划分为 a b c 共3块区域 */
+	grid-template-areas:
+		"a a a"
+		"b b b"
+		"c c c";
+	/* 代表将9个单元格划分为 header main sidebar footer 共4块区域 */
+	grid-template-areas:
+		"header header header"
+		"main main sidebar"
+		"footer footer footer";
 }
 ```
 
@@ -222,7 +222,7 @@ flex 属性代表 flex-grow，flex-shrink，flex-basis 这三种属性，他有�
 </br>
 </br>
 
-### 页面的回流与重绘
+### 13、页面的回流与重绘
 
 整个渲染流程：构建 DOM 树 ——> 构建 StyleSheets ——> 构建布局树 ——> 划分图层 ——> 图层绘制 ——> 栅格化操作 ——> 显示
 
