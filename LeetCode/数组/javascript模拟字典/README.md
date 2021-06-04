@@ -34,13 +34,13 @@ const map = new Map([
     ["c", { msg: "hello" }],
 ]);
 
-for (item of map) {
+for (let item of map) {
     console.log(item); // ["a", 1], ["b", 2], ["c", { msg: 'hello' }]
 }
-for (item of map.keys()) {
+for (let item of map.keys()) {
     console.log(item); // a, b, c
 }
-for (item of map.values()) {
+for (let item of map.values()) {
     console.log(item); // 1, 2, { msg: 'hello' }
 }
 ```
