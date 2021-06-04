@@ -38,35 +38,44 @@
 
 ```javascript
 /**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
  * }
  */
 /**
- * @param {ListNode} head
- * @return {ListNode}
+ * @param {TreeNode} root
+ * @return {number}
  */
-var reverseList = function (head) {
-    // l表示反转后的链表（初始值为null）
-    let l = null;
-    // p表示需要反转的这个链表的指针
-    let p = head;
-    // 遍历这个p链表
-    while (p) {
-        // 用temp缓存p的下一个节点
-        const temp = p.next;
-        // 将p当前这个节点插入到l链表头部
-        p.next = l;
-        l = p;
-        // p继续指向下一个节点
-        p = temp;
+var maxDepth = function (root) {
+    // 用max用来保存该二叉树的最大深度值
+    let max = 0;
+
+    // 递归遍历这个二叉树
+    // 以参数的形式记录当前树的深度
+    function deep(node, index) {
+        // 递归的终止条件是node不存在
+        if (!node) {
+            return;
+        }
+
+        // 如果max小于index，则更新max
+        max = max < index ? index : max;
+
+        // 下一次递归，树的深度+1
+        deep(node.left, index + 1);
+        deep(node.right, index + 1);
     }
-    return l;
+
+    // 遍历root
+    deep(root, 1);
+
+    return max;
 };
 ```
 
 </br>
 
-**题目来自：[LeetCode-反转链表](https://leetcode-cn.com/problems/reverse-linked-list/)**
+**题目来自：[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/submissions/)**
