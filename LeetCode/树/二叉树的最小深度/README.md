@@ -37,11 +37,6 @@
 
 -   使用深度优先遍历，找到所有叶子节点（left 和 right 为 null 就说明该节点为叶子节点），找到最小值
 
-</br>
-</br>
-
-### 求解
-
 ```javascript
 /**
  * Definition for a binary tree node.

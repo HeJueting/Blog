@@ -25,16 +25,9 @@
 </br>
 </br>
 
-### 思路
+### 思路一
 
--   初始化一个新链表表示反转后的链表
-
--   遍历链表，将每一个节点 **插入到新链表的第一个位置**，其实就是链表插入节点的操作
-
-</br>
-</br>
-
-### 求解
+-   使用深度优先遍历
 
 ```javascript
 /**
@@ -76,6 +69,73 @@ var maxDepth = function (root) {
 };
 ```
 
+</br>
+</br>
+
+### 思路二
+
+-   使用广度优先遍历
+
+```javascript
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+var maxDepth = function (root) {
+    // 如果root不存在，说明层级为0
+    if (!root) {
+        return 0;
+    }
+
+    // 用max来保存最深的节点层级
+    let max = 0;
+
+    // 用队列来保存需要遍历的节点
+    const queue = [
+        {
+            node: root, // 节点
+            index: 1, // 当前节点层级
+        },
+    ];
+
+    while (queue.length) {
+        // 取出队列第一项，获取节点、层级信息
+        const { node, index } = queue[0];
+        // 第一项出队列
+        queue.shift();
+
+        // 得到叶子节点的层级
+        if (!node.left && !node.right) {
+            max = max < index ? index : max;
+        }
+        // 如果不是叶子节点，继续入队列
+        else {
+            node.left &&
+                queue.push({
+                    node: node.left,
+                    index: index + 1,
+                });
+            node.right &&
+                queue.push({
+                    node: node.right,
+                    index: index + 1,
+                });
+        }
+    }
+
+    return max;
+};
+```
+
+</br>
 </br>
 
 **题目来自：[二叉树的最大深度](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/submissions/)**
