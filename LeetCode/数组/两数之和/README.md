@@ -28,7 +28,7 @@
 </br>
 </br>
 
-### 思路
+### 思路一
 
 -   两次 for 循环
 
@@ -44,6 +44,40 @@ function twoSum(nums, target) {
             if (nums[i] + nums[j] === target) {
                 return [i, j];
             }
+        }
+    }
+}
+```
+
+</br>
+</br>
+
+### 思路二
+
+-   先将数组转为 Map 数据结构，值作为 key，位置下标作为 value
+
+-   再遍历数组，判断 map 中是否存在 target - nums[ i ]的数据，如果有
+
+-   注意处理边界情况，target 不能自己与自己相加所得
+
+</br>
+</br>
+
+### 求解
+
+```javascript
+function twoSum(nums, target) {
+    // 将数组转为map数据结构，值作为key，数组下标作为value
+    const map = new Map();
+    nums.forEach((num, index) => {
+        map.set(num, index);
+    });
+    // 遍历原数组，用 target - nums[i] 作为 key，在map数据中查看 map[key] 是否存在
+    for (let i = 0; i < nums.length; i++) {
+        const mapIndex = map.get(target - nums[i]);
+        // 注意：不能将自己与自己相加得到 target
+        if (mapIndex !== undefined && mapIndex !== i) {
+            return [i, map.get(target - nums[i])];
         }
     }
 }
