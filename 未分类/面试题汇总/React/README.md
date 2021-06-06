@@ -265,3 +265,114 @@ hook 本身只是一个函数，没有生命周期的概念，state 和 props �
 
 </br>
 </br>
+
+### 16、hooks 的使用
+
+#### useState
+
+1. useState 的参数如果是函数，返回值会作为 state 的初始值
+
+2. setState 可以传入一个 function， preState 作为参数，返回一个 newState，setState((prevState) => { return newState })
+
+3. 基于 Object.is（浅比较） 来比较 state 的值
+
+```javascript
+[state, setState] = useState(data | function);
+```
+
+</br>
+
+#### useEffect 和 useLayoutEffect
+
+1. 第一个函数参数：可以返回一个清除函数，该清除函数会在下一次 useEffect 执行前执行
+
+2. 第二个依赖参数
+
+    - 依赖变化时，才会触发该函数
+    - 如果传入[]，只在组件第一次加载时触发
+    - 如果不传，则组件加载和更新都会触发
+
+3. useEffect 在浏览器**渲染之后触发**；useLayoutEffect 是**在浏览器渲染之前触发**
+    - 如果是 dom 操作，建议使用 useLayoutEffect 避免 dom 的闪变的效果
+    - 其他操作建议使用 useEffect，否则会阻塞 dom 的渲染
+
+```javascript
+useEffect(() => {
+	subscribe(); // 注册监听事件
+	return () => {
+		unsubscribe(); // 在下一次执行这个useEffect前，取消注册监听事件
+	};
+}, [state]);
+```
+
+</br>
+
+#### useCallback 和 useMemo
+
+1. useCallback 缓存函数
+
+    - 如果将一个 handle 函数传给子组件，那么每次父组件的更新都会引起子组件的更新，因此可以利用 useCallback 来缓存这个函数，并且子组件利用 React.Memo（浅比较 props） 来阻止更新
+
+    - 对于需要大量计算的函数，也可以利用 useCallback 来缓存，传入依赖项来缓存他
+
+2. useMemo 缓存变量
+
+```javascript
+// 缓存函数
+const handleClick = useCallback(() => {
+	// to do list...
+}, []);
+
+// 缓存变量
+const expensive = useMemo(() => {
+	// to do list...
+	return result;
+}, [count]);
+```
+
+</br>
+
+#### useConext 和 useReducer
+
+1. useReducer 接受两个参数，一个 reducer，一个 initState，通过 dispatch(action) 去改变 state
+
+```javascript
+// 使用useReducer
+function reducer(state, action) {
+	switch (action.type) {
+		case "add":
+			return { count: state.count + 1 };
+		case "reduce":
+			return { count: state.count - 1 };
+		default:
+			throw new Error();
+	}
+}
+const [state, dispatch] = useReducer(reducer, { count: 0 });
+// 触发state改变
+dispatch({ type: "add" });
+```
+
+2. useContext
+
+```javascript
+// 创建一个Context
+const Context = React.createContext();
+// 在App组件中，将count变量作为Context传递下去
+function App() {
+	const [count, setCount] = useState(0);
+	return (
+		<Context.Provider value={count}>
+			<Child />
+		</Context.Provider>
+	);
+}
+// 在Child组件中访问Context
+function Child() {
+	const count = useContext(Context);
+	return <p>{count}</p>;
+}
+```
+
+</br>
+</br>
