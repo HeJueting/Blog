@@ -18,3 +18,37 @@ c instanceof Func; // true
 
 </br>
 </br>
+
+### 继承实现
+
+```javascript
+function Func() {
+    Func.prototype.id++;
+    const obj = Object.create(Func.prototype);
+    obj.id = Func.prototype.id;
+    return obj;
+}
+Func.prototype.id = 0;
+```
+
+</br>
+</br>
+
+### 作用域来实现
+
+使用继承的话，Func 上的 id 可能会被修改掉，因此可以使用作用域来实现
+
+```javascript
+const Func = (function () {
+    let id = 0;
+    return function func() {
+        id++;
+        const obj = Object.create(Func.prototype);
+        obj.id = id;
+        return obj;
+    };
+})();
+```
+
+</br>
+</br>
