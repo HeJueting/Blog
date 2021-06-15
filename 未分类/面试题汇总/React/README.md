@@ -217,6 +217,8 @@ hook 本身只是一个函数，没有生命周期的概念，state 和 props �
 
 3. tag 和 key，两者都相同，则认为是相同节点，不再深度比较
 
+4. 如果 tag 相同，属性和内容不同，只更新属性和内容即可
+
 </br>
 </br>
 
@@ -268,6 +270,10 @@ hook 本身只是一个函数，没有生命周期的概念，state 和 props �
 
 ### 16、hooks 的使用
 
+1. 每次更新组件 function 都会执行一次，因此可以借助 useCallback 来缓存一些复杂的函数
+
+2. 避免子组件的不必要渲染，可以借助 React.memo 会浅比较 prop 的值，也可以给第二个参数值传一个函数，类似于 shouldcomponentWillUpdated
+
 #### useState
 
 1. useState 的参数如果是函数，返回值会作为 state 的初始值
@@ -298,10 +304,10 @@ hook 本身只是一个函数，没有生命周期的概念，state 和 props �
 
 ```javascript
 useEffect(() => {
-	subscribe(); // 注册监听事件
-	return () => {
-		unsubscribe(); // 在下一次执行这个useEffect前，取消注册监听事件
-	};
+    subscribe(); // 注册监听事件
+    return () => {
+        unsubscribe(); // 在下一次执行这个useEffect前，取消注册监听事件
+    };
 }, [state]);
 ```
 
@@ -320,13 +326,13 @@ useEffect(() => {
 ```javascript
 // 缓存函数
 const handleClick = useCallback(() => {
-	// to do list...
+    // to do list...
 }, []);
 
 // 缓存变量
 const expensive = useMemo(() => {
-	// to do list...
-	return result;
+    // to do list...
+    return result;
 }, [count]);
 ```
 
@@ -339,14 +345,14 @@ const expensive = useMemo(() => {
 ```javascript
 // 使用useReducer
 function reducer(state, action) {
-	switch (action.type) {
-		case "add":
-			return { count: state.count + 1 };
-		case "reduce":
-			return { count: state.count - 1 };
-		default:
-			throw new Error();
-	}
+    switch (action.type) {
+        case "add":
+            return { count: state.count + 1 };
+        case "reduce":
+            return { count: state.count - 1 };
+        default:
+            throw new Error();
+    }
 }
 const [state, dispatch] = useReducer(reducer, { count: 0 });
 // 触发state改变
@@ -360,17 +366,17 @@ dispatch({ type: "add" });
 const Context = React.createContext();
 // 在App组件中，将count变量作为Context传递下去
 function App() {
-	const [count, setCount] = useState(0);
-	return (
-		<Context.Provider value={count}>
-			<Child />
-		</Context.Provider>
-	);
+    const [count, setCount] = useState(0);
+    return (
+        <Context.Provider value={count}>
+            <Child />
+        </Context.Provider>
+    );
 }
 // 在Child组件中访问Context
 function Child() {
-	const count = useContext(Context);
-	return <p>{count}</p>;
+    const count = useContext(Context);
+    return <p>{count}</p>;
 }
 ```
 
