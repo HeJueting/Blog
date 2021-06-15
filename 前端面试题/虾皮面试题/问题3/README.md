@@ -9,11 +9,11 @@ promise 中并没有 resolve 或者 reject，因此 promise.then 并不会执行
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-	console.log(1);
-	console.log(2);
+    console.log(1);
+    console.log(2);
 });
 promise.then(() => {
-	console.log(3);
+    console.log(3);
 });
 console.log(4);
 // 1 2 4
@@ -32,23 +32,23 @@ console.log(4);
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-	reject("error");
-	resolve("success1");
-	resolve("success2");
+    reject("error");
+    resolve("success1");
+    resolve("success2");
 });
 promise
-	.then((res) => {
-		console.log("then1: ", res);
-	})
-	.then((res) => {
-		console.log("then2: ", res);
-	})
-	.catch((err) => {
-		console.log("catch: ", err);
-	})
-	.then((res) => {
-		console.log("then3: ", res);
-	});
+    .then((res) => {
+        console.log("then1: ", res);
+    })
+    .then((res) => {
+        console.log("then2: ", res);
+    })
+    .catch((err) => {
+        console.log("catch: ", err);
+    })
+    .then((res) => {
+        console.log("then3: ", res);
+    });
 // catch: error
 // then3: undefined
 ```
@@ -66,29 +66,29 @@ promise
 
 ```javascript
 Promise.reject(1)
-	.then((res) => {
-		console.log(res);
-		return 2;
-	})
-	.catch((err) => {
-		console.log(err);
-		return 3;
-	})
-	.then((res) => {
-		console.log(res);
-	});
+    .then((res) => {
+        console.log(res);
+        return 2;
+    })
+    .catch((err) => {
+        console.log(err);
+        return 3;
+    })
+    .then((res) => {
+        console.log(res);
+    });
 // 1 3
 
 Promise.resolve()
-	.then(() => {
-		return new Error("error!!!");
-	})
-	.then((res) => {
-		console.log("then: ", res);
-	})
-	.catch((err) => {
-		console.log("catch: ", err);
-	});
+    .then(() => {
+        return new Error("error!!!");
+    })
+    .then((res) => {
+        console.log("then: ", res);
+    })
+    .catch((err) => {
+        console.log("catch: ", err);
+    });
 // then: Error: error!!!
 ```
 
@@ -101,7 +101,7 @@ Promise.resolve()
 
 ```javascript
 const promise = Promise.resolve().then(() => {
-	return promise;
+    return promise;
 });
 promise.catch(console.err);
 // Uncaught (in promise) TypeError: Chaining cycle detected for promise #<Promise>
@@ -118,13 +118,13 @@ promise.catch(console.err);
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
-	resolve("success");
+    resolve("success");
 });
 promise.then((res) => {
-	console.log(res);
+    console.log(res);
 });
 promise.then((res) => {
-	console.log(res);
+    console.log(res);
 });
 // success
 // success
@@ -136,44 +136,44 @@ Promise.resolve(1).then(2).then(Promise.resolve(3)).then(console.log);
 </br>
 </br>
 
-### 题目五
+### 题目六
 
 .then 方法是能接收两个参数的，第一个是处理成功的函数，第二个是处理失败的函数，**在某些时候你可以认为 catch 是.then 第二个参数的简便写法**
 
 ```javascript
 Promise.reject("err!!!")
-	.then(
-		(res) => {
-			console.log("success", res);
-		},
-		(err) => {
-			console.log("error", err);
-		}
-	)
-	.catch((err) => {
-		console.log("catch", err);
-	});
+    .then(
+        (res) => {
+            console.log("success", res);
+        },
+        (err) => {
+            console.log("error", err);
+        }
+    )
+    .catch((err) => {
+        console.log("catch", err);
+    });
 // error error!!!
 
 Promise.resolve()
-	.then(
-		function success(res) {
-			throw new Error("error!!!");
-		},
-		function fail1(err) {
-			console.log("fail1", err);
-		}
-	)
-	.catch(function fail2(err) {
-		console.log("fail2", err);
-	});
+    .then(
+        function success(res) {
+            throw new Error("error!!!");
+        },
+        function fail1(err) {
+            console.log("fail1", err);
+        }
+    )
+    .catch(function fail2(err) {
+        console.log("fail2", err);
+    });
 // fail2 error!!!
 ```
 
 </br>
 </br>
 
-### 题目五
+### 题目七
 
 .finally 方法也是返回一个 Promise，他在 Promise 结束的时候，无论结果为 resolved 还是 rejected，都会执行里面的回调函数
 
@@ -183,29 +183,74 @@ Promise.resolve()
 
 3. 它最终返回的默认会是一个上一次的 Promise 对象值，不过如果抛出的是一个异常则返回异常的 Promise 对象。
 
+4. **.finally() .catch .then 中定义的回调函数都是一个微任务**，链式调用时，需要等待上一个链式调用的函数执行完成之后，才能加入微任务队列
+
 ```javascript
-Promise.resolve("1")
-	.then((res) => {
-		console.log(res);
-	})
-	.finally(() => {
-		console.log("finally");
-	});
-Promise.resolve("2")
-	.finally(() => {
-		console.log("finally2");
-		return "我是finally2返回的值";
-	})
-	.then((res) => {
-		console.log("finally2后面的then函数", res);
-	});
+function promise1() {
+    let p = new Promise((resolve) => {
+        console.log("promise1");
+        resolve("1");
+    });
+    return p;
+}
+function promise2() {
+    return new Promise((resolve, reject) => {
+        reject("error");
+    });
+}
+promise1()
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+    .then(() => console.log("finally1"));
+
+promise2()
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err))
+    .then(() => console.log("finally2"));
+// promise1
 // 1
+// error
+// finally1
 // finally2
-// finally
-// finally2后面的then函数 2
 ```
 
-https://juejin.cn/post/6844904077537574919#heading-22
+</br>
+</br>
+
+### 题目七
+
+1. .all()的作用是接收一组异步任务，然后并行执行异步任务，并且在所有异步操作执行完后才执行回调。
+
+2. .race()的作用也是接收一组异步任务，然后并行执行异步任务，只保留取第一个执行完成的异步操作的结果，其他的方法仍在执行，不过执行结果会被抛弃。
+
+```javascript
+// Promise.all
+function asyncPromise(x) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(x);
+            resolve(x);
+        }, 1000 * x);
+    });
+}
+
+Promise.all([asyncPromise(1), asyncPromise(2), asyncPromise(3)]).then((res) => {
+    console.log("promise.all：", res);
+});
+// 1  (1s后输出)
+// 2  (2s后输出)
+// 3  (3s后输出)
+// promise.all：[1, 2, 3]
+
+// Promise.race
+Promise.race([asyncPromise(1), asyncPromise(2), asyncPromise(3)]).then((res) => {
+    console.log("promise.race：", res);
+});
+// 1  (1s后输出)
+// promise.race： 1
+// 2  (2s后输出)
+// 3  (3s后输出)
+```
 
 </br>
 </br>
