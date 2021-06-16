@@ -52,7 +52,7 @@ var rob = function (nums) {
     // 初始化arr时，第一项和第二项是可以确定的
     const arr = [0, nums[0]];
 
-    // 从第二项开始遍历
+    // 从第三项开始遍历
     for (let i = 2; i < nums.length + 1; i++) {
         // 根据公式
         arr[i] = Math.max(arr[i - 2] + nums[i - 1], arr[i - 1]);
