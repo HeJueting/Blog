@@ -48,7 +48,7 @@ React Fiber 是对 React 核心算法的一次重新实现，16 版本之前在�
 
 **原理**
 
-此前 React 使用的是 JS 本身的函数调用栈，因此所有会一气呵成执行完所有任务。React Fiber 基于 requestldleCallback 函数（这个 API 能让开发者自行控制函数调用顺序）重新实现了函数调用栈
+此前 React 使用的是 JS 本身的函数调用栈，因此所有会一气呵成执行完所有任务。React Fiber 基于 requestldleCallback 函数（让浏览器空闲期执行任务）
 
 </br>
 </br>
