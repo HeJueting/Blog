@@ -33,3 +33,12 @@
 
 </br>
 </br>
+
+### 3、懒加载
+
+1. getBoundingClientRect：得到它对应于视口左上角的坐标，再判断是否在视口之内，但是每次触发 scroll 事件时计算量很大，容易造成性能问题。
+
+2. IntersectionObserver：监听 dom 元素，dom 元素移入视口和移出时会触发一个它的 callback，里面包含了一些 dom 元素信息
+
+</br>
+</br>
