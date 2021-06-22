@@ -151,7 +151,50 @@
 </br>
 </br>
 
-### 12、浏览器缓存
+### 12、浏览器存储
 
 1. cookie：存储在本地磁盘（存储数据量小）
+
     - session（注意区分 session 机制）：基于 cookie 将 sessionId 存储在本地，然后通过 sessionId 去服务端映射用户信息
+
+2. sessionStorage：当前会话页面一关闭就没有了（同源：协议/域名/端口）
+
+3. localStorage：永久本地缓存（同源：协议/域名/端口）
+
+4. IndexDB：以键值来存储的非关系型数据库，存储量比较大，项目中使用 localForage
+
+5. manifest 离线应用缓存
+
+    - 编写 manifest 文件去告诉浏览器缓存哪些资源
+
+6. servive worker 离线缓存（PWA）
+
+    - 独立开启一个线程
+    - 仅支持 https 协议，本地开发可使用 http 协议
+    - 支持局部更新缓存，且支持更新后立即被页面使用
+    - 可以拦截 fetch 请求和 message 事件，能进行消息推送，默默更新缓存等
+    - 不能操作页面的 DOM
+
+</br>
+</br>
+
+### 13、跨域
+
+1. Jsonp：只支持 get 请求，在 script 标签中加入一个 callback，服务端将响应这个 callback，并把响应的数据作为 callback 的参数
+
+2. Cros 实现跨域：
+
+    - 服务端配置白名单，在请求头中：Access-Control-Allow-origin（允许跨域的源）、Access-Control-Allow-Credentials（是否允许携带 cookie 跨域，但是不能设置为 “\*” ）
+
+    - 简单请求：get、post、head 请求，并且 http 请求头信息也有限制
+
+    - 非简单请求：增加一次 option 预请求，预先询问服务器是否可跨域访问，只有等到肯定答复只会，浏览器才会发出正式的 XMLHttpRequest 请求，否则报错
+
+3. websocket：不受跨域限制
+
+4. nginx： 配置反向代理，让他们同源，解决跨域问题
+
+5. postMessage：用于页面之间的跨域通信
+
+</br>
+</br>

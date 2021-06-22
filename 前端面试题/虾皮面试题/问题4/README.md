@@ -1,46 +1,46 @@
-### 题目描述
+### 题目
 
-1. async 函数的返回值是一个 promise 对象
-
-2. async 函数内部抛出错误，会导致返回的 Promise 对象变为 reject 状态。抛出的错误对象会被 catch 方法回调函数接收到
-
-3. await 命令后面是一个 Promise 对象，返回该对象的结果。如果不是 Promise 对象，就直接返回对应的值
-
-4. 任何一个 await 语句后面的 Promise 对象变为 reject 状态，那么整个 async 函数都会中断执行
+1. async 函数的返回值会默认包装成一个 promise 对象
 
 ```javascript
 async function async1() {
-	console.log("async1 start");
-	await async2();
-	console.log("async1 end");
+    console.log("async1 start");
+    // 第一个微任务
+    await async2();
+    console.log("async1 end");
 }
 async function async2() {
-	console.log("async2 start");
+    console.log("async2 start");
 }
 
 async1();
 
 setTimeout(() => {
-	console.log("setTimeout");
+    // 第一个宏任务
+    console.log("setTimeout");
 });
 
 console.log("script start");
 
 new Promise((resolve, reject) => {
-	console.log("promise start");
-	resolve();
+    console.log("promise start");
+    resolve();
 }).then(() => {
-	console.log("promise end");
+    // 第二个微任务
+    console.log("promise end");
 });
 
 console.log("script end");
 
-// async1 start
-// async2 start
-// script start
-// promise start
-// script end
-// async1 end
-// promise end
-// setTimeout
+// async1 start  （先执行 async1 函数体）
+// async2 start  （再执行 async2 函数体）
+// script start  （执行主函数）
+// promise start （promise 主函数正常顺序执行）
+// script end    （主函数执行完毕）
+// async1 end    （async2由于没有返回值，默认返回一个promise.resolve()，因为await的原因，console.log("async1 end")需要等async2返回的promise.resolve这个微任务执行完之后才能继续执行）
+// promise end   （执行第二个微任务）
+// setTimeout    （执行第一个宏任务）
 ```
+
+</br>
+</br>
