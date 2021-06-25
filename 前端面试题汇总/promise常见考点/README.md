@@ -1,11 +1,11 @@
-# Promise 面试题
+# Promise 常见考点
 
 </br>
 </br>
 
 ### 题目一
 
-promise 中并没有 resolve 或者 reject，因此 promise.then 并不会执行，它只有在被改变了状态之后才会执行。
+如果 promise 中没有 resolve 或者 reject，就不会触发 then 和 catch 方法
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
@@ -26,9 +26,7 @@ console.log(4);
 
 1. Promise 的状态一经改变就不能再改变
 
-2. .then 和.catch 都会返回一个新的 Promise
-
-3. catch 不管被连接到哪里，都能捕获上层未捕捉过的错误
+2. catch 不管被连接到哪里，都能捕获上层未捕捉过的错误
 
 ```javascript
 const promise = new Promise((resolve, reject) => {
@@ -45,12 +43,8 @@ promise
     })
     .catch((err) => {
         console.log("catch: ", err);
-    })
-    .then((res) => {
-        console.log("then3: ", res);
     });
 // catch: error
-// then3: undefined
 ```
 
 </br>
@@ -175,15 +169,15 @@ Promise.resolve()
 
 ### 题目七
 
-.finally 方法也是返回一个 Promise，他在 Promise 结束的时候，无论结果为 resolved 还是 rejected，都会执行里面的回调函数
+1. .finally 方法也是返回一个 Promise，他在 Promise 结束的时候，无论结果为 resolved 还是 rejected，都会执行里面的回调函数
 
-1. .finally()方法不管 Promise 对象最后的状态如何都会执行
+2. .finally 方法不管 Promise 对象最后的状态如何都会执行
 
-2. .finally()方法的回调函数不接受任何的参数，也就是说你在.finally()函数中是没法知道 Promise 最终的状态是 resolved 还是 rejected 的
+3. .finally 方法的回调函数不接受任何的参数，也就是说你在 .finally 函数中是没法知道 Promise 最终的状态是 resolved 还是 rejected 的
 
-3. 它最终返回的默认会是一个上一次的 Promise 对象值，不过如果抛出的是一个异常则返回异常的 Promise 对象。
+4. 它最终返回的默认会是一个上一次的 Promise 对象值，不过如果抛出的是一个异常则返回异常的 Promise 对象。
 
-4. **.finally() .catch .then 中定义的回调函数都是一个微任务**，链式调用时，需要等待上一个链式调用的函数执行完成之后，才能加入微任务队列
+5. **.finally() .catch .then 中定义的回调函数都是一个微任务**，链式调用时，需要等待上一个链式调用的函数执行完成之后，才能加入微任务队列
 
 ```javascript
 function promise1() {
@@ -201,12 +195,12 @@ function promise2() {
 promise1()
     .then((res) => console.log(res))
     .catch((err) => console.log(err))
-    .then(() => console.log("finally1"));
+    .finally(() => console.log("finally1"));
 
 promise2()
     .then((res) => console.log(res))
     .catch((err) => console.log(err))
-    .then(() => console.log("finally2"));
+    .finally(() => console.log("finally2"));
 // promise1
 // 1
 // error
@@ -219,12 +213,9 @@ promise2()
 
 ### 题目八
 
-1. .all()的作用是接收一组异步任务，然后并行执行异步任务，并且在所有异步操作执行完后才执行回调。
-
-2. .race()的作用也是接收一组异步任务，然后并行执行异步任务，只保留取第一个执行完成的异步操作的结果，其他的方法仍在执行，不过执行结果会被抛弃。
+Promise.race() 接收一组异步任务，然后并行执行异步任务，只保留取第一个执行完成的异步操作的结果，其他的方法仍在执行，不过执行结果会被抛弃。
 
 ```javascript
-// Promise.all
 function asyncPromise(x) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -234,15 +225,6 @@ function asyncPromise(x) {
     });
 }
 
-Promise.all([asyncPromise(1), asyncPromise(2), asyncPromise(3)]).then((res) => {
-    console.log("promise.all：", res);
-});
-// 1  (1s后输出)
-// 2  (2s后输出)
-// 3  (3s后输出)
-// promise.all：[1, 2, 3]
-
-// Promise.race
 Promise.race([asyncPromise(1), asyncPromise(2), asyncPromise(3)]).then((res) => {
     console.log("promise.race：", res);
 });
