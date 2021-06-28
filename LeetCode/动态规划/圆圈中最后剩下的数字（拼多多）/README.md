@@ -1,4 +1,4 @@
-# 圆圈中最后剩下的数字
+# 圆圈中最后剩下的数字（拼多多）
 
 </br>
 
@@ -8,7 +8,7 @@
 
 例如，0、1、2、3、4 这 5 个数字组成一个圆圈，从数字 0 开始每次删除第 3 个数字，则删除的前 4 个数字依次是 2、0、4、1，因此最后剩下的数字是 3。
 
-```javascript
+````javascript
 // 示例 1
 输入: n = 5, m = 3
 输出: 3
@@ -70,7 +70,7 @@ var lastRemaining = function(n, m) {
     const res = deep(array, m);
     return res;
 };
-```
+````
 
 </br>
 </br>
@@ -81,15 +81,15 @@ f(M, N) = ( f(M−1, N) + N ) % M
 
 ```javascript
 function lastRemaining(m, n) {
-	// 只有 1 个人的时候，那个人就是获胜者，他的下标位置是 0
-	let p = 0;
+    // 只有 1 个人的时候，那个人就是获胜者，他的下标位置是 0
+    let p = 0;
 
-	// 从 n=2 开始遍历
-	for (let i = 2; i <= m; i++) {
-		// 根据约瑟夫环的公式
-		p = (p + n) % i;
-	}
-	return p;
+    // 从 n=2 开始遍历
+    for (let i = 2; i <= m; i++) {
+        // 根据约瑟夫环的公式
+        p = (p + n) % i;
+    }
+    return p;
 }
 ```
 
