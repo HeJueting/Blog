@@ -8,7 +8,7 @@
 
 例如，0、1、2、3、4 这 5 个数字组成一个圆圈，从数字 0 开始每次删除第 3 个数字，则删除的前 4 个数字依次是 2、0、4、1，因此最后剩下的数字是 3。
 
-````javascript
+```javascript
 // 示例 1
 输入: n = 5, m = 3
 输出: 3
@@ -27,11 +27,6 @@
 这种解决方案，当 m 和 n 过于庞大之后会存在栈溢出的问题
 
 ```javascript
-/**
- * @param {number} n
- * @param {number} m
- * @return {number}
- */
 var lastRemaining = function(n, m) {
     // 先将n转化为一个数组
     const array = [];
@@ -70,14 +65,14 @@ var lastRemaining = function(n, m) {
     const res = deep(array, m);
     return res;
 };
-````
+```
 
 </br>
 </br>
 
 ### 约瑟夫环
 
-f(M, N) = ( f(M−1, N) + N ) % M
+**公式：f(M, N) = ( f(M−1, N) + N ) % M**
 
 ```javascript
 function lastRemaining(m, n) {

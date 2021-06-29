@@ -33,7 +33,7 @@ F(n) = F(n - 1) + F(n - 2)，其中 n > 1
 </br>
 </br>
 
-### 递归求解
+### 求解
 
 ```javascript
 function fib(n) {
@@ -45,6 +45,7 @@ function fib(n) {
 }
 ```
 
+</br>
 </br>
 
 **题目来自：[LeetCode-斐波那契数](https://leetcode-cn.com/problems/fibonacci-number/)**
