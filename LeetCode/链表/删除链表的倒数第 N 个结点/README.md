@@ -25,34 +25,22 @@
 
 ### 注意
 
--   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
+1. 在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
--   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
+2. 在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
 </br>
 </br>
 
 ### 求解一
 
--   遍历链表，得到其长度
+1. 遍历链表，得到其长度
 
--   根据链表长度和 n 得到被删除的前一个节点，p.next = p.next.next 进行删除即可
+2. 根据链表长度和 n 得到被删除的前一个节点，p.next = p.next.next 进行删除即可
 
--   注意处理删除第一个节点这种临界情况（n = 链表长度）
+3. 注意处理删除第一个节点这种临界情况（n = 链表长度）
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @param {number} n
- * @return {ListNode}
- */
 var removeNthFromEnd = function (head, n) {
     // 先计算链表的长度
     let length = 0;
@@ -86,25 +74,13 @@ var removeNthFromEnd = function (head, n) {
 
 ### 求解二
 
--   利用栈先入后出的特性来解决
+1. 利用栈先入后出的特性来解决
 
--   链表节点先依次入栈，再根据 n 依次出栈，出栈 n 个节点之后，数组的最后一项刚好是被删除的前一个节点
+2. 链表节点先依次入栈，再根据 n 依次出栈，出栈 n 个节点之后，数组的最后一项刚好是被删除的前一个节点
 
--   注意处理删除第一个节点这种临界情况（出栈后，数组为空）
+3. 注意处理删除第一个节点这种临界情况（出栈后，数组为空）
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @param {number} n
- * @return {ListNode}
- */
 var removeNthFromEnd = function (head, n) {
     // 利用栈先入后出的特性来解决，arr用来存储链表的所有节点
     const arr = [];
@@ -136,23 +112,11 @@ var removeNthFromEnd = function (head, n) {
 
 ### 求解三
 
--   定义两个指针，他们位置之差就是 n
+1. 定义两个指针，他们位置之差就是 n
 
--   当快指针指向末端时，慢指针恰好指向被删除的节点
+2. 当快指针指向末端时，慢指针恰好指向被删除的节点
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val, next) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.next = (next===undefined ? null : next)
- * }
- */
-/**
- * @param {ListNode} head
- * @param {number} n
- * @return {ListNode}
- */
 var removeNthFromEnd = function (head, n) {
     // 定义一快一慢两个指针
     let fir = head;

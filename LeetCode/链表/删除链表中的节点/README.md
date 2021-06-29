@@ -23,9 +23,9 @@
 
 ### 注意
 
--   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
+1. 在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
--   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
+2. 在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
 </br>
 </br>
@@ -33,17 +33,6 @@
 ### 求解
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-/**
- * @param {ListNode} node
- * @return {void} Do not return anything, modify node in-place instead.
- */
 var deleteNode = function (node) {
     // 将下一个obj直接赋值给了被删除的整个obj
     node.val = node.next.val;

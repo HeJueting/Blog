@@ -21,18 +21,18 @@
 
 ### 注意
 
--   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
+1. 在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
--   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
+2. 在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
 </br>
 </br>
 
 ### 求解一
 
--   声明一个 arr 保存不重复数字的数组
+1. 声明一个 arr 保存不重复数字的数组
 
--   再根据这个 arr 数组生成新的链表
+2. 再根据这个 arr 数组生成新的链表
 
 ```javascript
 /**
@@ -82,20 +82,9 @@ var deleteDuplicates = function (head) {
 
 ### 求解二
 
--   这是一个顺序链表，只要前一个节点跟后一个节点相同就可以移除后一个节点
+1. 这是一个顺序链表，只要前一个节点跟后一个节点相同就可以移除后一个节点
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-/**
- * @param {ListNode} node
- * @return {void} Do not return anything, modify node in-place instead.
- */
 var deleteDuplicates = function (head) {
     let p = head;
     while (p && p.next) {
@@ -113,6 +102,7 @@ var deleteDuplicates = function (head) {
 };
 ```
 
+</br>
 </br>
 
 **题目来自：[LeetCode-删除排序链表中的重复元素](https://leetcode-cn.com/problems/remove-duplicates-from-sorted-list/)**

@@ -25,18 +25,18 @@
 
 ### 注意
 
--   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
+1. 在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
--   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
+2. 在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
 </br>
 </br>
 
 ### 思路
 
--   遍历链表，并将链表转为数组
+1. 遍历链表，并将链表转为数组
 
--   数组从前后往中间进行遍历判断
+2. 数组从前后往中间进行遍历判断
 
 </br>
 </br>
@@ -44,17 +44,6 @@
 ### 求解
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-/**
- * @param {ListNode} head
- * @return {boolean}
- */
 var isPalindrome = function (head) {
     // 将链表转为数组
     let p = head;
@@ -74,6 +63,7 @@ var isPalindrome = function (head) {
 };
 ```
 
+</br>
 </br>
 
 **题目来自：[LeetCode-回文链表](https://leetcode-cn.com/problems/palindrome-linked-list/)**

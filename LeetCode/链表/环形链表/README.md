@@ -11,18 +11,18 @@
 
 ### 注意
 
--   在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
+1. 在 JavaScript 中，我们可以利用 Object 属性的指向来模拟链表操作
 
--   在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
+2. 在 leetcode 中，**多留意代码块中的注释内容，Definition 后面定义的函数或变量是可以直接使用的**
 
 </br>
 </br>
 
 ### 思路
 
--   两个人在圆形操场上的起点同时起跑，速度快的人一定会超过速度慢的人一圈
+1. 两个人在圆形操场上的起点同时起跑，速度快的人一定会超过速度慢的人一圈
 
--   用一快一慢两个指针遍历链表，如果指针能够相逢，那么链表就有圈
+2. 用一快一慢两个指针遍历链表，如果指针能够相逢，那么链表就有圈
 
 </br>
 </br>
@@ -30,18 +30,6 @@
 ### 求解
 
 ```javascript
-/**
- * Definition for singly-linked list.
- * function ListNode(val) {
- *     this.val = val;
- *     this.next = null;
- * }
- */
-
-/**
- * @param {ListNode} head
- * @return {boolean}
- */
 var hasCycle = function (head) {
     // 定义两个指针同时参与遍历，一快一慢
     let p1 = head;
