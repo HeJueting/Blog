@@ -103,8 +103,6 @@ var partition = function (head, x) {
         lp.next = location;
     }
 
-    console.log(l);
-
     return l;
 };
 ```
