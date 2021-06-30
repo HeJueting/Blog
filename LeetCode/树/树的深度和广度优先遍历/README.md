@@ -55,7 +55,7 @@ deep(tree); // A B D E C F G
 
 ### 广度优先遍历
 
-![depth](./img/span.jpg)
+![span](./img/span.jpg)
 
 1. 新建一个队列，把根节点入队
 

@@ -6,24 +6,19 @@
 
 给定一棵二叉搜索树，请找出其中第 k 大的节点
 
-**示例 1：**
-
-```
-输入: root = [3,1,4,null,2], k = 1
+```javascript
+// 示例 1
+// 输入: root = [3,1,4,null,2], k = 1
+// 输出: 4
    3
   / \
  1   4
   \
    2
-输出: 4
-```
 
-</br>
-
-**示例 2：**
-
-```
-输入: root = [5,3,6,2,4,null,null,1], k = 3
+// 示例 2
+// 输入: root = [5,3,6,2,4,null,null,1], k = 3
+// 输出: 4
        5
       / \
      3   6
@@ -31,7 +26,6 @@
    2   4
   /
  1
-输出: 4
 ```
 
 </br>
@@ -39,9 +33,9 @@
 
 ### 思路
 
--   遍历这个二叉树，将起节点数值存到数组中
+1. 遍历这个二叉树，将起节点数值存到数组中
 
--   对这个数组排序，再取出第 K 大的值
+2. 对这个数组排序，再取出第 K 大的值
 
 </br>
 </br>
@@ -84,4 +78,4 @@ var kthLargest = function (root, k) {
 </br>
 </br>
 
-**题目来自：[二叉搜索树的第 k 大节点](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/)**
+**题目来自：[LeetCode-二叉搜索树的第 k 大节点](https://leetcode-cn.com/problems/er-cha-sou-suo-shu-de-di-kda-jie-dian-lcof/)**

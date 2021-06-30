@@ -10,32 +10,27 @@
 
 说明： 叶子节点是指没有子节点的节点。
 
-**示例 1：**
-
-```
+```javascript
+// 示例 1
+// 输入：root = [3,9,20,null,null,15,7]
+// 输出：2
     3
    / \
   9  20
     /  \
    15   7
+
+// 示例 2
+// 输入：root = [2,null,3,null,4,null,5,null,6]
+// 输出：5
 ```
 
-输入：root = [3,9,20,null,null,15,7]
-输出：2
-
-</br>
-
-**示例 2：**
-
-输入：root = [2,null,3,null,4,null,5,null,6]
-输出：5
-
 </br>
 </br>
 
-### 思路一
+### 求解一
 
--   使用深度优先遍历，找到所有叶子节点（left 和 right 为 null 就说明该节点为叶子节点），找到最小值
+使用深度优先遍历，找到所有叶子节点（left 和 right 为 null 就说明该节点为叶子节点），找到最小值
 
 ```javascript
 /**
@@ -84,9 +79,9 @@ var minDepth = function (root) {
 </br>
 </br>
 
-### 思路二
+### 求解二
 
--   使用广度优先遍历，只要在某一层找到了叶子节点，就说明这是最小深度
+使用广度优先遍历，只要在某一层找到了叶子节点，就说明这是最小深度
 
 ```javascript
 /**
@@ -143,4 +138,4 @@ var minDepth = function (root) {
 </br>
 </br>
 
-**题目来自：[二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)**
+**题目来自：[LeetCode-二叉树的最小深度](https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/)**
