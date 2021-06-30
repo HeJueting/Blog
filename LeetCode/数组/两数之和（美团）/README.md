@@ -28,14 +28,9 @@
 </br>
 </br>
 
-### 思路一
+### 求解一
 
--   两次 for 循环
-
-</br>
-</br>
-
-### 求解
+1.  两次 for 循环
 
 ```javascript
 function twoSum(nums, target) {
@@ -52,18 +47,13 @@ function twoSum(nums, target) {
 </br>
 </br>
 
-### 思路二
+### 求解二
 
--   先将数组转为 Map 数据结构，值作为 key，位置下标作为 value
+1.  先将数组转为 Map 数据结构，值作为 key，位置下标作为 value
 
--   再遍历数组，判断 map 中是否存在 target - nums[ i ]的数据，如果有
+2.  再遍历数组，判断 map 中是否存在 target - nums[ i ]的数据，如果有
 
--   注意处理边界情况，target 不能自己与自己相加所得
-
-</br>
-</br>
-
-### 求解
+3.  注意处理边界情况，target 不能自己与自己相加所得
 
 ```javascript
 function twoSum(nums, target) {

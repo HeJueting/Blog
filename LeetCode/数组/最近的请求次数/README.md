@@ -31,11 +31,11 @@ recentCounter.ping(3002);  // requests = [1, 100, 3001, 3002]，范围是 [2,300
 
 ### 思路
 
--   利用队列先入先出的特性
+1. 利用队列先入先出的特性
 
--   先让传入的 t 入列队，然后不断遍历队列的第一项，如果小于 t-3000 就让第一项出队列
+2. 先让传入的 t 入列队，然后不断遍历队列的第一项，如果小于 t-3000 就让第一项出队列
 
--   最后队列的长度就是符合要求的请求数量
+3. 最后队列的长度就是符合要求的请求数量
 
 </br>
 </br>
@@ -61,6 +61,7 @@ RecentCounter.prototype.ping = function (t) {
 };
 ```
 
+</br>
 </br>
 
 **题目来自：[LeetCode-最近的请求次数](https://leetcode-cn.com/problems/number-of-recent-calls/)**

@@ -23,19 +23,19 @@
 
 ```javascript
 var majorityElement = function (nums) {
-	let map = new Map();
-	for (let i = 0; i < nums.length; i++) {
-		let key = nums[i];
-		if (map.has(key)) {
-			map.set(key, map.get(key) + 1);
-		} else {
-			map.set(key, 1);
-		}
-		// 如果次数超过一半，直接return
-		if (map.get(key) > nums.length / 2) {
-			return key;
-		}
-	}
+    let map = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        let key = nums[i];
+        if (map.has(key)) {
+            map.set(key, map.get(key) + 1);
+        } else {
+            map.set(key, 1);
+        }
+        // 如果次数超过一半，直接return
+        if (map.get(key) > nums.length / 2) {
+            return key;
+        }
+    }
 };
 ```
 
@@ -50,12 +50,12 @@ var majorityElement = function (nums) {
 
 ```javascript
 var majorityElement = function (nums) {
-	nums = nums.sort((a, b) => a - b);
-    return nums[Math.floor(nums.length / 2)]
+    nums = nums.sort((a, b) => a - b);
+    return nums[Math.floor(nums.length / 2)];
 };
 ```
 
 </br>
 </br>
 
-**题目来自：[LeetCode-两数之和](https://leetcode-cn.com/problems/two-sum/)**
+**题目来自：[LeetCode-数组中出现次数超过一半的数字](https://leetcode-cn.com/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/)**

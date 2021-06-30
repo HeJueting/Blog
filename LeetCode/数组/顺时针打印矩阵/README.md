@@ -29,43 +29,46 @@
     - 从右到左
     - 从左到上
 
+</br>
+</br>
+
 ### 求解
 
 ```javascript
 var spiralOrder = function (matrix) {
-	let result = [];
-	// 顺时针遍历的同时，不断删除已经遍历的元素，直到二维数组为空
-	while (matrix.length) {
-		// 左 ——> 右
-		result = result.concat(matrix[0]); // 将第一行顺序放入到result中
-		matrix.splice(0, 1); // 删除第一行
+    let result = [];
+    // 顺时针遍历的同时，不断删除已经遍历的元素，直到二维数组为空
+    while (matrix.length) {
+        // 左 ——> 右
+        result = result.concat(matrix[0]); // 将第一行顺序放入到result中
+        matrix.splice(0, 1); // 删除第一行
 
-		// 右 ——> 下
-		for (let i = 0; i < matrix.length; i++) {
-			result.push(matrix[i][matrix[i].length - 1]); // push这个元素
-			matrix[i].splice(matrix[i].length - 1, 1); // 删除这个元素
-		}
-		// 如果每一行的元素为空了，跳出循环
-		if (matrix[0] && !matrix[0].length) {
-			break;
-		}
+        // 右 ——> 下
+        for (let i = 0; i < matrix.length; i++) {
+            result.push(matrix[i][matrix[i].length - 1]); // push这个元素
+            matrix[i].splice(matrix[i].length - 1, 1); // 删除这个元素
+        }
+        // 如果每一行的元素为空了，跳出循环
+        if (matrix[0] && !matrix[0].length) {
+            break;
+        }
 
-		// 下 ——> 左
-		result = result.concat((matrix[matrix.length - 1] || []).reverse()); // 将最后一行逆序放入到result中
-		matrix.splice(matrix.length - 1, 1); // 删除最后一行
+        // 下 ——> 左
+        result = result.concat((matrix[matrix.length - 1] || []).reverse()); // 将最后一行逆序放入到result中
+        matrix.splice(matrix.length - 1, 1); // 删除最后一行
 
-		// 左 ——> 上
-		for (let i = matrix.length - 1; i >= 0; i--) {
-			result.push(matrix[i][0]); // push这个元素
-			matrix[i].splice(0, 1); // 删除这个元素
-		}
-		// 如果每一行的元素为空了，跳出循环
-		if (matrix[0] && !matrix[0].length) {
-			break;
-		}
-	}
+        // 左 ——> 上
+        for (let i = matrix.length - 1; i >= 0; i--) {
+            result.push(matrix[i][0]); // push这个元素
+            matrix[i].splice(0, 1); // 删除这个元素
+        }
+        // 如果每一行的元素为空了，跳出循环
+        if (matrix[0] && !matrix[0].length) {
+            break;
+        }
+    }
 
-	return result;
+    return result;
 };
 ```
 

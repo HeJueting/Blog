@@ -26,13 +26,18 @@
 </br>
 </br>
 
-### 求解
+### 思路
 
 1. 用 min 记录下当前最小的值
 
 2. 用 max 记录下当前最大的值
 
 3. 如果 prices[i] - min > max 就更新 max
+
+</br>
+</br>
+
+### 求解
 
 ```javascript
 var maxProfit = function (prices) {

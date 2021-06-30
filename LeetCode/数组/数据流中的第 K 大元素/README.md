@@ -32,5 +32,6 @@ function findKthLargest(nums, k) {
 由于 JS 的 Array 对象自带 sort 方法，变将这个问题直接简化
 
 </br>
+</br>
 
 **题目来自：[LeetCode-数组中的第 K 个最大元素](https://leetcode-cn.com/problems/kth-largest-element-in-an-array/)**

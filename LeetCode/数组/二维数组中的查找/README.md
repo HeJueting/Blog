@@ -23,17 +23,22 @@
 </br>
 </br>
 
-### 求解一
+### 思路
 
-1. 两次 for 循环遍历
+1.  两次 for 循环遍历
 
-2. 注意几个临界条件
+2.  注意几个临界条件
 
-    - 如果 matrix[i][0] > target，说明这一行都不会存在
+    -   如果 matrix[i][0] > target，说明这一行都不会存在
 
-    - 如果 matrix[i]matrix[i].length - 1] < target，说明这一行都不会存在 target
+    -   如果 matrix[i]matrix[i].length - 1] < target，说明这一行都不会存在 target
 
-    - 如果 matrix[i][j] > target，说明这一行剩下的元素不会存在 target
+    -   如果 matrix[i][j] > target，说明这一行剩下的元素不会存在 target
+
+</br>
+</br>
+
+### 求解
 
 ```javascript
 /**
