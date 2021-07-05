@@ -19,15 +19,15 @@ const app = new Koa();
 
 // 中间件 one
 async function one(ctx, next) {
-	console.log("one before next");
-	await next();
-	console.log("one after next");
+    console.log("one before next");
+    await next();
+    console.log("one after next");
 }
 // 中间件 two
 async function two(ctx, next) {
-	console.log("two before next");
-	await next();
-	console.log("two after next");
+    console.log("two before next");
+    await next();
+    console.log("two after next");
 }
 
 // 使用 one、two 两个中间件
@@ -35,8 +35,8 @@ app.use(one);
 app.use(two);
 
 app.use(async (ctx) => {
-	console.log("request url:", ctx.url);
-	ctx.body = "Hello World";
+    console.log("request url:", ctx.url);
+    ctx.body = "Hello World";
 });
 
 app.listen(3000);
@@ -68,15 +68,15 @@ app.listen(3000);
 ```javascript
 // 中间件 one
 async function one(ctx, next) {
-	ctx.one = "one";
-	await next();
-	console.log("ctx.two：", ctx.two);
+    ctx.one = "one";
+    await next();
+    console.log("ctx.two：", ctx.two);
 }
 // 中间件 two
 async function two(ctx, next) {
-	ctx.two = "two";
-	await next();
-	console.log("ctx.one：", ctx.one);
+    ctx.two = "two";
+    await next();
+    console.log("ctx.one：", ctx.one);
 }
 
 // ctx.one： one
@@ -92,17 +92,17 @@ async function two(ctx, next) {
 
 ```javascript
 function one() {
-	console.log("one before next");
-	two();
-	console.log("one after next");
+    console.log("one before next");
+    two();
+    console.log("one after next");
 }
 function two() {
-	console.log("two before next");
-	three();
-	console.log("two after next");
+    console.log("two before next");
+    three();
+    console.log("two after next");
 }
 function three() {
-	console.log("three");
+    console.log("three");
 }
 one();
 
@@ -122,37 +122,37 @@ one();
 
 ```javascript
 function one(next) {
-	console.log("one before next");
-	next();
-	console.log("one after next");
+    console.log("one before next");
+    next();
+    console.log("one after next");
 }
 function two(next) {
-	console.log("two before next");
-	next();
-	console.log("two after next");
+    console.log("two before next");
+    next();
+    console.log("two after next");
 }
 function three(next) {
-	console.log("three");
+    console.log("three");
 }
 
 // 接收并执行多个中间件
 function runMiddleware(middlewares) {
-	// 标识当前执行到哪一个中间件了
-	var index = -1;
-	// 链式调用的 next 方法
-	function next() {
-		// 当所有的中间件已经执行完成，结束递归
-		if (index === middlewares.length - 1) {
-			return;
-		}
-		// 执行下一个中间件
-		index++;
-		// 获取对应的中间件函数
-		var fn = middlewares[index];
-		// 递归执行这些中间件
-		fn(next);
-	}
-	next();
+    // 标识当前执行到哪一个中间件了
+    var index = -1;
+    // 链式调用的 next 方法
+    function next() {
+        // 当所有的中间件已经执行完成，结束递归
+        if (index === middlewares.length - 1) {
+            return;
+        }
+        // 执行下一个中间件
+        index++;
+        // 获取对应的中间件函数
+        var fn = middlewares[index];
+        // 递归执行这些中间件
+        fn(next);
+    }
+    next();
 }
 runMiddleware([one, two, three]);
 ```
@@ -170,47 +170,47 @@ runMiddleware([one, two, three]);
 
 ```javascript
 function setName(ctx, next) {
-	console.log("setName before next，ctx:", ctx);
-	ctx.name = "hejueting";
-	next();
-	console.log("setName after next，ctx:", ctx);
+    console.log("setName before next，ctx:", ctx);
+    ctx.name = "hejueting";
+    next();
+    console.log("setName after next，ctx:", ctx);
 }
 function setAge(ctx, next) {
-	console.log("setAge before next，ctx:", ctx);
-	ctx.age = 25;
-	next();
-	console.log("setAge after next，ctx:", ctx);
+    console.log("setAge before next，ctx:", ctx);
+    ctx.age = 25;
+    next();
+    console.log("setAge after next，ctx:", ctx);
 }
 function app() {
-	// 保存中间件
-	var middlewares = [];
-	// 作用于所有中间件的 ctx 变量
-	var ctx = {};
-	// 标识当前执行到哪一个中间件了
-	var index = -1;
+    // 保存中间件
+    var middlewares = [];
+    // 作用于所有中间件的 ctx 变量
+    var ctx = {};
+    // 标识当前执行到哪一个中间件了
+    var index = -1;
 
-	function onion() {
-		// 链式调用的 next 方法
-		function next() {
-			// 当所有的中间件已经执行完成，结束递归
-			if (index === middlewares.length - 1) {
-				return;
-			}
-			// 执行下一个中间件
-			index++;
-			// 获取对应的中间件函数
-			var fn = middlewares[index];
-			// 递归执行这些中间件
-			fn(ctx, next);
-		}
-		next();
-	}
-	// 每当调用 use 方法时，就将传入中间件保存在 middlewares 中
-	onion.use = function (mid) {
-		middlewares.push(mid);
-	};
+    function onion() {
+        // 链式调用的 next 方法
+        function next() {
+            // 当所有的中间件已经执行完成，结束递归
+            if (index === middlewares.length - 1) {
+                return;
+            }
+            // 执行下一个中间件
+            index++;
+            // 获取对应的中间件函数
+            var fn = middlewares[index];
+            // 递归执行这些中间件
+            fn(ctx, next);
+        }
+        next();
+    }
+    // 每当调用 use 方法时，就将传入中间件保存在 middlewares 中
+    onion.use = function (mid) {
+        middlewares.push(mid);
+    };
 
-	return onion;
+    return onion;
 }
 var onion = app();
 onion.use(setName);
@@ -239,40 +239,40 @@ onion();
 ```javascript
 const compose = require("koa-compose");
 module.exports = class Application extends Emitter {
-	constructor() {
-		// 1. 声明一个 middleware 变量用于保存中间件
-		this.middleware = [];
-	}
+    constructor() {
+        // 1. 声明一个 middleware 变量用于保存中间件
+        this.middleware = [];
+    }
 
-	// 2. 通过 use 方法将所使用的这些中间件 fn 保存在数组里面
-	use(fn) {
-		this.middleware.push(fn);
-		// 这里返回 this，表示我们可以链式调用 use 方法去添加中间件
-		// app.use(one).use(two)
-		return this;
-	}
+    // 2. 通过 use 方法将所使用的这些中间件 fn 保存在数组里面
+    use(fn) {
+        this.middleware.push(fn);
+        // 这里返回 this，表示我们可以链式调用 use 方法去添加中间件
+        // app.use(one).use(two)
+        return this;
+    }
 
-	// 3、启动 HTTP 服务器并监听请求连接
-	listen(...args) {
-		const server = http.createServer(this.callback());
-		return server.listen(...args);
-	}
+    // 3、启动 HTTP 服务器并监听请求连接
+    listen(...args) {
+        const server = http.createServer(this.callback());
+        return server.listen(...args);
+    }
 
-	// 4、callback的返回值是一个函数
-	callback() {
-		// 5、传入这些中间件函数，通过 compose 函数包裹，最后生成一个 fn
-		const fn = compose(this.middleware);
-		return (req, res) => {
-			// 6、每次请求连接，都会创建一个ctx，并执行 this.handleRequest 方法，最后返回其结果
-			const ctx = this.createContext(req, res);
-			return this.handleRequest(ctx, fn);
-		};
-	}
+    // 4、callback的返回值是一个函数
+    callback() {
+        // 5、传入这些中间件函数，通过 compose 函数包裹，最后生成一个 fn
+        const fn = compose(this.middleware);
+        return (req, res) => {
+            // 6、每次请求连接，都会创建一个ctx，并执行 this.handleRequest 方法，最后返回其结果
+            const ctx = this.createContext(req, res);
+            return this.handleRequest(ctx, fn);
+        };
+    }
 
-	handleRequest(ctx, fnMiddleware) {
-		// 7、执行 callback 中生成的 fn 函数
-		return fnMiddleware(ctx).then(handleResponse).catch(onerror);
-	}
+    handleRequest(ctx, fnMiddleware) {
+        // 7、执行 callback 中生成的 fn 函数
+        return fnMiddleware(ctx).then(handleResponse).catch(onerror);
+    }
 };
 ```
 
@@ -290,46 +290,45 @@ module.exports = class Application extends Emitter {
 因此，洋葱模型的设计的关键点就在于 compose 函数。
 
 ```javascript
-// koa 的中间件支持异步操作，因此
+// 1、compose 函数接收多个中间件，返回一个函数
 function compose(middleware) {
-	// 1. compose 函数返回了一个执行函数，该执行函数的所有返回均是一个 Promise
-	return function (context, next) {
-		// 2、用 index 标识执行到了第几个中间件
-		let index = -1;
+    // 2、从 application.js 源码中的 fnMiddleware(ctx).then 处可以发现，该函数应该返回一个 Promise
+    return function (context, next) {
+        // 3、用 index 标识执行到了第几个中间件
+        let index = -1;
 
-		// 3、dispatch 函数用于链式执行所有中间件函数
-		function dispatch(i) {
-			// 4、更新 index 标识
-			index = i;
+        // 4、用于中间件链式调用的 next 函数，由于 koa 中间件都是通过 await next() 去按序执行，因此该函数也应该返回一个 Promise
+        function dispatch(i) {
+            // 5、更新 index 标识
+            // 6、注意区分我们使用的 index++，如果使用 i 来更新，可以指定从哪个中间件开始执行
+            index = i;
 
-			// 5、获取中间件传入的函数
-			let fn = middleware[i];
+            // 7、获取中间件传入的函数
+            let fn = middleware[i];
 
-			// 6、当所有中间件执行完成后
-			if (i === middleware.length) fn = next;
+            // 8、当所有中间件执行完成后
+            if (i === middleware.length) fn = next;
 
-			// 7、传入的中间件必须是一个函数，否则直接结束后续逻辑执行
-			if (!fn) return Promise.resolve();
+            // 9、传入的中间件必须是一个函数，否则直接结束后续逻辑执行
+            if (!fn) return Promise.resolve();
 
-			// 8、执行这个 fn 中间件函数，又将 dispatch 函数作为 next 参数传入
-			return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
-		}
+            // 10、执行这个 middleware[i] 中间件函数，又将 dispatch 函数作为 next 参数传入
+            // 11、注意：这里使用 bind 会返回一个新的函数，并将 i+1 作为参数传递下去，如果只传入 dispatch，则没有办法将 i+1 传递下去
+            return Promise.resolve(fn(context, dispatch.bind(null, i + 1)));
+        }
 
-		// 从第一个中间件开始执行
-		return dispatch(0);
-	};
+        // 12、从第一个中间件开始执行，执行完后会返回一个 Promise
+        return dispatch(0);
+    };
 }
 ```
 
-对于源码中第 8 的步骤的代码可能有些青涩，我们可以将其等价转换一下：
+</br>
+</br>
 
-```javascript
-return Promise.resolve(
-    middleware1(context, return Promise(
-        middleware1
-    ))
-)
-```
+### 总结
+
+慢慢梳理下来，发现洋葱模型并没有想象中那么有难度。不由想到了一句调侃 “面试造火箭，工作拧螺丝”，所谓的 “火箭”，其实在我们事后的学习中会发现不是不会，而是不了解。
 
 </br>
 </br>
