@@ -56,7 +56,7 @@
 </br>
 </br>
 
-**注意**：图片可能表现得并不直观，具体代码我已经放置仓库的 [demo](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%9B%BE%E5%B1%82%E6%B8%B2%E6%9F%93) 文件夹中，欢迎大家 clone 下来在本地体验一下渲染的差距
+**注意**：图片可能表现得并不直观，具体代码我已经放置仓库的 [demo](https://github.com/HeJueting/Blog/tree/master/%E5%89%8D%E7%AB%AF%E9%9A%8F%E7%AC%94/SVG%20VS%20Canvas%20%E5%9B%BE%E5%B1%82%E6%B8%B2%E6%9F%93) 文件夹中，欢迎大家 clone 下来在本地体验一下渲染的差距
 
 </br>
 </br>
