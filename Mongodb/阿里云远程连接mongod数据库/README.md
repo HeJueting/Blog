@@ -31,16 +31,13 @@ service mongod restart
 ```
 
 </br>
-
----
-
 </br>
 
 ### 远程连接 mongdb
 
 </br>
 
-- **cmd 连接**
+-   **cmd 连接**
 
 如果你使用的是 windows，需要进入到 mongodb/bin 目录下执行以下命令：
 
@@ -50,16 +47,13 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
-- **可视化工具**
+-   **可视化工具**
 
 我使用的是 mongodb 官方可视化工具 —— MongoDB Compass Community，输入**公网 IP**和**端口号**即可进行连接
 
 ![image](./img/connect.png)
 
 </br>
-
----
-
 </br>
 
 ### 添加用户认证
@@ -68,7 +62,7 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
-- **角色权限**
+-   **角色权限**
 
 在 moogodb 中，每一个数据库都可以创建多个角色，不同的角色有着不同的操作权限
 
@@ -89,7 +83,7 @@ mongo 11.11.11.11 //mongo后面接你的公网IP地址
 
 </br>
 
-- **创建超级管理员用户**
+-   **创建超级管理员用户**
 
 ```
 // 连接数据库(你也通过cmd远程连接，这里我在服务器直接使用mongo命令进行的连接)
@@ -117,7 +111,7 @@ db.auth("root","xxxxxx")
 
 </br>
 
-- **开启认证**
+-   **开启认证**
 
 ```
 //编辑配置文件
@@ -138,7 +132,7 @@ service mongod restart
 
 </br>
 
-- **再次连接 mongodb**
+-   **再次连接 mongodb**
 
 **1、** cmd 方式
 
@@ -151,20 +145,17 @@ mongo 阿里云公网地址 -u "root" -p "xxxxxx" --authenticationDatabase admin
 ![image](./img/connect-auth.png)
 
 </br>
-
----
-
 </br>
 
 ### 使用 moogose 连接数据库
 
 </br>
 
-在个人博客开发过程中，使用到了 **moogose** 这个库对数据库进行连接，由于我开启了 mongodb 用户权限，使用 moogose 进行数据库连接时，也需要添加用户信息，否则 mongodb 会连接失败。
+在个人博客开发过程中，使用到了 [moogose](https://www.npmjs.com/package/mongoose) 这个库对数据库进行连接，由于我开启了 mongodb 用户权限，使用 moogose 进行数据库连接时，也需要添加用户信息，否则 mongodb 会连接失败。
 
 </br>
 
-- **创建拥有读写权限的角色**
+-   **创建拥有读写权限的角色**
 
 虽然我们一开始在 admin 数据库下创建了一个超级管理用户，他拥有所有数据库的读写权限，但是我的个人博客使用的是 blog 数据库，在 blog 数据库下用户认证是不会通过的。
 
@@ -193,7 +184,7 @@ db.createUser(
 
 </br>
 
-- **修改代码**
+-   **修改代码**
 
 ```javascrit
 mongoose.connect("mongodb://localhost:27017/blog", {
