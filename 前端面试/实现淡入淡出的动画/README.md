@@ -1,17 +1,19 @@
-### 题目描述
+# 实现淡入淡出的动画
 
-如何实现元素消失与显示动画
+</br>
+
+### 知识点考察
+
+1. 理解事件循环机制
+
+2. 正确使用 transition 平移动画
+
+3. 理解 requestAnimationFrame 的触发时机
 
 </br>
 </br>
 
 ### 代码实现
-
-1. 理解事件循环机制，
-
-2. 使用 transition 平移动画
-
-3. 理解 requestAnimationFrame 的触发时机
 
 ```html
 <html lang="en">
