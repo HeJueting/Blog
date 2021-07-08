@@ -14,6 +14,7 @@ location ^~ /blog/ {
 ```
 
 </br>
+</br>
 
 ### root
 
@@ -27,6 +28,7 @@ location /blog/admin/ {
 ```
 
 </br>
+</br>
 
 ### alias
 
@@ -39,6 +41,7 @@ location /blog/admin/ {
 }
 ```
 
+</br>
 </br>
 
 ### try_files
@@ -58,4 +61,5 @@ location /blog/ {
 }
 ```
 
+</br>
 </br>
