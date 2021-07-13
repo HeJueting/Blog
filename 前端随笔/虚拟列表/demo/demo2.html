@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>虚拟列表-方案二</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+        }
+        header,
+        footer,
+        div {
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+        }
+        header,
+        footer {
+            background: black;
+            height: 180px;
+            line-height: 180px;
+        }
+        #wrap {
+            overflow: auto;
+        }
+        .item {
+            width: 600px;
+            margin: 60px auto;
+            height: 100px;
+            background: red;
+            line-height: 100px;
+        }
+    </style>
+    <body>
+        <header>Header</header>
+        <div id="wrap"></div>
+        <footer id="footer">Footer</footer>
+        <script>
+            var lists = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+            var page = 0;
+            var newList = [];
+            var wrapDom = document.getElementById("wrap");
+            var footerDom = document.getElementById("footer");
+
+            // 更新需要新增的数据
+            function updateNewList() {
+                var newPage = page + 1;
+                // 如果已经展示完所有数据
+                if (Math.ceil(lists.length / 5) < newPage) {
+                    return;
+                }
+                // 刚好展示到最后一页数据，只需要新增最后几条数据即可
+                else if (Math.ceil(lists.length) === newPage) {
+                    newList = lists.slice(page * 5, lists.length);
+                }
+                // 新增下一页的数据
+                else {
+                    newList = lists.slice(page * 5, newPage * 5);
+                }
+                // 更新page，更新视图
+                page = newPage;
+                updateView();
+            }
+
+            // 更新视图
+            function updateView() {
+                var wrapDomStr = wrapDom.innerHTML;
+                for (var i = 0; i < newList.length; i++) {
+                    wrapDomStr += `<div class='item'>文章${newList[i]}</div>`;
+                }
+                wrapDom.innerHTML = wrapDomStr;
+                newList = [];
+            }
+
+            // 监听body元素的鼠标滚动事件
+            document.body.addEventListener("scroll", (e) => {
+                var rectObj = footerDom.getBoundingClientRect();
+                if (rectObj.top <= document.body.clientHeight) {
+                    updateNewList();
+                }
+            });
+
+            updateNewList();
+        </script>
+    </body>
+</html>
