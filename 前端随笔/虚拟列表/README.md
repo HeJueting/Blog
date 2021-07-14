@@ -122,6 +122,11 @@ var Observer = new IntersectionObserver(callback, options);
 
 // 监听的目标元素
 Observer.observe(target);
+
+// 停止对target元素的观察
+Observer.unobserve(target);
+// 停止该观察器对所有元素的观察
+Observer.disconnect();
 ```
 
 </br>
